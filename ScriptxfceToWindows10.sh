@@ -8,7 +8,6 @@ sudo chmod 555 -R /usr/share/themes/Kali-Windows-10-theme
 #this command applies the new theme we copied to the system.
 echo "applying the theme to your computer"
 xfconf-query -c xsettings -p /Net/ThemeName -s "Kali-Windows-10-theme"
-echo "All commands finished successfully, your computer should now look like windows 10."
 echo "downloading windows 10 icon theme from b00merang"
 sudo apt update
 sudo apt install git -y
@@ -37,7 +36,8 @@ sudo chmod 555 -R /usr/share/icons/Windows-10-Icons
 echo "changing theme to Windows-10-Icons"
 xfconf-query -c xsettings -p /Net/IconThemeName -s Windows-10-Icons
 echo "downloading dependancies"
-sudo apt install python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles -y
+sudo apt install python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y
+sudo snap install snap-store
 echo "creating the xfce4 panel theme"
 mkdir windowsLike
 mkdir windowsLike/launcher-2
@@ -53,7 +53,7 @@ echo -e "[Desktop Entry]\nVersion=1.0\nType=Application\nName=Next Workspace\nEx
 echo -e "[Desktop Entry]\nVersion=1.0\nType=Application\nExec=exo-open --launch TerminalEmulator\nIcon=utilities-terminal\nStartupNotify=true\nTerminal=false\nCategories=Utility;X-XFCE;X-Xfce-Toplevel;\nOnlyShowIn=XFCE;\nX-AppStream-Ignore=True\nName=Terminal\n" > ./windowsLike/launcher-6/15735608061.desktop
 echo -e "[Desktop Entry]\nVersion=1.0\nType=Application\nExec=exo-open --launch WebBrowser %u\nIcon=web-browser\nStartupNotify=true\nTerminal=false\nCategories=Network;X-XFCE;X-Xfce-Toplevel;\nOnlyShowIn=XFCE;\nX-XFCE-MimeType=x-scheme-handler/http;x-scheme-handler/https;\nX-AppStream-Ignore=True\nName=Web Browser\n" > ./windowsLike/launcher-7/15780459961.desktop
 echo -e "[Desktop Entry]\nName=Text Editor\nExec=mousepad %F\nIcon=accessories-text-editor\nTerminal=false\nStartupNotify=true\nType=Application\nCategories=Utility;TextEditor;GTK;\nMimeType=text/plain;\n" > ./windowsLike/launcher-8/15780460092.desktop
-echo -e "[Desktop Entry]\nName=Software\nComment=Add, remove or update software on this computer\nIcon=softwarecenter\nExec=gnome-software %U\nTerminal=false\nType=Application\nCategories=GNOME;GTK;System;PackageManager;\nKeywords=Updates;Upgrade;Sources;Repositories;Preferences;Install;Uninstall;Program;Software;App;Store;\nStartupNotify=true\nMimeType=x-scheme-handler/appstream;x-scheme-handler/apt;x-scheme-handler/snap;\nX-GNOME-UsesNotifications=true\nDBusActivatable=true\nX-Purism-FormFactor=Workstation;Mobile;\nX-Ubuntu-Gettext-Domain=gnome-software\nX-XFCE-Source=file:///usr/share/applications/org.gnome.Software.desktop\n" > ./windowsLike/launcher-18/16878133091.desktop
+echo -e "[Desktop Entry]\nName=App Store\nComment=Add, remove or update software on this computer\nIcon=softwarecenter\nExec=snap-store %U\nTerminal=false\nType=Application\nCategories=GNOME;GTK;System;PackageManager;\nKeywords=Updates;Upgrade;Sources;Repositories;Preferences;Install;Uninstall;Program;Software;App;Store;\nStartupNotify=true\nMimeType=x-scheme-handler/appstream;x-scheme-handler/apt;x-scheme-handler/snap;\nX-GNOME-UsesNotifications=true\nDBusActivatable=true\nX-Purism-FormFactor=Workstation;Mobile;\nX-Ubuntu-Gettext-Domain=gnome-software\nPath=\n" > ./windowsLike/launcher-18/16878133091.desktop
 cd windowsLike/ && tar -zcvf ../windowsLike.tar.gz * && cd - 
 xfce4-panel-profiles load windowsLike.tar.gz
 echo "All commands finished successfully, your computer should now look like windows 10."
