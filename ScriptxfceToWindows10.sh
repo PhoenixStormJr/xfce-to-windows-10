@@ -34,4 +34,6 @@ sudo cp -r Kali-Windows-10-Icons/scalable /usr/share/icons/Windows-10-Icons
 sudo cp -r Kali-Windows-10-Icons/index.theme /usr/share/icons/Windows-10-Icons
 echo "making sure the windows 10 icons can be read but not deleted"
 sudo chmod 555 -R /usr/share/icons/Windows-10-Icons
+echo "changing theme to Windows-10-Icons"
+xfconf-query -c xsettings -p /Net/IconThemeName -s Windows-10-Icons
 echo "All commands finished successfully, your computer should now look like windows 10."
