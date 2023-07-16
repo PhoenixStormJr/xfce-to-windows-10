@@ -33,7 +33,7 @@ sudo cp -r Kali-Windows-10-Icons/scalable /usr/share/icons/Windows-10-Icons
 sudo cp -r Kali-Windows-10-Icons/index.theme /usr/share/icons/Windows-10-Icons
 echo "making sure the windows 10 icons can be read but not deleted"
 sudo chmod 555 -R /usr/share/icons/Windows-10-Icons
-echo "changing theme to Windows-10-Icons"
+echo "changing icons to Windows-10-Icons"
 xfconf-query -c xsettings -p /Net/IconThemeName -s Windows-10-Icons
 echo "downloading dependancies"
 sudo apt install python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y
