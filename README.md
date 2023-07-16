@@ -22,4 +22,12 @@ https://www.kali.org/docs/introduction/kali-undercover/
 
 Croluy , theGorkha.
 
+Found some useful commands here:
+
+https://github.com/SofianeHamlaoui/Go-undercover/blob/master/go-undercover.sh
+
+SofianeHamlaoui Sofiane Hamlaoui
+MS-Jahan Md. Sarwar Jahan Sabit
+
+
 Also well... Windows-10 obviously, since i had to rip the mail icon from Windows 10. it didn't come with kali OR B00merang.
