@@ -51,6 +51,12 @@ echo "making sure the windows 10 icons can be read but not deleted"
 sudo chmod 555 -R /usr/share/icons/Windows-10-Icons
 echo "changing icons to Windows-10-Icons"
 xfconf-query -c xsettings -p /Net/IconThemeName -s Windows-10-Icons
+echo "changing cursor to Windows-10-Icons"
+xfconf-query -c xsettings -p /Gtk/CursorThemeName -n -t string -s "Windows-10-Icons"
+echo "Whatever the heck these are..."
+xfconf-query -c xsettings -p /Gtk/FontName -n -t string -s "Liberation Sans 11"
+xfconf-query -c xfwm4 -p /general/theme -n -t string -s "Windows-10"
+xfconf-query -c xfwm4 -p /general/button_layout -n -t string -s "|HMC"
 echo "downloading dependancies"
 sudo apt install python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y
 sudo snap install snap-store
