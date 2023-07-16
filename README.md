@@ -26,7 +26,7 @@ Found some useful commands here:
 
 https://github.com/SofianeHamlaoui/Go-undercover/blob/master/go-undercover.sh
 
-SofianeHamlaoui Sofiane Hamlaoui
+SofianeHamlaoui Sofiane Hamlaoui, 
 MS-Jahan Md. Sarwar Jahan Sabit
 
 
