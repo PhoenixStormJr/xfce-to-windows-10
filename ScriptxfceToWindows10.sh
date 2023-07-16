@@ -31,6 +31,22 @@ sudo cp -r Kali-Windows-10-Icons/512x512 /usr/share/icons/Windows-10-Icons
 sudo cp -r Kali-Windows-10-Icons/cursors /usr/share/icons/Windows-10-Icons
 sudo cp -r Kali-Windows-10-Icons/scalable /usr/share/icons/Windows-10-Icons
 sudo cp -r Kali-Windows-10-Icons/index.theme /usr/share/icons/Windows-10-Icons
+echo "One icon apparently has never been ripped from Windows. The mail icon. I made it myself."
+sudo cp setupStuff/MissingIcon/22x22/Windows10Mail.png /usr/share/icons/Windows-10-Icons/22x22/apps/thunderbird.png
+sudo cp setupStuff/MissingIcon/24x24/Windows10Mail.png /usr/share/icons/Windows-10-Icons/24x24/apps/thunderbird.png
+sudo cp setupStuff/MissingIcon/32x32/Windows10Mail.png /usr/share/icons/Windows-10-Icons/32x32/apps/thunderbird.png
+sudo cp setupStuff/MissingIcon/48x48/Windows10Mail.png /usr/share/icons/Windows-10-Icons/48x48/apps/thunderbird.png
+sudo cp setupStuff/MissingIcon/128x128/Windows10Mail.png /usr/share/icons/Windows-10-Icons/128x128/apps/thunderbird.png
+sudo cp setupStuff/MissingIcon/256x256/Windows10Mail.png /usr/share/icons/Windows-10-Icons/256x256/apps/thunderbird.png
+sudo rm /usr/share/icons/Windows-10-Icons/22x22/apps/thunderbird.svg
+sudo rm /usr/share/icons/Windows-10-Icons/24x24/apps/thunderbird.svg
+sudo rm /usr/share/icons/Windows-10-Icons/32x32/apps/thunderbird.svg
+sudo rm /usr/share/icons/Windows-10-Icons/48x48/apps/thunderbird.svg
+sudo rm /usr/share/icons/Windows-10-Icons/128x128/apps/thunderbird.svg
+sudo rm /usr/share/icons/Windows-10-Icons/256x256/apps/thunderbird.svg
+sudo rm /usr/share/icons/Windows-10-Icons/scalable/apps/thunderbird.svg
+sudo cp setupStuff/MissingIcon/scalable/Windows10Mail.svg /usr/share/icons/Windows-10-Icons/scalable/apps/thunderbird.svg
+echo "making sure the windows 10 icons can be read but not deleted"
 echo "making sure the windows 10 icons can be read but not deleted"
 sudo chmod 555 -R /usr/share/icons/Windows-10-Icons
 echo "changing icons to Windows-10-Icons"
