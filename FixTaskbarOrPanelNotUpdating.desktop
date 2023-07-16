@@ -1,0 +1,12 @@
+[Desktop Entry]
+X-SnapInstanceName=FixTaskbarOrPanelNotUpdating
+Version=1.0
+Name=FixTaskbarOrPanelNotUpdating
+Comment=the panel profile sometimes doesn't load right off the bat, so run this and it might.
+GenericName=Fix Panel profile
+Keywords=panel;taskbar;bottom;menu
+Exec=xfce4-panel-profiles load windowsLike.tar.gz
+Terminal=true
+Type=Application
+Icon=org.xfce.panel.separator
+StartupNotify=true
