@@ -37,7 +37,7 @@ sudo rm /usr/share/icons/Windows-10-Icons/22x22/apps/thunderbird.svg
 sudo rm /usr/share/icons/Windows-10-Icons/24x24/apps/thunderbird.svg
 sudo rm /usr/share/icons/Windows-10-Icons/32x32/apps/thunderbird.svg
 sudo rm /usr/share/icons/Windows-10-Icons/48x48/apps/thunderbird.svg
-sudo rm /usr/share/icons/Windows-10-Icons/128x128/apps/thunderbird.sv
+sudo rm /usr/share/icons/Windows-10-Icons/128x128/apps/thunderbird.svg
 echo "making sure the windows 10 icons can be read but not deleted"
 sudo chmod 555 -R /usr/share/icons/Windows-10-Icons
 echo "changing icons to Windows-10-Icons"
