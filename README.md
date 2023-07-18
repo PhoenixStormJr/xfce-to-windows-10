@@ -36,6 +36,6 @@ https://askubuntu.com/questions/380550/xubuntu-how-to-set-the-wallpaper-using-th
 scai
 
 Also well... Windows-10 obviously...
-mail icon is located in C:\Program Files\WindowsApps\microsoft.windowscommunicationsapps_16005.11629.20316.0_x64__8wekyb3d8bbwe\images however, you will need to right click, and add yourself to the security tab and stuff. Very complicated, not going into it.
+mail icon is located in C:\Program Files\WindowsApps\microsoft.windowscommunicationsapps_16005.11629.20316.0_x64__8wekyb3d8bbwe\images\HxMail (followed by odd letters or whatnot. Its MANY logos.) however, you will need to right click, and add yourself to the security tab and stuff. Very complicated, not going into it.
 
 windows media player icon is located in "C:\Program Files (x86)\Windows Media Player\wmplayer.exe" however you will need something like icon viewer in order to actually use this, and the convert the .exe to .ico and convert the .ico to .png
