@@ -40,4 +40,4 @@ mail icon is located in C:\Program Files\WindowsApps\microsoft.windowscommunicat
 
 windows media player icon is located in "C:\Program Files (x86)\Windows Media Player\wmplayer.exe" however you will need something like icon viewer in order to actually use this, and the convert the .exe to .ico and convert the .ico to .png
 
-Photos icon is located in C:\Program Files\WindowsApps\Microsoft.Windows.Photos_2019.19071.12548.0_x64__8wekyb3d8bbwe\Assets.
+Photos icon is located in C:\Program Files\WindowsApps\Microsoft.Windows.Photos_2019.19071.12548.0_x64__8wekyb3d8bbwe\Assets\PhotosAppList (followed by odd letters or whatnot.) Again, you need to take ownership.
