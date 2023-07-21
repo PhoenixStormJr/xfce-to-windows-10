@@ -44,9 +44,11 @@ echo "changing icons to Windows-10-Icons"
 xfconf-query -c xsettings -p /Net/IconThemeName -s Windows-10-Icons
 echo "changing cursor to Windows-10-Icons"
 xfconf-query -c xsettings -p /Gtk/CursorThemeName -n -t string -s "Windows-10-Icons"
-echo "Whatever the heck these are..."
+echo "Changing the text theme to the windows style."
 xfconf-query -c xsettings -p /Gtk/FontName -n -t string -s "Liberation Sans 11"
-xfconf-query -c xfwm4 -p /general/theme -n -t string -s "Windows-10"
+echo "changing the window buttons to look like Windows 10"
+xfconf-query -c xfwm4 -p /general/theme -n -t string -s "Kali-Windows-10-theme"
+echo "changing the button pictures to be like windows 10."
 xfconf-query -c xfwm4 -p /general/button_layout -n -t string -s "|HMC"
 echo "downloading dependancies"
 sudo apt install python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y
