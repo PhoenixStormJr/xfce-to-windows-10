@@ -42,4 +42,4 @@ windows media player icon is located in "C:\Program Files (x86)\Windows Media Pl
 
 Photos icon is located in C:\Program Files\WindowsApps\Microsoft.Windows.Photos_2019.19071.12548.0_x64__8wekyb3d8bbwe\Assets\PhotosAppList.targetsize- (followed by the size of the image.) Again, you need to take ownership.
 
-Groove Music Icon is in "C:\Program Files\WindowsApps\Microsoft.ZuneMusic_10.19071.19011.0_x64__8wekyb3d8bbwe\Assets\contrast-black\"
+Groove Music Icon is in "C:\Program Files\WindowsApps\Microsoft.ZuneMusic_10.19071.19011.0_x64__8wekyb3d8bbwe\Assets\contrast-black\AppList.targetsize-" (again weird numbers)
