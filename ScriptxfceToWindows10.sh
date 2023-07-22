@@ -103,7 +103,7 @@ xfconf-query --channel xfce4-desktop --list | grep last-image | while read path;
 done
 echo "copying shortcuts, which, on linux are known as .desktop files, to their proper places."
 sudo cp -r setupStuff/desktopFiles/applications /usr/share/
-sudo cp -r setupStuff/desktopFiles/Desktop /home/$USER/Desktop/
+sudo cp -r setupStuff/desktopFiles/Desktop /home/$USER/
 echo "Now changing mousepad, or notepad settings, to be easier to use"
 sudo apt install dconf-cli
 dconf load /org/xfce/mousepad/ < setupStuff/mousepad.settings
