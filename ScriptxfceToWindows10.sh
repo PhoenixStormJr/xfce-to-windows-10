@@ -104,6 +104,7 @@ done
 echo "copying shortcuts, which, on linux are known as .desktop files, to their proper places."
 sudo cp -r setupStuff/desktopFiles/applications /usr/share/
 cp -r setupStuff/desktopFiles/Desktop /home/$USER/
+ln -s /usr/share/applications /home/$USER/Desktop/ALL_Applications
 echo "Now changing mousepad, or notepad settings, to be easier to use"
 sudo apt install dconf-cli
 dconf load /org/xfce/mousepad/ < setupStuff/mousepad.settings
