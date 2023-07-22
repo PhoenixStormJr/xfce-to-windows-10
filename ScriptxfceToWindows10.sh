@@ -1,4 +1,7 @@
 #!/bin/bash
+echo "installing dependancies"
+sudo apt update
+sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y
 #this command copies the windows 10 theme, from kali, to your theme folder.
 echo "Copying windows 10 theme to /usr/share/themes/"
 sudo cp -r setupStuff/Kali-Windows-10-theme /usr/share/themes
@@ -10,7 +13,6 @@ echo "applying the theme to your computer"
 xfconf-query -c xsettings -p /Net/ThemeName -s "Kali-Windows-10-theme"
 echo "downloading windows 10 icon theme from b00merang"
 sudo apt update
-sudo apt install git -y
 git clone https://github.com/B00merang-Artwork/Windows-10.git
 echo "changing name of the icon folder to Windows-10-Icons"
 mv Windows-10 Windows-10-Icons
@@ -51,7 +53,7 @@ xfconf-query -c xfwm4 -p /general/theme -n -t string -s "Kali-Windows-10-theme"
 echo "changing the button pictures to be like windows 10."
 xfconf-query -c xfwm4 -p /general/button_layout -n -t string -s "|HMC"
 echo "downloading dependancies"
-sudo apt install python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y
+all python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y
 sudo snap install snap-store
 echo "creating the xfce4 panel theme"
 mkdir windowsLike
@@ -106,6 +108,5 @@ sudo cp -r setupStuff/desktopFiles/applications /usr/share/
 cp -r setupStuff/desktopFiles/Desktop /home/$USER/
 ln -s /usr/share/applications /home/$USER/Desktop/ALL_Applications
 echo "Now changing mousepad, or notepad settings, to be easier to use"
-sudo apt install dconf-cli
 dconf load /org/xfce/mousepad/ < setupStuff/mousepad.settings
 echo "All commands finished successfully, your computer should now look like windows 10."
