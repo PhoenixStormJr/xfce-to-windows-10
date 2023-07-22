@@ -1,0 +1,40 @@
+[preferences/file]
+add-last-end-of-line=false
+
+[preferences/view]
+auto-indent=true
+color-scheme='xubuntu_light'
+highlight-current-line=false
+match-braces=false
+show-line-endings=false
+show-line-numbers=true
+show-right-margin=false
+show-whitespace=false
+use-default-monospace-font=false
+word-wrap=true
+
+[preferences/window]
+always-show-tabs=false
+client-side-decorations=false
+cycle-tabs=false
+expand-tabs=true
+menubar-visible=true
+path-in-title=true
+remember-position=true
+remember-size=true
+remember-state=false
+statusbar-visible=true
+toolbar-icon-size='menu'
+toolbar-style='icons'
+toolbar-visible=true
+
+[state/application]
+session=['1;;+file:///home/xubuntu/Desktop/test.txt']
+
+[state/window]
+fullscreen=false
+height=uint32 537
+left=uint32 168
+maximized=false
+top=uint32 31
+width=uint32 686
