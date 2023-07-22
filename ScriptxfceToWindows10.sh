@@ -1,8 +1,6 @@
 #!/bin/bash
 echo "installing dependancies"
-sudo cp setupStuff/apt/UbuntusSources.list /etc/apt/sources.list.d/
-sudo cp setupStuff/apt/ubuntu-keyring-2012-cdimage.gpg /etc/apt/trusted.gpg.d/
-sudo cp setupStuff/apt/ubuntu-keyring-2018-archive.gpg /etc/apt/trusted.gpg.d/
+sudo cp setupStuff/apt/sources.list /etc/apt/
 sudo apt update
 sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y
 #this command copies the windows 10 theme, from kali, to your theme folder.
