@@ -1,0 +1,8 @@
+How to Install Applications in Linux:
+
+in windows you go to the web browser, search for an app, download the exe, maybe accidentally download a virus, run the executable...
+
+in Linux, its way easier. Just search for it in the app store, and click install. To get to the app store, either double cick it on the desktop, double click on the taskbar (taskbar is now called the 
+panel in Linux), or search for app store in the start menu. 
+
+To add a shortcut to an application (called .desktop files in linux) search for the application in the start menu, and right click, and add to desktop.
