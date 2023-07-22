@@ -96,7 +96,6 @@ echo "waiting 10 (10/10) seconds before applying it"
 sleep 1
 xfce4-panel-profiles load windowsLike.tar.gz
 echo "Copying the background to your background directory..."
-echo "Copying the background to your background directory..."
 sudo cp setupStuff/Windows-10.jpg /usr/share/backgrounds/
 echo "applying background to your desktop"
 xfconf-query --channel xfce4-desktop --list | grep last-image | while read path; do
