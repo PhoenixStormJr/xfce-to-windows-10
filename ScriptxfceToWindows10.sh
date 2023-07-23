@@ -1,7 +1,18 @@
 #!/bin/bash
+echo "getting name of your linux distro"
+FULL=$(cat /etc/os-release)
+declare -i repeat=6
+VAR1="HELLO"
+VAR2="HELLO2"
+while [ ! "${FULL:repeat:1}" = '"' ]
+do
+   repeat=$((repeat+1))
+done
+DISTRONAME=${FULL:6:repeat-6}
+echo "the name of your system is:"
+echo $DISTRONAME
 echo "installing dependancies"
-sudo cp setupStuff/apt/sources.list /etc/apt/
-sudo apt update
+sudo apt update --allow-unauthenticated --allow-insecure-repositories
 sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y
 #this command copies the windows 10 theme, from kali, to your theme folder.
 echo "Copying windows 10 theme to /usr/share/themes/"
