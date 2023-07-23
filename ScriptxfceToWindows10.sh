@@ -6,16 +6,19 @@ source /etc/os-release
 echo "the name of your system is:"
 echo $NAME
 echo "installing dependancies"
-sudo apt update --allow-unauthenticated --allow-insecure-repositories
 if [ "$NAME" = "Ubuntu" ]; then
+    sudo apt update --allow-unauthenticated --allow-insecure-repositories
     sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y
     DISTROUNKNOWN="false"
 fi
 if [ "$NAME" = "Linux Mint" ]; then
+    sudo apt update --allow-unauthenticated --allow-insecure-repositories
     sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles -y
     DISTROUNKNOWN="false"
 fi
 if [ "$DISTROUNKNOWN" = "true" ]; then
+    sudo cp setupStuff/apt/UbuntuSources.list /etc/apt/sources.list.d
+    sudo apt update --allow-unauthenticated --allow-insecure-repositories
     echo "UNKNOWN DISTRO DETECTED. we'll go ahead anyway..."
     sudo apt install xfce4-panel-profiles -y
     sudo apt install dconf-cli -y
