@@ -5,7 +5,9 @@ echo "the name of your system is:"
 echo $NAME
 echo "installing dependancies"
 sudo apt update --allow-unauthenticated --allow-insecure-repositories
-sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y
+if [ "$NAME" = "Ubuntu" ]; then
+    sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y
+fi
 #this command copies the windows 10 theme, from kali, to your theme folder.
 echo "Copying windows 10 theme to /usr/share/themes/"
 sudo cp -r setupStuff/Kali-Windows-10-theme /usr/share/themes
