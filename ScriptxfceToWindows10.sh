@@ -117,6 +117,8 @@ echo "copying shortcuts, which, on linux are known as .desktop files, to their p
 sudo cp -r setupStuff/desktopFiles/applications /usr/share/
 cp -r setupStuff/desktopFiles/Desktop /home/$USER/
 ln -s /usr/share/applications /home/$USER/Desktop/ALL_Applications
+cp "setupStuff/desktopFiles/$NAME/AppStore.desktop" /home/$USER/Desktop/
+sudo cp "setupStuff/desktopFiles/$NAME/AppStore.desktop" /usr/share/applications/
 echo "Now changing mousepad, or notepad settings, to be easier to use"
 dconf load /org/xfce/mousepad/ < setupStuff/mousepad.settings
 echo "All commands finished successfully, your computer should now look like windows 10."
