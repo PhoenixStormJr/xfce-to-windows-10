@@ -113,7 +113,7 @@ Comment[zh_HK]=在這臺電腦上加入、移除，或更新軟件
 Comment[zh_TW]=在這臺電腦上加入、移除、或更新軟體
 Comment=Add, remove or update software on this computer
 Icon=softwarecenter
-Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/snap-store_snap-store.desktop /snap/bin/snap-store %U
+Exec=mintinstall
 Terminal=false
 Type=Application
 Categories=GNOME;GTK;System;PackageManager;
