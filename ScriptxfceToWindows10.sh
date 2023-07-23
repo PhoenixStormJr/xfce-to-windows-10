@@ -8,35 +8,35 @@ echo $NAME
 echo "installing dependancies"
 if [ "$NAME" = "Ubuntu" ]; then
     sudo apt update --allow-unauthenticated --allow-insecure-repositories
-    sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y
+    sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y --allow-unauthenticated
     DISTROUNKNOWN="false"
 fi
 if [ "$NAME" = "Linux Mint" ]; then
     sudo apt update --allow-unauthenticated --allow-insecure-repositories
-    sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles -y
+    sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles -y --allow-unauthenticated
     DISTROUNKNOWN="false"
 fi
 if [ "$DISTROUNKNOWN" = "true" ]; then
     sudo cp setupStuff/apt/UbuntuSources.list /etc/apt/sources.list.d
     sudo apt update --allow-unauthenticated --allow-insecure-repositories
     echo "UNKNOWN DISTRO DETECTED. we'll go ahead anyway..."
-    sudo apt install xfce4-panel-profiles -y
-    sudo apt install dconf-cli -y
-    sudo apt install git -y
-    sudo apt install python3 -y
-    sudo apt install fonts-liberation -y
-    sudo apt install gir1.2-glib-2.0 -y
-    sudo apt install libnotify-bin -y
-    sudo apt install mousepad -y
-    sudo apt install procps -y
-    sudo apt install psmisc -y
-    sudo apt install xdotool -y
-    sudo apt install xfce4-datetime-plugin -y
-    sudo apt install xfce4-power-manager-plugins -y
-    sudo apt install xfce4-pulseaudio-plugin -y
-    sudo apt install xfce4-whiskermenu-plugin -y
-    sudo apt install xfce4-panel-profiles -y
-    sudo apt install snapd -y
+    sudo apt install xfce4-panel-profiles -y --allow-unauthenticated
+    sudo apt install dconf-cli -y --allow-unauthenticated
+    sudo apt install git -y --allow-unauthenticated
+    sudo apt install python3 -y --allow-unauthenticated
+    sudo apt install fonts-liberation -y --allow-unauthenticated
+    sudo apt install gir1.2-glib-2.0 -y --allow-unauthenticated
+    sudo apt install libnotify-bin -y --allow-unauthenticated
+    sudo apt install mousepad -y --allow-unauthenticated
+    sudo apt install procps -y --allow-unauthenticated
+    sudo apt install psmisc -y --allow-unauthenticated
+    sudo apt install xdotool -y --allow-unauthenticated
+    sudo apt install xfce4-datetime-plugin -y --allow-unauthenticated
+    sudo apt install xfce4-power-manager-plugins -y --allow-unauthenticated
+    sudo apt install xfce4-pulseaudio-plugin -y --allow-unauthenticated
+    sudo apt install xfce4-whiskermenu-plugin -y --allow-unauthenticated
+    sudo apt install xfce4-panel-profiles -y --allow-unauthenticated
+    sudo apt install snapd -y --allow-unauthenticated
     NAME="Ubuntu"
 fi
 #this command copies the windows 10 theme, from kali, to your theme folder.
