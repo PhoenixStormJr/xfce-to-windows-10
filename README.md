@@ -4,7 +4,15 @@ Remember, since this is unfinished, there are no pictures to display of the end 
 
 also IDK why it's saying its like 98% CSS, I wrote this in 100% bash, the language that Linux uses. Then again, this is my first project, it could be kali's windows 10 theme triggering it. IDK...
 
-*picture will go here*
+BEFORE:
+![VirtualBox_Ubuntu_24_07_2023_18_37_47](https://github.com/PhoenixStormJr/xfce-to-windows-10-INCOMPLETE/assets/66498788/75caef9c-b480-4da0-a059-2ee3c133e681)
+![VirtualBox_Ubuntu_24_07_2023_18_38_16](https://github.com/PhoenixStormJr/xfce-to-windows-10-INCOMPLETE/assets/66498788/ade29013-d34f-4219-b241-e356c3f7cd25)
+
+AFTER:
+![VirtualBox_Ubuntu_24_07_2023_18_43_44](https://github.com/PhoenixStormJr/xfce-to-windows-10-INCOMPLETE/assets/66498788/2bc6294a-0868-442b-a1e4-76ddbdb3b64d)
+![VirtualBox_Ubuntu_24_07_2023_18_45_32](https://github.com/PhoenixStormJr/xfce-to-windows-10-INCOMPLETE/assets/66498788/19555d5b-c033-4241-92b4-df104c62e387)
+![VirtualBox_Ubuntu_24_07_2023_18_44_32](https://github.com/PhoenixStormJr/xfce-to-windows-10-INCOMPLETE/assets/66498788/fa96f915-e7e1-4145-9764-68ea94de5a0c)
+
 
 # credits to:
 https://github.com/B00merang-Artwork/Windows-10
