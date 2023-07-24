@@ -4,6 +4,8 @@ Remember, since this is unfinished, there are no pictures to display of the end 
 
 also IDK why it's saying its like 98% CSS, I wrote this in 100% bash, the language that Linux uses. Then again, this is my first project, it could be kali's windows 10 theme triggering it. IDK...
 
+You will need to right click the datetime and change the font to liberation serif size 9 however, if you want a near identical copy. I do not know the commands to do this automatically. Feel free to copy my project and add whatever you like to it, or make your own for KDE-plasma or GNOME.
+
 BEFORE:
 ![VirtualBox_Ubuntu_24_07_2023_18_37_47](https://github.com/PhoenixStormJr/xfce-to-windows-10-INCOMPLETE/assets/66498788/75caef9c-b480-4da0-a059-2ee3c133e681)
 ![VirtualBox_Ubuntu_24_07_2023_18_38_16](https://github.com/PhoenixStormJr/xfce-to-windows-10-INCOMPLETE/assets/66498788/ade29013-d34f-4219-b241-e356c3f7cd25)
