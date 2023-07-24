@@ -89,7 +89,6 @@ echo "changing the window buttons to look like Windows 10"
 xfconf-query -c xfwm4 -p /general/theme -n -t string -s "Kali-Windows-10-theme"
 echo "changing the button pictures to be like windows 10."
 xfconf-query -c xfwm4 -p /general/button_layout -n -t string -s "|HMC"
-all python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y
 if [ "$NAME" = "Ubuntu" ]; then
     sudo snap install snap-store
 fi
