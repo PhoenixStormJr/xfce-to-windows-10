@@ -1,4 +1,22 @@
 #!/bin/bash
+echo "Hello, this is the Linux installer for the application xfce-to-windows-10. This application will transform your linux xfce desktop to a windows 10 like look and feel. Currently there is no ULA. Would you like to install it? Enter y for yes or n for no."
+while [ true ]
+do
+  read -p 'y/n: ' option
+  echo you entered $option
+  if [ "$option" = "y" ]
+  then
+    break
+  fi
+  if [ "$option" = "n" ]
+  then
+    exit 1
+  fi
+  if [ "$option" != "n" ] && [ "$option" != "n" ]
+  then
+    echo "that was not an option. Your options were y or n"
+  fi
+done
 DISTROUNKNOWN="true"
 echo $DISTROUNKNOWN
 echo "getting name of your linux distro"
