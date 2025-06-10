@@ -6,6 +6,10 @@ also IDK why it's saying its like 98% CSS, I wrote this in 100% bash, the langua
 
 You will need to right click the datetime and change the font to liberation serif size 9 however, if you want a near identical copy. I do not know the commands to do this automatically. Feel free to copy my project and add whatever you like to it, or make your own for KDE-plasma or GNOME.
 
+Oh! I found a login screen copy!:
+
+![Windows_10_Login_Screen](https://us1.discourse-cdn.com/spiceworks/optimized/4X/9/1/5/91576352dafff29c9de814e011e0232743d4e651_2_690x388.jpeg)
+
 BEFORE:
 ![VirtualBox_Ubuntu_24_07_2023_18_37_47](https://github.com/PhoenixStormJr/xfce-to-windows-10-INCOMPLETE/assets/66498788/75caef9c-b480-4da0-a059-2ee3c133e681)
 ![VirtualBox_Ubuntu_24_07_2023_18_38_16](https://github.com/PhoenixStormJr/xfce-to-windows-10-INCOMPLETE/assets/66498788/ade29013-d34f-4219-b241-e356c3f7cd25)
