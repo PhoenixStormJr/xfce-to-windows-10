@@ -1,4 +1,4 @@
-# xfce-to-windows-10-INCOMPLETE
+# xfce-to-windows-10
 This script will instantly convert your xfce desktop to a windows 10 like feel. (All finished!)
 
 also IDK why it's saying its like 98% CSS, I wrote this in 100% bash, the language that Linux uses. Then again, this is my first project, it could be kali's windows 10 theme triggering it. IDK...
