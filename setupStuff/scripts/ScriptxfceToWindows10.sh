@@ -172,6 +172,8 @@ fi
 #Okay, NOW we're installing the shortcuts!
 xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/Super_L" -r
 xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/Super_L" -t string -s "xfce4-popup-whiskermenu"
+xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/<Super>d" -r
+xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/<Super>d" -t string -s "wmctrl -k on"
 echo "waiting 10 (0/10) seconds before applying it"
 sleep 1
 echo "waiting 10 (1/10) seconds before applying it"
