@@ -26,12 +26,12 @@ echo $NAME
 echo "installing dependancies"
 if [ "$NAME" = "Ubuntu" ]; then
     sudo apt update --allow-unauthenticated --allow-insecure-repositories
-    sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd -y --allow-unauthenticated
+    sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd wmctrl -y --allow-unauthenticated
     DISTROUNKNOWN="false"
 fi
 if [ "$NAME" = "Linux Mint" ]; then
     sudo apt update --allow-unauthenticated --allow-insecure-repositories
-    sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles -y --allow-unauthenticated
+    sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles wmctrl -y --allow-unauthenticated
     DISTROUNKNOWN="false"
 fi
 if [ "$DISTROUNKNOWN" = "true" ]; then
