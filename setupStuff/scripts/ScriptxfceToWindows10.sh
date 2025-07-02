@@ -17,6 +17,33 @@ do
     echo "that was not an option. Your options were y or n"
   fi
 done
+echo "expanding entire volume of usable space, to use entire disk..."
+# Get the root logical volume device
+LV=$(findmnt -n -o SOURCE /)
+FSTYPE=$(findmnt -n -o FSTYPE /)
+echo "[🔍] Checking for unused LVM space..."
+# Get free extents in the volume group
+FREE_PE=$(vgdisplay | awk '/Free  *PE/ { print $5 }')
+if [ "$FREE_PE" -gt 0 ]; then
+    echo "[📦] Unallocated space detected. Expanding root volume..."
+    # Put your expand commands here
+    # Extend the logical volume only if there's free space
+    sudo lvextend -l +100%FREE "$LV" >/dev/null
+    # Resize filesystem depending on type
+    if [ "$FSTYPE" = "ext4" ]; then
+        echo "[🧱] Resizing ext4 filesystem..."
+        sudo resize2fs "$LV" >/dev/null
+    elif [ "$FSTYPE" = "xfs" ]; then
+        echo "[🧱] Resizing XFS filesystem..."
+        sudo xfs_growfs / >/dev/null
+    else
+        echo "[❌] Unsupported filesystem type: $FSTYPE"
+        exit 1
+    fi
+    echo "[✅] Root volume successfully expanded to use all available space."
+else
+    echo "[✅] No unallocated space. Root volume is already fully expanded."
+fi
 DISTROUNKNOWN="true"
 echo $DISTROUNKNOWN
 echo "getting name of your linux distro"
