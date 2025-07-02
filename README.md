@@ -3,7 +3,7 @@ This script will instantly convert your xfce desktop to a windows 10 like feel. 
 
 also IDK why it's saying its like 98% CSS, I wrote this in 100% bash, the language that Linux uses. Then again, this is my first project, it could be kali's windows 10 theme triggering it. IDK...
 
-You will need to right click the datetime and change the font to **liberation sans size 9** however, if you want a near identical copy. I do not know the commands to do this automatically. Feel free to copy my project and add whatever you like to it, or make your own for KDE-plasma or GNOME.
+You will need to right click the datetime and change the font to **liberation sans size 9** however, if you want a near identical copy. I do not know the commands to do this automatically. (I think I found the commands to do it automatically and updated it!) Feel free to copy my project and add whatever you like to it, or make your own for KDE-plasma or GNOME.
 
 Oh! I found a login screen copy!:
 
