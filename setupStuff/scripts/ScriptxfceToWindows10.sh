@@ -17,9 +17,6 @@ do
     echo "that was not an option. Your options were y or n"
   fi
 done
-
-
-
 echo "expanding entire volume of usable space, to use entire disk..."
 # Get the root logical volume device
 LV=$(sudo findmnt -n -o SOURCE /)
@@ -46,10 +43,6 @@ if [ "$FREE_PE" -gt 0 ]; then
 else
     echo "[✅] No unallocated space. Root volume is already fully expanded."
 fi
-
-
-
-
 DISTROUNKNOWN="true"
 echo $DISTROUNKNOWN
 echo "getting name of your linux distro"
