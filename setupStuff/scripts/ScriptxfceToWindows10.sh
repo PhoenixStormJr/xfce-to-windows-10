@@ -169,6 +169,7 @@ if [ ! -f "$TAR_FILE" ]; then
 else
     echo "XFCE panel theme archive already exists. Skipping creation."
 fi
+#Okay, NOW we're installing the shortcuts!
 xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/Super_L" -r
 xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/Super_L" -t string -s "xfce4-popup-whiskermenu"
 echo "waiting 10 (0/10) seconds before applying it"
