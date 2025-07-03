@@ -77,3 +77,4 @@ else
   echo "✅ Arc Menu already enabled."
 fi
 echo "🎉 Arc Menu setup complete!"
+dconf load /org/gnome/shell/extensions/dash-to-panel/ < dash-to-panel-windows-10.txt
