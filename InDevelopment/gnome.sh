@@ -78,3 +78,4 @@ else
 fi
 echo "🎉 Arc Menu setup complete!"
 dconf load /org/gnome/shell/extensions/dash-to-panel/ < dash-to-panel-windows-10.txt
+dconf load /org/gnome/shell/extensions/arcmenu/ < arc-menu-windows-10.txt
