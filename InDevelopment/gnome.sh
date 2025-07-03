@@ -30,8 +30,6 @@ mkdir -p ~/Templates
 if [ ! -f ~/Templates/"Empty File.txt" ]; then
     touch ~/Templates/"Empty File.txt"
 fi
-
-
 set -e
 UUID="dash-to-panel@jderose9.github.com"
 EXT_DIR="$HOME/.local/share/gnome-shell/extensions/$UUID"
@@ -56,3 +54,26 @@ else
   echo "✅ Dash to Panel already enabled."
 fi
 echo "🎉 Done!"
+set -e
+UUID="arcmenu@arcmenu.com"
+EXT_DIR="$HOME/.local/share/gnome-shell/extensions/$UUID"
+ZIP_URL="https://extensions.gnome.org/extension-data/arcmenuarcmenu.com.v50.shell-extension.zip"
+echo "🔍 Checking if Arc Menu is installed..."
+if [ ! -d "$EXT_DIR" ]; then
+  echo "⚠️ Arc Menu not installed — installing fallback v50..."
+  echo "🌐 Downloading..."
+  curl -sL "$ZIP_URL" -o /tmp/arcmenu.zip
+  echo "📦 Extracting..."
+  mkdir -p "$EXT_DIR"
+  unzip -o /tmp/arcmenu.zip -d "$EXT_DIR"
+else
+  echo "ℹ️ Arc Menu already installed."
+fi
+echo "🔍 Checking if Arc Menu is enabled..."
+if ! gnome-extensions info "$UUID" 2>/dev/null | grep -q "State: ENABLED"; then
+  echo "🚀 Enabling Arc Menu..."
+  gnome-extensions enable "$UUID" || echo "⚠️ May need GNOME shell restart for effect."
+else
+  echo "✅ Arc Menu already enabled."
+fi
+echo "🎉 Arc Menu setup complete!"
