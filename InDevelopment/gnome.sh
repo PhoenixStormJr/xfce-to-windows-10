@@ -30,3 +30,29 @@ mkdir -p ~/Templates
 if [ ! -f ~/Templates/"Empty File.txt" ]; then
     touch ~/Templates/"Empty File.txt"
 fi
+
+
+set -e
+UUID="dash-to-panel@jderose9.github.com"
+EXT_DIR="$HOME/.local/share/gnome-shell/extensions/$UUID"
+ZIP_URL="https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v65.shell-extension.zip"
+echo "🔍 Checking if Dash to Panel is installed..."
+if [ ! -d "$EXT_DIR" ]; then
+  echo "⚠️ Dash to Panel not installed — installing fallback v65..."
+  sudo apt install -y curl unzip gnome-shell-extensions
+  echo "🌐 Downloading..."
+  curl -sL "$ZIP_URL" -o /tmp/dash-to-panel.zip
+  echo "📦 Extracting..."
+  mkdir -p "$EXT_DIR"
+  unzip -o /tmp/dash-to-panel.zip -d "$EXT_DIR"
+else
+  echo "ℹ️ Dash to Panel already installed."
+fi
+echo "🔍 Checking if Dash to Panel is enabled..."
+if ! gnome-extensions info "$UUID" 2>/dev/null | grep -q "State: ENABLED"; then
+  echo "🚀 Enabling Dash to Panel..."
+  gnome-extensions enable "$UUID" || echo "⚠️ May need GNOME shell restart for effect."
+else
+  echo "✅ Dash to Panel already enabled."
+fi
+echo "🎉 Done!"
