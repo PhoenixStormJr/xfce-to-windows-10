@@ -1,0 +1,10 @@
+[/]
+menu-background-color='rgb(0,37,54)'
+menu-border-color='rgb(36,31,49)'
+menu-button-appearance='Icon'
+menu-layout='Windows'
+override-menu-theme=true
+prefs-visible-page=0
+search-entry-border-radius=(true, 25)
+show-activities-button=false
+update-notifier-project-version=66
