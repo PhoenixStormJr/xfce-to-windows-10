@@ -11,7 +11,9 @@ Oh! I found a login screen copy!:
 
 # CHANGE LOG:
 
-I now made it grow the size of the disk to use all available disk space, AND I made it reduce the wait-until-online service wait time during boot!
+I now made it grow the size of the disk to use all available disk space, 
+
+AND I made it reduce the wait-until-online service wait time during boot!
 
 # BEFORE:
 ![VirtualBox_Ubuntu_24_07_2023_18_37_47](https://github.com/PhoenixStormJr/xfce-to-windows-10-INCOMPLETE/assets/66498788/75caef9c-b480-4da0-a059-2ee3c133e681)
