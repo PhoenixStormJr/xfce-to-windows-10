@@ -130,8 +130,42 @@ fi
 echo "Applying Windows 10 theme"
 gsettings set org.gnome.desktop.interface gtk-theme "$THEME_NAME"
 gsettings set org.gnome.shell.extensions.user-theme name 'Windows 10'
-
-
+#This next part should be in an if block but it is unfinished:
+    echo "Icon theme not found. Proceeding with installation..."
+    echo "Updating package lists..."
+    sudo apt update
+    echo "downloading windows 10 icon theme from b00merang"
+    git clone https://github.com/B00merang-Artwork/Windows-10.git
+    echo "changing name of the icon folder to Windows-10-Icons"
+    mv Windows-10 Windows-10-Icons
+    echo "Moving Windows-10-Icons to /usr/share/icons"
+    sudo mv Windows-10-Icons /usr/share/icons
+    echo "untarring kali windows 10 icons"
+    tar -xvf ../setupStuff/Kali-Windows-10-Icons.tar
+    echo "copying missing icons to /usr/share/icons/Windows-10-Icons"
+    sudo cp -r Kali-Windows-10-Icons/8x8 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/16x16 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/22x22 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/24x24 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/32x32 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/48x48 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/128x128 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/256x256 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/512x512 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/cursors /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/scalable /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/index.theme /usr/share/icons/Windows-10-Icons
+    echo "multiple icons have not been copied from Windows, I copied some and others I found online."
+    sudo cp -r ../setupStuff/MissingIcons/Windows-10-Icons /usr/share/icons/
+    sudo rm /usr/share/icons/Windows-10-Icons/22x22/apps/thunderbird.svg
+    sudo rm /usr/share/icons/Windows-10-Icons/24x24/apps/thunderbird.svg
+    sudo rm /usr/share/icons/Windows-10-Icons/32x32/apps/thunderbird.svg
+    sudo rm /usr/share/icons/Windows-10-Icons/48x48/apps/thunderbird.svg
+    sudo rm /usr/share/icons/Windows-10-Icons/128x128/apps/thunderbird.svg
+    echo "changing icons to Windows-10-Icons"
+    gsettings set org.gnome.desktop.interface icon-theme 'Windows-10-Icons'
+    echo "changing cursor to Windows-10-Icons"
+    gsettings set org.gnome.desktop.interface cursor-theme "Windows-10-Icons"
 
 #Finally when all is done, log out and log back in:
 gnome-session-quit --logout
