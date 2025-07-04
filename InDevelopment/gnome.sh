@@ -107,6 +107,7 @@ else
   echo "✅ Arc Menu already enabled."
 fi
 echo "🎉 Arc Menu setup complete!"
+gnome-extensions disable ubuntu-dock@ubuntu.com
 dconf load /org/gnome/shell/extensions/dash-to-panel/ < dash-to-panel-windows-10.txt
 dconf load /org/gnome/shell/extensions/arcmenu/ < arc-menu-windows-10.txt
 # System-wide Windows 10 GTK theme installation
@@ -129,3 +130,8 @@ fi
 echo "Applying Windows 10 theme"
 gsettings set org.gnome.desktop.interface gtk-theme "$THEME_NAME"
 gsettings set org.gnome.shell.extensions.user-theme name 'Windows 10'
+
+
+
+#Finally when all is done, log out and log back in:
+gnome-session-quit --logout
