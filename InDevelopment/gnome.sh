@@ -128,3 +128,4 @@ fi
 # Optionally set it (comment out if not needed in the larger script)
 echo "Applying Windows 10 theme"
 gsettings set org.gnome.desktop.interface gtk-theme "$THEME_NAME"
+gsettings set org.gnome.shell.extensions.user-theme name 'Windows 10'
