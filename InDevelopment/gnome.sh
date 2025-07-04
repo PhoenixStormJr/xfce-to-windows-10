@@ -25,6 +25,36 @@ if [ "$FREE_PE" -gt 0 ]; then
 else
     echo "[✅] No unallocated space. Root volume is already fully expanded."
 fi
+set -e
+OVERRIDE_DIR="/etc/systemd/system/systemd-networkd-wait-online.service.d"
+OVERRIDE_FILE="$OVERRIDE_DIR/timeout.conf"
+# === SYSTEMD CHECK ===
+if ! pidof systemd > /dev/null; then
+    echo "❌ Not a systemd-based system. Skipping systemd-networkd-wait-online configuration."
+else
+    # === SERVICE EXISTENCE CHECK ===
+    if systemctl list-unit-files | grep -q systemd-networkd-wait-online.service; then
+        # === APPLY TIMEOUT CONFIGURATION ===
+        echo "✅ Detected systemd-networkd-wait-online.service — applying timeout override."
+        sudo mkdir -p "$OVERRIDE_DIR"
+        if grep -q -- '--timeout=10' "$OVERRIDE_FILE" 2>/dev/null; then
+            echo "⏩ Timeout already set to 10 seconds in $OVERRIDE_FILE"
+        else
+            echo "⚙️  Setting timeout to 10 seconds for systemd-networkd-wait-online.service"
+            sudo tee "$OVERRIDE_FILE" > /dev/null <<EOF
+[Service]
+ExecStart=
+ExecStart=/lib/systemd/systemd-networkd-wait-online --timeout=10
+EOF
+        fi
+        # === RELOAD SYSTEMD TO APPLY CHANGES ===
+        sudo systemctl daemon-reexec
+        sudo systemctl daemon-reload
+        echo "✅ systemd-networkd-wait-online timeout config applied (or already present)"
+    else
+        echo "ℹ️ systemd-networkd-wait-online.service not found — skipping override."
+    fi
+fi
 #Adding right click menu.
 mkdir -p ~/Templates
 if [ ! -f ~/Templates/"Empty File.txt" ]; then
