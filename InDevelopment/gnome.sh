@@ -109,3 +109,22 @@ fi
 echo "🎉 Arc Menu setup complete!"
 dconf load /org/gnome/shell/extensions/dash-to-panel/ < dash-to-panel-windows-10.txt
 dconf load /org/gnome/shell/extensions/arcmenu/ < arc-menu-windows-10.txt
+# System-wide Windows 10 GTK theme installation
+THEME_NAME="Windows 10"
+THEME_DIR="/usr/share/themes/$THEME_NAME"
+TMP_ZIP="/tmp/windows-10-theme.zip"
+# Only install if theme is not already present
+if [ ! -d "$THEME_DIR" ]; then
+    echo "[INFO] Installing Windows 10 GTK theme system-wide..."
+    sudo mkdir -p /usr/share/themes
+    # Download and extract
+    curl -L -o "$TMP_ZIP" https://github.com/B00merang-Project/Windows-10/archive/refs/heads/master.zip
+    sudo unzip -q "$TMP_ZIP" -d /usr/share/themes
+    sudo mv /usr/share/themes/Windows-10-master "$THEME_DIR"
+    rm -f "$TMP_ZIP"
+else
+    echo "[INFO] Theme already installed: $THEME_DIR"
+fi
+# Optionally set it (comment out if not needed in the larger script)
+echo "Applying Windows 10 theme"
+gsettings set org.gnome.desktop.interface gtk-theme "$THEME_NAME"
