@@ -25,6 +25,7 @@ if [ "$FREE_PE" -gt 0 ]; then
 else
     echo "[✅] No unallocated space. Root volume is already fully expanded."
 fi
+dpkg -s nemo >/dev/null 2>&1 || sudo apt install -y nemo
 set -e
 OVERRIDE_DIR="/etc/systemd/system/systemd-networkd-wait-online.service.d"
 OVERRIDE_FILE="$OVERRIDE_DIR/timeout.conf"
