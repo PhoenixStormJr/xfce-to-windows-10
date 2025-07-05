@@ -25,8 +25,10 @@ if [ "$FREE_PE" -gt 0 ]; then
 else
     echo "[✅] No unallocated space. Root volume is already fully expanded."
 fi
+sudo add-apt-repository ppa:agornostal/ulauncher -y
+sudo apt update
 #Install dependencies:
-sudo apt install -y nemo gnome-tweaks ttf-mscorefonts-installer
+sudo apt install -y nemo gnome-tweaks ttf-mscorefonts-installer ulauncher
 # Set Nemo as default file manager for folders
 xdg-mime default nemo.desktop inode/directory
 set -e
