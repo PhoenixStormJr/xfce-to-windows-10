@@ -184,5 +184,13 @@ else
     echo "Icon folder not found. Skipping chmod."
 fi
 cp ../setupStuff/desktopFiles/applications/thunderbird_thunderbird.desktop ~/.local/share/applications
+# Set GNOME font settings
+gsettings set org.gnome.desktop.interface font-name 'Segoe UI 11'
+gsettings set org.gnome.desktop.interface document-font-name 'Segoe UI 11'
+gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Segoe UI Bold 11'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 12'
+# Updated antialiasing and hinting options
+gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'
+gsettings set org.gnome.desktop.interface font-hinting 'slight'
 #Finally when all is done, log out and log back in:
 gnome-session-quit --logout
