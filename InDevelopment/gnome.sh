@@ -25,7 +25,10 @@ if [ "$FREE_PE" -gt 0 ]; then
 else
     echo "[✅] No unallocated space. Root volume is already fully expanded."
 fi
+#Install nemo file manager because nautilus doesn't update icons.
 dpkg -s nemo >/dev/null 2>&1 || sudo apt install -y nemo
+# Set Nemo as default file manager for folders
+xdg-mime default nemo.desktop inode/directory
 set -e
 OVERRIDE_DIR="/etc/systemd/system/systemd-networkd-wait-online.service.d"
 OVERRIDE_FILE="$OVERRIDE_DIR/timeout.conf"
