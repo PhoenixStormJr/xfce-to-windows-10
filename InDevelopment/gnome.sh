@@ -133,6 +133,8 @@ if [ ! -d "$THEME_DIR" ]; then
 else
     echo "[INFO] Theme already installed: $THEME_DIR"
 fi
+#Change positions of new icons like Windows 10:
+gsettings set org.gnome.shell.extensions.ding start-corner 'top-left'
 # Optionally set it (comment out if not needed in the larger script)
 echo "Applying Windows 10 theme"
 gsettings set org.gnome.desktop.interface gtk-theme "$THEME_NAME"
