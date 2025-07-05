@@ -114,6 +114,7 @@ echo "🎉 Arc Menu setup complete!"
 gnome-extensions disable ubuntu-dock@ubuntu.com
 dconf load /org/gnome/shell/extensions/dash-to-panel/ < dash-to-panel-windows-10.txt
 dconf load /org/gnome/shell/extensions/arcmenu/ < arc-menu-windows-10.txt
+dconf write /org/gnome/shell/favorite-apps "$(cat favorite-apps-windows-10.txt)"
 # System-wide Windows 10 GTK theme installation
 THEME_NAME="Windows 10"
 THEME_DIR="/usr/share/themes/$THEME_NAME"
