@@ -167,12 +167,12 @@ if [ ! -d "$ICON_DIR" ]; then
     sudo cp -r Kali-Windows-10-Icons/scalable /usr/share/icons/Windows-10-Icons
     sudo cp -r Kali-Windows-10-Icons/index.theme /usr/share/icons/Windows-10-Icons
     echo "multiple icons have not been copied from Windows, I copied some and others I found online."
-    sudo cp -r setupStuff/MissingIcons/Windows-10-Icons /usr/share/icons/
     sudo rm /usr/share/icons/Windows-10-Icons/22x22/apps/thunderbird.svg
     sudo rm /usr/share/icons/Windows-10-Icons/24x24/apps/thunderbird.svg
     sudo rm /usr/share/icons/Windows-10-Icons/32x32/apps/thunderbird.svg
     sudo rm /usr/share/icons/Windows-10-Icons/48x48/apps/thunderbird.svg
     sudo rm /usr/share/icons/Windows-10-Icons/128x128/apps/thunderbird.svg
+    sudo cp -r setupStuff/MissingIcons/Windows-10-Icons /usr/share/icons/
 else
     echo "Windows 10 icon theme already exists. Skipping installation."
 fi
