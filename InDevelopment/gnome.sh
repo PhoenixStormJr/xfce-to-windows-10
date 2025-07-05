@@ -130,7 +130,9 @@ fi
 echo "Applying Windows 10 theme"
 gsettings set org.gnome.desktop.interface gtk-theme "$THEME_NAME"
 gsettings set org.gnome.shell.extensions.user-theme name 'Windows 10'
-#This next part should be in an if block but it is unfinished:
+ICON_DIR="/usr/share/icons/Windows-10-Icons"
+echo "Checking if Windows 10 icon theme is already installed..."
+if [ ! -d "$ICON_DIR" ]; then
     echo "Icon theme not found. Proceeding with installation..."
     echo "Updating package lists..."
     sudo apt update
