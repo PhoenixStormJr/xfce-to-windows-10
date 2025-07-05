@@ -192,5 +192,21 @@ gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 12'
 # Updated antialiasing and hinting options
 gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'
 gsettings set org.gnome.desktop.interface font-hinting 'slight'
+BG_PATH="/usr/share/backgrounds/Windows-10.jpg"
+echo "Checking if background image is already installed..."
+if [ ! -f "$BG_PATH" ]; then
+    echo "Windows 10 Background not found. Copying now..."
+    sudo cp ../setupStuff/Windows-10.jpg /usr/share/backgrounds/
+    echo "Windows 10 Background copied successfully."
+else
+    echo "Windows 10 Background already exists. Skipping copy."
+fi
+if [ -f "$BG_PATH" ]; then
+    echo "applying Windows 10 background to your desktop"
+    gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Windows-10.jpg'
+    gsettings set org.gnome.desktop.background picture-options "zoom"
+else
+    echo "Background image not found at $BG_PATH. Skipping background application."
+fi
 #Finally when all is done, log out and log back in:
 gnome-session-quit --logout
