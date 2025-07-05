@@ -26,7 +26,7 @@ else
     echo "[✅] No unallocated space. Root volume is already fully expanded."
 fi
 #Install dependencies:
-sudo apt install -y nemo gnome-tweaks
+sudo apt install -y nemo gnome-tweaks ttf-mscorefonts-installer
 # Set Nemo as default file manager for folders
 xdg-mime default nemo.desktop inode/directory
 set -e
