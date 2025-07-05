@@ -178,5 +178,6 @@ if [ -d "$ICON_DIR" ]; then
 else
     echo "Icon folder not found. Skipping chmod."
 fi
+cp ../setupStuff/desktopFiles/applications/thunderbird_thunderbird.desktop ~/.local/share/applications
 #Finally when all is done, log out and log back in:
 gnome-session-quit --logout
