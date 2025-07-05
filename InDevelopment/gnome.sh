@@ -164,8 +164,6 @@ if [ ! -d "$ICON_DIR" ]; then
     sudo rm /usr/share/icons/Windows-10-Icons/48x48/apps/thunderbird.svg
     sudo rm /usr/share/icons/Windows-10-Icons/128x128/apps/thunderbird.svg
     sudo cp -r ../setupStuff/MissingIcons/Windows-10-Icons /usr/share/icons/
-    echo "changing icons to Windows-10-Icons"
-    echo "changing cursor to Windows-10-Icons"
 else
     echo "Windows 10 icon theme already exists. Skipping installation."
 fi
