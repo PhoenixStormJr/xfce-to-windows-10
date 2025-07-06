@@ -1,4 +1,6 @@
 #!/bin/bash
+
+
 echo "expanding entire volume of usable space, to use entire disk..."
 # Get the root logical volume device
 LV=$(sudo findmnt -n -o SOURCE /)
@@ -25,12 +27,18 @@ if [ "$FREE_PE" -gt 0 ]; then
 else
     echo "[✅] No unallocated space. Root volume is already fully expanded."
 fi
+
+
+#Install dependencies:
 sudo add-apt-repository ppa:agornostal/ulauncher -y
 sudo apt update
-#Install dependencies:
 sudo apt install -y nemo gnome-tweaks gnome-software gnome-extensions-app ttf-mscorefonts-installer ulauncher gtk2-engines-murrine gnome-themes-extra sassc
 # Set Nemo as default file manager for folders
 xdg-mime default nemo.desktop inode/directory
+
+
+#Speeding up boot time by reducing check if internet is connected. 
+#This is harmless. It ONLY CHECKS if the internet is connected, LITERALLY DOES NOTHING ELSE!:
 set -e
 OVERRIDE_DIR="/etc/systemd/system/systemd-networkd-wait-online.service.d"
 OVERRIDE_FILE="$OVERRIDE_DIR/timeout.conf"
@@ -61,11 +69,16 @@ EOF
         echo "ℹ️ systemd-networkd-wait-online.service not found — skipping override."
     fi
 fi
+
+
 #Adding right click menu.
 mkdir -p ~/Templates
 if [ ! -f ~/Templates/"Empty File.txt" ]; then
     touch ~/Templates/"Empty File.txt"
 fi
+
+
+#Installing GNOME extensions:
 set -e
 UUID="dash-to-panel@jderose9.github.com"
 EXT_DIR="$HOME/.local/share/gnome-shell/extensions/$UUID"
@@ -130,6 +143,10 @@ else
   fi
   # Enable it
 fi
+
+
+#Enabling GNOME extensions. This... might crash, you may need to log out and log back in, then run the script again:
+echo "Enabling GNOME extensions. This... might crash. Log out, log back in, and run the script again."
 echo "🚀 Enabling Dash to Panel..."
 gnome-extensions enable "dash-to-panel@jderose9.github.com" || echo "⚠️ May need GNOME shell restart for effect."
 echo "🚀 Enabling Arc Menu..."
@@ -140,6 +157,9 @@ echo "🚀 Enabling User Theme"
 gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 echo "🚀 Disabling Ubuntu Dock..."
 gnome-extensions disable ubuntu-dock@ubuntu.com
+
+
+#Changing extension settings to be like Windows 10:
 dconf load /org/gnome/shell/extensions/dash-to-panel/ < dash-to-panel-windows-10.txt
 dconf load /org/gnome/shell/extensions/arcmenu/ < arc-menu-windows-10.txt
 #dconf read /org/gnome/shell/favorite-apps > favorite-apps-windows-10.txt
@@ -150,6 +170,10 @@ SCHEMA_DIR=~/.local/share/gnome-shell/extensions/date-menu-formatter@marcinjakub
 while IFS=": " read -r key val; do
   eval GSETTINGS_SCHEMA_DIR=$SCHEMA_DIR gsettings set $SCHEMA $key "$val"
 done < date-menu-formatter-windows-10.txt
+#Change positions of new icons like Windows 10:
+gsettings set org.gnome.shell.extensions.ding start-corner 'top-left'
+
+
 # System-wide Windows 10 GTK theme installation
 THEME_NAME="Windows 10"
 THEME_DIR="/usr/share/themes/$THEME_NAME"
@@ -166,12 +190,13 @@ if [ ! -d "$THEME_DIR" ]; then
 else
     echo "[INFO] Theme already installed: $THEME_DIR"
 fi
-#Change positions of new icons like Windows 10:
-gsettings set org.gnome.shell.extensions.ding start-corner 'top-left'
 # Optionally set it (comment out if not needed in the larger script)
 echo "Applying Windows 10 theme"
 gsettings set org.gnome.desktop.interface gtk-theme "$THEME_NAME"
 gsettings set org.gnome.shell.extensions.user-theme name 'Windows 10'
+
+
+#Install the Windows 10 Icons:
 ICON_DIR="/usr/share/icons/Windows-10-Icons"
 echo "Checking if Windows 10 icon theme is already installed..."
 if [ ! -d "$ICON_DIR" ]; then
@@ -220,11 +245,16 @@ if [ -d "$ICON_DIR" ]; then
 else
     echo "Icon folder not found. Skipping chmod."
 fi
+
+
+#Change the desktop files to be like Windows 10:
 sudo rm /usr/share/applications/ulauncher.desktop
 sudo cp ../setupStuff/desktopFiles/applications/show_desktop.desktop /usr/share/applications/show_desktop.desktop
 sudo cp ../setupStuff/desktopFiles/applications/org.gnome.TextEditor.desktop /usr/share/applications/org.gnome.TextEditor.desktop
 sudo cp ../setupStuff/desktopFiles/applications/ulauncher.desktop /usr/share/applications/ulauncher.desktop
 cp ../setupStuff/desktopFiles/applications/thunderbird_thunderbird.desktop ~/.local/share/applications
+
+
 # Set GNOME font settings
 gsettings set org.gnome.desktop.interface font-name 'Segoe UI 11'
 gsettings set org.gnome.desktop.interface document-font-name 'Segoe UI 11'
@@ -233,6 +263,9 @@ gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 12'
 # Updated antialiasing and hinting options
 gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'
 gsettings set org.gnome.desktop.interface font-hinting 'slight'
+
+
+#Change the Windows 10 background/wallpaper:
 BG_PATH="/usr/share/backgrounds/Windows-10.jpg"
 echo "Checking if background image is already installed..."
 if [ ! -f "$BG_PATH" ]; then
@@ -249,10 +282,14 @@ if [ -f "$BG_PATH" ]; then
 else
     echo "Background image not found at $BG_PATH. Skipping background application."
 fi
+
+
 #Installing the final Windows 10 theme:
 echo "Installing the final windows 10 theme:"
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git
 sudo ./Fluent-gtk-theme/install.sh 
 gsettings set org.gnome.shell.extensions.user-theme name "Fluent-Dark"
+
+
 #Finally when all is done, log out and log back in:
 gnome-session-quit --logout
