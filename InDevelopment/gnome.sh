@@ -113,6 +113,38 @@ else
   echo "✅ Arc Menu already enabled."
 fi
 echo "🎉 Arc Menu setup complete!"
+EXT_ID=4655
+GNOME_VERSION=$(gnome-shell --version | awk '{print $3}')
+# Fetch metadata
+VERSIONS_JSON=$(curl -s "https://extensions.gnome.org/extension-info/?pk=$EXT_ID&shell_version=$GNOME_VERSION")
+# Fallback to latest available version if GNOME version unsupported
+if echo "$VERSIONS_JSON" | jq -e .download_url | grep null >/dev/null; then
+  echo "⚠️ GNOME version $GNOME_VERSION not supported. Trying latest available version..."
+  GNOME_VERSION=$(curl -s "https://extensions.gnome.org/extension-query/?search=$EXT_ID" | jq -r '.extensions[0].shell_version_map | keys_unsorted[-1]')
+  VERSIONS_JSON=$(curl -s "https://extensions.gnome.org/extension-info/?pk=$EXT_ID&shell_version=$GNOME_VERSION")
+fi
+# Get download URL and UUID
+ZIP_URL=$(echo "$VERSIONS_JSON" | jq -r .download_url)
+UUID=$(echo "$VERSIONS_JSON" | jq -r .uuid)
+# Abort if missing data, but NO 'exit'
+if [ -z "$ZIP_URL" ] || [ "$ZIP_URL" = "null" ] || [ -z "$UUID" ]; then
+  echo "❌ Failed to get extension metadata."
+else
+  EXT_DIR="$HOME/.local/share/gnome-shell/extensions/$UUID"
+  # Only install if not already installed
+  if [ ! -d "$EXT_DIR" ]; then
+    echo "📦 Installing extension: $UUID"
+    curl -s -L -o ext.zip "https://extensions.gnome.org$ZIP_URL"
+    mkdir -p "$EXT_DIR"
+    unzip -q ext.zip -d "$EXT_DIR"
+    rm ext.zip
+  else
+    echo "✅ Extension already installed: $UUID"
+  fi
+  # Enable it
+  gnome-extensions enable "$UUID"
+  echo "🟢 Extension enabled: $UUID"
+fi
 gnome-extensions disable ubuntu-dock@ubuntu.com
 dconf load /org/gnome/shell/extensions/dash-to-panel/ < dash-to-panel-windows-10.txt
 dconf load /org/gnome/shell/extensions/arcmenu/ < arc-menu-windows-10.txt
