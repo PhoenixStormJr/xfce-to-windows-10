@@ -1,5 +1,6 @@
 [/]
 animate-app-switch=true
+animate-appicon-hover=false
 animate-appicon-hover-animation-extent={'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}
 appicon-margin=4
 appicon-padding=6
@@ -19,8 +20,11 @@ prefs-opened=false
 primary-monitor='unknown-unknown'
 status-icon-padding=-1
 trans-bg-color='#002536'
+trans-panel-opacity=1.0
 trans-use-custom-bg=true
-trans-use-custom-opacity=false
+trans-use-custom-gradient=true
+trans-use-custom-opacity=true
+trans-use-dynamic-opacity=false
 tray-padding=-1
 tray-size=26
 window-preview-title-position='TOP'
