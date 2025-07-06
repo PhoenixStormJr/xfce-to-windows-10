@@ -29,16 +29,9 @@ else
 fi
 
 
-#Install dependencies:
-sudo add-apt-repository ppa:agornostal/ulauncher -y
-sudo apt update
-sudo apt install -y nemo gnome-tweaks gnome-software gnome-extensions-app ttf-mscorefonts-installer ulauncher gtk2-engines-murrine gnome-themes-extra sassc
-# Set Nemo as default file manager for folders
-xdg-mime default nemo.desktop inode/directory
-
-
 #Speeding up boot time by reducing check if internet is connected. 
-#This is harmless. It ONLY CHECKS if the internet is connected, LITERALLY DOES NOTHING ELSE!:
+#This is harmless. It ONLY CHECKS if the internet is connected, LITERALLY DOES NOTHING ELSE!
+#NOT EVEN ACTUALLY CONNECT TO THE INTERNET!:
 set -e
 OVERRIDE_DIR="/etc/systemd/system/systemd-networkd-wait-online.service.d"
 OVERRIDE_FILE="$OVERRIDE_DIR/timeout.conf"
@@ -69,6 +62,97 @@ EOF
         echo "ℹ️ systemd-networkd-wait-online.service not found — skipping override."
     fi
 fi
+
+
+#Install the Windows 10 Icons:
+ICON_DIR="/usr/share/icons/Windows-10-Icons"
+echo "Checking if Windows 10 icon theme is already installed..."
+if [ ! -d "$ICON_DIR" ]; then
+    echo "Icon theme not found. Proceeding with installation..."
+    echo "Updating package lists..."
+    sudo apt update
+    echo "downloading windows 10 icon theme from b00merang"
+    git clone https://github.com/B00merang-Artwork/Windows-10.git
+    echo "changing name of the icon folder to Windows-10-Icons"
+    mv Windows-10 Windows-10-Icons
+    echo "Moving Windows-10-Icons to /usr/share/icons"
+    sudo mv Windows-10-Icons /usr/share/icons
+    echo "untarring kali windows 10 icons"
+    tar -xvf ../setupStuff/Kali-Windows-10-Icons.tar
+    echo "copying missing icons to /usr/share/icons/Windows-10-Icons"
+    sudo cp -r Kali-Windows-10-Icons/8x8 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/16x16 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/22x22 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/24x24 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/32x32 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/48x48 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/128x128 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/256x256 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/512x512 /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/cursors /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/scalable /usr/share/icons/Windows-10-Icons
+    sudo cp -r Kali-Windows-10-Icons/index.theme /usr/share/icons/Windows-10-Icons
+    echo "multiple icons have not been copied from Windows, I copied some and others I found online."
+    sudo rm /usr/share/icons/Windows-10-Icons/22x22/apps/thunderbird.svg
+    sudo rm /usr/share/icons/Windows-10-Icons/24x24/apps/thunderbird.svg
+    sudo rm /usr/share/icons/Windows-10-Icons/32x32/apps/thunderbird.svg
+    sudo rm /usr/share/icons/Windows-10-Icons/48x48/apps/thunderbird.svg
+    sudo rm /usr/share/icons/Windows-10-Icons/128x128/apps/thunderbird.svg
+    sudo cp -r ../setupStuff/MissingIcons/Windows-10-Icons /usr/share/icons/
+else
+    echo "Windows 10 icon theme already exists. Skipping installation."
+fi
+if [ -d "$ICON_DIR" ]; then
+    echo "making sure the windows 10 icons can be read but not deleted"
+    sudo chmod 555 -R /usr/share/icons/Windows-10-Icons
+    echo "Permissions updated successfully."
+    echo "changing icons to Windows-10-Icons"
+    gsettings set org.gnome.desktop.interface icon-theme 'Windows-10-Icons'
+    echo "changing cursor to Windows-10-Icons"
+    gsettings set org.gnome.desktop.interface cursor-theme "Windows-10-Icons"
+else
+    echo "Icon folder not found. Skipping chmod."
+fi
+
+
+#Copy unchaning desktop icons:
+cp ../setupStuff/desktopFiles/applications/thunderbird_thunderbird.desktop ~/.local/share/applications
+
+
+#Change the Windows 10 background/wallpaper:
+BG_PATH="/usr/share/backgrounds/Windows-10.jpg"
+echo "Checking if background image is already installed..."
+if [ ! -f "$BG_PATH" ]; then
+    echo "Windows 10 Background not found. Copying now..."
+    sudo cp ../setupStuff/Windows-10.jpg /usr/share/backgrounds/
+    echo "Windows 10 Background copied successfully."
+else
+    echo "Windows 10 Background already exists. Skipping copy."
+fi
+
+
+
+
+
+
+
+
+
+if [ -f "$BG_PATH" ]; then
+    echo "applying Windows 10 background to your desktop"
+    gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Windows-10.jpg'
+    gsettings set org.gnome.desktop.background picture-options "zoom"
+else
+    echo "Background image not found at $BG_PATH. Skipping background application."
+fi
+
+
+#Install dependencies:
+sudo add-apt-repository ppa:agornostal/ulauncher -y
+sudo apt update
+sudo apt install -y nemo gnome-tweaks gnome-software gnome-extensions-app ttf-mscorefonts-installer ulauncher gtk2-engines-murrine gnome-themes-extra sassc
+# Set Nemo as default file manager for folders
+xdg-mime default nemo.desktop inode/directory
 
 
 #Adding right click menu.
@@ -196,63 +280,11 @@ gsettings set org.gnome.desktop.interface gtk-theme "$THEME_NAME"
 gsettings set org.gnome.shell.extensions.user-theme name 'Windows 10'
 
 
-#Install the Windows 10 Icons:
-ICON_DIR="/usr/share/icons/Windows-10-Icons"
-echo "Checking if Windows 10 icon theme is already installed..."
-if [ ! -d "$ICON_DIR" ]; then
-    echo "Icon theme not found. Proceeding with installation..."
-    echo "Updating package lists..."
-    sudo apt update
-    echo "downloading windows 10 icon theme from b00merang"
-    git clone https://github.com/B00merang-Artwork/Windows-10.git
-    echo "changing name of the icon folder to Windows-10-Icons"
-    mv Windows-10 Windows-10-Icons
-    echo "Moving Windows-10-Icons to /usr/share/icons"
-    sudo mv Windows-10-Icons /usr/share/icons
-    echo "untarring kali windows 10 icons"
-    tar -xvf ../setupStuff/Kali-Windows-10-Icons.tar
-    echo "copying missing icons to /usr/share/icons/Windows-10-Icons"
-    sudo cp -r Kali-Windows-10-Icons/8x8 /usr/share/icons/Windows-10-Icons
-    sudo cp -r Kali-Windows-10-Icons/16x16 /usr/share/icons/Windows-10-Icons
-    sudo cp -r Kali-Windows-10-Icons/22x22 /usr/share/icons/Windows-10-Icons
-    sudo cp -r Kali-Windows-10-Icons/24x24 /usr/share/icons/Windows-10-Icons
-    sudo cp -r Kali-Windows-10-Icons/32x32 /usr/share/icons/Windows-10-Icons
-    sudo cp -r Kali-Windows-10-Icons/48x48 /usr/share/icons/Windows-10-Icons
-    sudo cp -r Kali-Windows-10-Icons/128x128 /usr/share/icons/Windows-10-Icons
-    sudo cp -r Kali-Windows-10-Icons/256x256 /usr/share/icons/Windows-10-Icons
-    sudo cp -r Kali-Windows-10-Icons/512x512 /usr/share/icons/Windows-10-Icons
-    sudo cp -r Kali-Windows-10-Icons/cursors /usr/share/icons/Windows-10-Icons
-    sudo cp -r Kali-Windows-10-Icons/scalable /usr/share/icons/Windows-10-Icons
-    sudo cp -r Kali-Windows-10-Icons/index.theme /usr/share/icons/Windows-10-Icons
-    echo "multiple icons have not been copied from Windows, I copied some and others I found online."
-    sudo rm /usr/share/icons/Windows-10-Icons/22x22/apps/thunderbird.svg
-    sudo rm /usr/share/icons/Windows-10-Icons/24x24/apps/thunderbird.svg
-    sudo rm /usr/share/icons/Windows-10-Icons/32x32/apps/thunderbird.svg
-    sudo rm /usr/share/icons/Windows-10-Icons/48x48/apps/thunderbird.svg
-    sudo rm /usr/share/icons/Windows-10-Icons/128x128/apps/thunderbird.svg
-    sudo cp -r ../setupStuff/MissingIcons/Windows-10-Icons /usr/share/icons/
-else
-    echo "Windows 10 icon theme already exists. Skipping installation."
-fi
-if [ -d "$ICON_DIR" ]; then
-    echo "making sure the windows 10 icons can be read but not deleted"
-    sudo chmod 555 -R /usr/share/icons/Windows-10-Icons
-    echo "Permissions updated successfully."
-    echo "changing icons to Windows-10-Icons"
-    gsettings set org.gnome.desktop.interface icon-theme 'Windows-10-Icons'
-    echo "changing cursor to Windows-10-Icons"
-    gsettings set org.gnome.desktop.interface cursor-theme "Windows-10-Icons"
-else
-    echo "Icon folder not found. Skipping chmod."
-fi
-
-
 #Change the desktop files to be like Windows 10:
 sudo rm /usr/share/applications/ulauncher.desktop
 sudo cp ../setupStuff/desktopFiles/applications/show_desktop.desktop /usr/share/applications/show_desktop.desktop
 sudo cp ../setupStuff/desktopFiles/applications/org.gnome.TextEditor.desktop /usr/share/applications/org.gnome.TextEditor.desktop
 sudo cp ../setupStuff/desktopFiles/applications/ulauncher.desktop /usr/share/applications/ulauncher.desktop
-cp ../setupStuff/desktopFiles/applications/thunderbird_thunderbird.desktop ~/.local/share/applications
 
 
 # Set GNOME font settings
@@ -263,25 +295,6 @@ gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 12'
 # Updated antialiasing and hinting options
 gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'
 gsettings set org.gnome.desktop.interface font-hinting 'slight'
-
-
-#Change the Windows 10 background/wallpaper:
-BG_PATH="/usr/share/backgrounds/Windows-10.jpg"
-echo "Checking if background image is already installed..."
-if [ ! -f "$BG_PATH" ]; then
-    echo "Windows 10 Background not found. Copying now..."
-    sudo cp ../setupStuff/Windows-10.jpg /usr/share/backgrounds/
-    echo "Windows 10 Background copied successfully."
-else
-    echo "Windows 10 Background already exists. Skipping copy."
-fi
-if [ -f "$BG_PATH" ]; then
-    echo "applying Windows 10 background to your desktop"
-    gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Windows-10.jpg'
-    gsettings set org.gnome.desktop.background picture-options "zoom"
-else
-    echo "Background image not found at $BG_PATH. Skipping background application."
-fi
 
 
 #Installing the final Windows 10 theme:
