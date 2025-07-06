@@ -1,0 +1,13 @@
+[/]
+custom-menu-button-icon='xfce4-panel-menu'
+custom-menu-button-icon-size=27.0
+menu-background-color='rgba(0,37,54,0.95)'
+menu-border-color='rgb(36,31,49)'
+menu-button-appearance='Icon'
+menu-button-icon='Custom_Icon'
+menu-layout='Windows'
+override-menu-theme=true
+prefs-visible-page=0
+search-entry-border-radius=(true, 25)
+show-activities-button=false
+update-notifier-project-version=66
