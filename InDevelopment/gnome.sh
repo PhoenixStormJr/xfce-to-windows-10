@@ -189,6 +189,7 @@ else
     echo "Icon folder not found. Skipping chmod."
 fi
 sudo rm /usr/share/applications/ulauncher.desktop
+sudo cp ../setupStuff/desktopFiles/applications/show_desktop.desktop /usr/share/applications/show_desktop.desktop
 sudo cp ../setupStuff/desktopFiles/applications/ulauncher.desktop /usr/share/applications/ulauncher.desktop
 cp ../setupStuff/desktopFiles/applications/thunderbird_thunderbird.desktop ~/.local/share/applications
 # Set GNOME font settings
