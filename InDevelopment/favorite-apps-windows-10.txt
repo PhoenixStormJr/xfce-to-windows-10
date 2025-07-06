@@ -1,0 +1,1 @@
+['ulauncher.desktop', 'firefox_firefox.desktop', 'thunderbird_thunderbird.desktop', 'nemo.desktop', 'org.gnome.Rhythmbox3.desktop', 'libreoffice-writer.desktop', 'yelp.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.TextEditor.desktop']
