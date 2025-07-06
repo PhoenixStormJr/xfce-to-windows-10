@@ -116,6 +116,7 @@ echo "🎉 Arc Menu setup complete!"
 gnome-extensions disable ubuntu-dock@ubuntu.com
 dconf load /org/gnome/shell/extensions/dash-to-panel/ < dash-to-panel-windows-10.txt
 dconf load /org/gnome/shell/extensions/arcmenu/ < arc-menu-windows-10.txt
+#dconf read /org/gnome/shell/favorite-apps > favorite-apps-windows-10.txt
 dconf write /org/gnome/shell/favorite-apps "$(cat favorite-apps-windows-10.txt)"
 # System-wide Windows 10 GTK theme installation
 THEME_NAME="Windows 10"
@@ -187,6 +188,8 @@ if [ -d "$ICON_DIR" ]; then
 else
     echo "Icon folder not found. Skipping chmod."
 fi
+sudo rm /usr/share/applications/ulauncher.desktop
+sudo cp ../setupStuff/desktopFiles/applications/ulauncher.desktop /usr/share/applications/ulauncher.desktop
 cp ../setupStuff/desktopFiles/applications/thunderbird_thunderbird.desktop ~/.local/share/applications
 # Set GNOME font settings
 gsettings set org.gnome.desktop.interface font-name 'Segoe UI 11'
