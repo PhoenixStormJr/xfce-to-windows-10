@@ -250,7 +250,9 @@ else
     echo "Background image not found at $BG_PATH. Skipping background application."
 fi
 #Installing the final Windows 10 theme:
+echo "Installing the final windows 10 theme:"
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git
 sudo ./Fluent-gtk-theme/install.sh 
+gsettings set org.gnome.shell.extensions.user-theme name "Fluent-Dark"
 #Finally when all is done, log out and log back in:
 gnome-session-quit --logout
