@@ -151,6 +151,12 @@ dconf load /org/gnome/shell/extensions/dash-to-panel/ < dash-to-panel-windows-10
 dconf load /org/gnome/shell/extensions/arcmenu/ < arc-menu-windows-10.txt
 #dconf read /org/gnome/shell/favorite-apps > favorite-apps-windows-10.txt
 dconf write /org/gnome/shell/favorite-apps "$(cat favorite-apps-windows-10.txt)"
+#Restoring date and time configuration to look like windows 10:
+SCHEMA=org.gnome.shell.extensions.date-menu-formatter
+SCHEMA_DIR=~/.local/share/gnome-shell/extensions/date-menu-formatter@marcinjakubowski.github.com/schemas
+while IFS=": " read -r key val; do
+  eval GSETTINGS_SCHEMA_DIR=$SCHEMA_DIR gsettings set $SCHEMA $key "$val"
+done < date-menu-formatter-windows-10.txt
 # System-wide Windows 10 GTK theme installation
 THEME_NAME="Windows 10"
 THEME_DIR="/usr/share/themes/$THEME_NAME"
