@@ -28,7 +28,7 @@ fi
 sudo add-apt-repository ppa:agornostal/ulauncher -y
 sudo apt update
 #Install dependencies:
-sudo apt install -y nemo gnome-tweaks ttf-mscorefonts-installer ulauncher gnome-software
+sudo apt install -y nemo gnome-tweaks gnome-software gnome-extensions-app ttf-mscorefonts-installer ulauncher
 # Set Nemo as default file manager for folders
 xdg-mime default nemo.desktop inode/directory
 set -e
