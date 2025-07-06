@@ -1,0 +1,23 @@
+[Desktop Entry]
+Categories=GNOME;GTK;Utility;TextEditor;
+Keywords=write;notepad;
+# Not activatable because we want to force ourself through the startup
+# options processing for session-state/etc. See #661.
+DBusActivatable=false
+Exec=gnome-text-editor %U
+MimeType=text/plain;application/x-zerosize;
+Name=Text Editor
+GenericName=Text Editor
+Comment=View and edit text files
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+Icon=accessories-text-editor
+StartupNotify=true
+Terminal=false
+Type=Application
+X-Flatpak-RenamedFrom=gnome-text-editor
+Actions=new-window;
+X-Ubuntu-Gettext-Domain=gnome-text-editor
+
+[Desktop Action new-window]
+Name=New Window
+Exec=gnome-text-editor --new-window
