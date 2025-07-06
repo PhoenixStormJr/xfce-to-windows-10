@@ -136,6 +136,8 @@ echo "🚀 Enabling Arc Menu..."
 gnome-extensions enable "arcmenu@arcmenu.com" || echo "⚠️ May need GNOME shell restart for effect."
 echo "🚀 Enabling Date Menu Formatter..."
 gnome-extensions enable "date-menu-formatter@marcinjakubowski.github.com"  || echo "⚠️ May need GNOME shell restart for effect."
+echo "🚀 Enabling User Theme"
+gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 echo "🚀 Disabling Ubuntu Dock..."
 gnome-extensions disable ubuntu-dock@ubuntu.com
 dconf load /org/gnome/shell/extensions/dash-to-panel/ < dash-to-panel-windows-10.txt
