@@ -113,6 +113,7 @@ else
   echo "✅ Arc Menu already enabled."
 fi
 echo "🎉 Arc Menu setup complete!"
+echo "Installing Date Menu Formatter"
 EXT_ID=4655
 GNOME_VERSION=$(gnome-shell --version | awk '{print $3}')
 # Fetch metadata
