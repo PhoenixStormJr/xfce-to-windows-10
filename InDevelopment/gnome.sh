@@ -247,5 +247,8 @@ if [ -f "$BG_PATH" ]; then
 else
     echo "Background image not found at $BG_PATH. Skipping background application."
 fi
+#Installing the final Windows 10 theme:
+git clone https://github.com/vinceliuice/Fluent-gtk-theme.git
+sudo ./Fluent-gtk-theme/install.sh 
 #Finally when all is done, log out and log back in:
 gnome-session-quit --logout
