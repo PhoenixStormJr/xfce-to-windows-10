@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=wmctrl -k on
+Terminal=false
+Icon=desktop
+Categories=GNOME;GTK;Desktop;desktop;
+StartupNotify=true
+Actions=new-window;new-private-window;open-profile-manager;
+Name=Show Desktop
+Comment=Minimize all windows and show the desktop
+GenericName=Show Desktop
+Keywords=Minimize;Desktop;wmctrl;
+
