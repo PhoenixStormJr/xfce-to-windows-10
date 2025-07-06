@@ -1,13 +1,20 @@
 [/]
+button-item-icon-size='Medium'
 custom-menu-button-icon='xfce4-panel-menu'
 custom-menu-button-icon-size=27.0
 menu-background-color='rgba(0,37,54,0.95)'
 menu-border-color='rgb(36,31,49)'
 menu-button-appearance='Icon'
 menu-button-icon='Custom_Icon'
+menu-item-category-icon-size='Extralarge'
+menu-item-grid-icon-size='Medium'
+menu-item-icon-size='Extralarge'
 menu-layout='Windows'
+menu-width-adjustment=-25
+misc-item-icon-size='Large'
 override-menu-theme=true
 prefs-visible-page=0
+quicklinks-item-icon-size='Extralarge'
 search-entry-border-radius=(true, 25)
 show-activities-button=false
 update-notifier-project-version=66
