@@ -121,6 +121,7 @@ else
 fi
 
 
+#Copying desktop files to their right places.
 sudo cp setupStuff/desktopFiles/applications/libreoffice-excel.desktop /usr/share/applications
 sudo cp setupStuff/desktopFiles/applications/libreoffice-powerpoint.desktop /usr/share/applications
 sudo cp setupStuff/desktopFiles/applications/libreoffice-startcenter.desktop /usr/share/applications
