@@ -323,38 +323,31 @@ echo "copying shortcuts, which, on linux are known as .desktop files, to their p
 sudo cp setupStuff/desktopFiles/applications/ControlPanel.desktop /usr/share/applications
 sudo cp setupStuff/desktopFiles/applications/Notepad.desktop /usr/share/applications
 
+#Now to the desktop:
+sudo cp setupStuff/desktopFiles/Desktop/firefox_firefox.desktop ~/Desktop/
+sudo cp setupStuff/desktopFiles/Desktop/HowToInstallApps.txt ~/Desktop/
 
-SRC_DIR="setupStuff/desktopFiles/Desktop"
-DST_DIR="/home/$USER/Desktop"
-# Make sure destination directory exists
-mkdir -p "$DST_DIR"
-for file in "$SRC_DIR"/*; do
-    filename=$(basename "$file")
-    if [ ! -e "$DST_DIR/$filename" ]; then
-        echo "Copying $filename to $DST_DIR"
-        cp -r "$file" "$DST_DIR/"
-    else
-        echo "Skipping $filename, already exists in $DST_DIR"
-    fi
-done
+
 LINK_PATH="/home/$USER/Desktop/ALL_Applications"
 TARGET="/usr/share/applications"
-
 if [ ! -L "$LINK_PATH" ] && [ ! -e "$LINK_PATH" ]; then
     echo "Creating symbolic link $LINK_PATH -> $TARGET"
     ln -s "$TARGET" "$LINK_PATH"
 else
     echo "Symbolic link or file $LINK_PATH already exists. Skipping."
 fi
+
+
 SRC="setupStuff/desktopFiles/$NAME/AppStore.desktop"
 DST="/home/$USER/Desktop/AppStore.desktop"
-
 if [ ! -e "$DST" ]; then
     echo "Copying AppStore.desktop to Desktop"
     cp "$SRC" "$DST"
 else
     echo "AppStore.desktop already exists on Desktop. Skipping."
 fi
+
+
 SRC="setupStuff/desktopFiles/$NAME/AppStore.desktop"
 DST="/usr/share/applications/AppStore.desktop"
 if [ ! -e "$DST" ]; then
@@ -363,6 +356,8 @@ if [ ! -e "$DST" ]; then
 else
     echo "AppStore.desktop already exists in /usr/share/applications/. Skipping."
 fi
+
+
 echo "Now changing mousepad, or notepad settings, to be easier to use"
 dconf load /org/xfce/mousepad/ < setupStuff/mousepad.settings
 echo "All commands finished successfully, your computer should now look like Windows 10."
