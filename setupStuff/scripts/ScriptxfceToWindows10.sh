@@ -1,4 +1,6 @@
 #!/bin/bash
+
+
 echo "Hello, this is the Linux installer for the application xfce-to-windows-10. This application will transform your linux xfce desktop to a windows 10 like look and feel. Currently there is no ULA. Would you like to install it? Enter y for yes or n for no."
 while [ true ]
 do
@@ -17,6 +19,8 @@ do
     echo "that was not an option. Your options were y or n"
   fi
 done
+
+
 echo "expanding entire volume of usable space, to use entire disk..."
 # Get the root logical volume device
 LV=$(sudo findmnt -n -o SOURCE /)
@@ -43,6 +47,8 @@ if [ "$FREE_PE" -gt 0 ]; then
 else
     echo "[✅] No unallocated space. Root volume is already fully expanded."
 fi
+
+
 set -e
 OVERRIDE_DIR="/etc/systemd/system/systemd-networkd-wait-online.service.d"
 OVERRIDE_FILE="$OVERRIDE_DIR/timeout.conf"
@@ -73,6 +79,8 @@ EOF
         echo "ℹ️ systemd-networkd-wait-online.service not found — skipping override."
     fi
 fi
+
+
 DISTROUNKNOWN="true"
 echo $DISTROUNKNOWN
 echo "getting name of your linux distro"
@@ -113,6 +121,8 @@ if [ "$DISTROUNKNOWN" = "true" ]; then
     sudo apt install snapd -y --allow-unauthenticated
     NAME="Ubuntu"
 fi
+
+
 #Sets a variable to see the Windows 10 theme directory.
 THEME_DIR="/usr/share/themes/Kali-Windows-10-theme"
 #This command checks if Windows 10 theme is already installed.
@@ -138,6 +148,8 @@ if [ -d "$THEME_DIR" ]; then
 else
     echo "Theme folder not found. Skipping chmod."
 fi
+
+
 #Creating an icon directory variable
 ICON_DIR="/usr/share/icons/Windows-10-Icons"
 echo "Checking if Windows 10 icon theme is already installed..."
@@ -187,6 +199,8 @@ if [ -d "$ICON_DIR" ]; then
 else
     echo "Icon folder not found. Skipping chmod."
 fi
+
+
 echo "Changing the text theme to the windows style."
 xfconf-query -c xsettings -p /Gtk/FontName -n -t string -s "Liberation Sans 11"
 echo "changing the button pictures to be like windows 10."
@@ -194,6 +208,8 @@ xfconf-query -c xfwm4 -p /general/button_layout -n -t string -s "|HMC"
 if [ "$NAME" = "Ubuntu" ]; then
     sudo snap install snap-store
 fi
+
+
 TAR_FILE="./windowsLike.tar.gz"
 echo "Checking for existing XFCE panel theme archive..."
 if [ ! -f "$TAR_FILE" ]; then
@@ -253,6 +269,8 @@ sleep 1
 echo "waiting 10 (10/10) seconds before applying it"
 sleep 1
 xfce4-panel-profiles load windowsLike.tar.gz
+
+
 BG_PATH="/usr/share/backgrounds/Windows-10.jpg"
 echo "Checking if background image is already installed..."
 if [ ! -f "$BG_PATH" ]; then
@@ -270,6 +288,8 @@ if [ -f "$BG_PATH" ]; then
 else
     echo "Background image not found at $BG_PATH. Skipping background application."
 fi
+
+
 echo "copying shortcuts, which, on linux are known as .desktop files, to their proper places."
 SRC_DIR="setupStuff/desktopFiles/applications"
 DST_DIR="/usr/share/applications"
@@ -282,6 +302,8 @@ for file in "$SRC_DIR"/*; do
         echo "Skipping $filename, already exists in $DST_DIR"
     fi
 done
+
+
 SRC_DIR="setupStuff/desktopFiles/Desktop"
 DST_DIR="/home/$USER/Desktop"
 # Make sure destination directory exists
