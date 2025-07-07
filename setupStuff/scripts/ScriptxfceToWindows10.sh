@@ -324,8 +324,8 @@ sudo cp setupStuff/desktopFiles/applications/ControlPanel.desktop /usr/share/app
 sudo cp setupStuff/desktopFiles/applications/Notepad.desktop /usr/share/applications
 
 #Now to the desktop:
-sudo cp setupStuff/desktopFiles/Desktop/firefox_firefox.desktop ~/Desktop/
-sudo cp setupStuff/desktopFiles/Desktop/HowToInstallApps.txt ~/Desktop/
+cp setupStuff/desktopFiles/Desktop/firefox_firefox.desktop ~/Desktop/
+cp setupStuff/desktopFiles/Desktop/HowToInstallApps.txt ~/Desktop/
 
 
 LINK_PATH="/home/$USER/Desktop/ALL_Applications"
