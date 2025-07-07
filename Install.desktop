@@ -1,0 +1,15 @@
+[Desktop Entry]
+X-SnapInstanceName=Install Windows Theme
+Version=1.0
+Name=Install Windows Theme
+Comment=Browse the World Wide Web
+GenericName=Linux Installer
+Keywords=Installer;Windows;xfce;
+Exec=bash setupStuff/scripts/ScriptLinuxToWindows10.sh
+Terminal=true
+Type=Application
+Icon=edit-cut
+Categories=Installer
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;x-scheme-handler/chrome;video/webm;application/x-xpinstall;
+StartupNotify=true
+Path=
