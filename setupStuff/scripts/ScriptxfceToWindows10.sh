@@ -121,7 +121,15 @@ else
 fi
 
 
-
+sudo cp setupStuff/desktopFiles/applications/libreoffice-excel.desktop /usr/share/applications
+sudo cp setupStuff/desktopFiles/applications/libreoffice-powerpoint.desktop /usr/share/applications
+sudo cp setupStuff/desktopFiles/applications/libreoffice-startcenter.desktop /usr/share/applications
+sudo cp setupStuff/desktopFiles/applications/libreoffice-word.desktop /usr/share/applications
+sudo cp setupStuff/desktopFiles/applications/ParoleMediaPlayer.desktop /usr/share/applications
+sudo cp setupStuff/desktopFiles/applications/RhythmboxMusic.desktop /usr/share/applications
+sudo cp setupStuff/desktopFiles/applications/RistrettoImageViewer.desktop /usr/share/applications
+sudo cp setupStuff/desktopFiles/applications/thunderbird.desktop /usr/share/applications
+sudo cp setupStuff/desktopFiles/applications/thunderbird_thunderbird.desktop /usr/share/applications
 
 
 
@@ -311,17 +319,8 @@ fi
 
 
 echo "copying shortcuts, which, on linux are known as .desktop files, to their proper places."
-SRC_DIR="setupStuff/desktopFiles/applications"
-DST_DIR="/usr/share/applications"
-for file in "$SRC_DIR"/*; do
-    filename=$(basename "$file")
-    if [ ! -e "$DST_DIR/$filename" ]; then
-        echo "Copying $filename to $DST_DIR"
-        sudo cp -r "$file" "$DST_DIR/"
-    else
-        echo "Skipping $filename, already exists in $DST_DIR"
-    fi
-done
+sudo cp setupStuff/desktopFiles/applications/ControlPanel.desktop /usr/share/applications
+sudo cp setupStuff/desktopFiles/applications/Notepad.desktop /usr/share/applications
 
 
 SRC_DIR="setupStuff/desktopFiles/Desktop"
