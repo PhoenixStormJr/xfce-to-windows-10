@@ -49,6 +49,9 @@ else
 fi
 
 
+#Speeding up boot time by reducing check if internet is connected. 
+#This is harmless. It ONLY CHECKS if the internet is connected, LITERALLY DOES NOTHING ELSE!
+#NOT EVEN ACTUALLY CONNECT TO THE INTERNET!:
 set -e
 OVERRIDE_DIR="/etc/systemd/system/systemd-networkd-wait-online.service.d"
 OVERRIDE_FILE="$OVERRIDE_DIR/timeout.conf"
