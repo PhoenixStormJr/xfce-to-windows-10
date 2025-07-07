@@ -136,7 +136,15 @@ sudo cp setupStuff/desktopFiles/applications/thunderbird.desktop /usr/share/appl
 sudo cp setupStuff/desktopFiles/applications/thunderbird_thunderbird.desktop /usr/share/applications
 
 
-
+BG_PATH="/usr/share/backgrounds/Windows-10.jpg"
+echo "Checking if background image is already installed..."
+if [ ! -f "$BG_PATH" ]; then
+    echo "Windows 10 Background not found. Copying now..."
+    sudo cp setupStuff/Windows-10.jpg /usr/share/backgrounds/
+    echo "Windows 10 Background copied successfully."
+else
+    echo "Windows 10 Background already exists. Skipping copy."
+fi
 
 
 
@@ -303,15 +311,7 @@ sleep 1
 xfce4-panel-profiles load windowsLike.tar.gz
 
 
-BG_PATH="/usr/share/backgrounds/Windows-10.jpg"
-echo "Checking if background image is already installed..."
-if [ ! -f "$BG_PATH" ]; then
-    echo "Windows 10 Background not found. Copying now..."
-    sudo cp setupStuff/Windows-10.jpg /usr/share/backgrounds/
-    echo "Windows 10 Background copied successfully."
-else
-    echo "Windows 10 Background already exists. Skipping copy."
-fi
+
 if [ -f "$BG_PATH" ]; then
     echo "applying Windows 10 background to your desktop"
     xfconf-query --channel xfce4-desktop --list | grep last-image | while read path; do
