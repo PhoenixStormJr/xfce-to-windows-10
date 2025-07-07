@@ -81,6 +81,26 @@ EOF
 fi
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 DISTROUNKNOWN="true"
 echo $DISTROUNKNOWN
 echo "getting name of your linux distro"
