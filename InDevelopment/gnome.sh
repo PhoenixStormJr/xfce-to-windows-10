@@ -102,17 +102,6 @@ if [ ! -d "$ICON_DIR" ]; then
 else
     echo "Windows 10 icon theme already exists. Skipping installation."
 fi
-if [ -d "$ICON_DIR" ]; then
-    echo "making sure the windows 10 icons can be read but not deleted"
-    sudo chmod 555 -R /usr/share/icons/Windows-10-Icons
-    echo "Permissions updated successfully."
-    echo "changing icons to Windows-10-Icons"
-    gsettings set org.gnome.desktop.interface icon-theme 'Windows-10-Icons'
-    echo "changing cursor to Windows-10-Icons"
-    gsettings set org.gnome.desktop.interface cursor-theme "Windows-10-Icons"
-else
-    echo "Icon folder not found. Skipping chmod."
-fi
 
 
 #Copy unchaning desktop icons:
@@ -136,6 +125,21 @@ fi
 
 
 
+
+
+
+
+if [ -d "$ICON_DIR" ]; then
+    echo "making sure the windows 10 icons can be read but not deleted"
+    sudo chmod 555 -R /usr/share/icons/Windows-10-Icons
+    echo "Permissions updated successfully."
+    echo "changing icons to Windows-10-Icons"
+    gsettings set org.gnome.desktop.interface icon-theme 'Windows-10-Icons'
+    echo "changing cursor to Windows-10-Icons"
+    gsettings set org.gnome.desktop.interface cursor-theme "Windows-10-Icons"
+else
+    echo "Icon folder not found. Skipping chmod."
+fi
 
 
 if [ -f "$BG_PATH" ]; then
