@@ -1,6 +1,7 @@
 #!/bin/bash
 
 
+cd "$(dirname "$0")/../.."
 echo "Hello, this is the Linux installer for the application xfce-to-windows-10. This application will transform your linux xfce desktop to a windows 10 like look and feel. Currently there is no ULA. Would you like to install it? Enter y for yes or n for no."
 while [ true ]
 do
