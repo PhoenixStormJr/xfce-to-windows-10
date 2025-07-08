@@ -160,7 +160,6 @@ fi
 
 DE=$(echo "$XDG_CURRENT_DESKTOP" | tr '[:upper:]' '[:lower:]')
 
-
 #If the desktop environment is xfce then install the xfce version of my program:
 if [[ "$DE" == *xfce* ]]; then
   echo "xfce"
@@ -369,4 +368,192 @@ if [[ "$DE" == *xfce* ]]; then
   echo "All commands finished successfully, your computer should now look like Windows 10."
 fi
 #End of the xfce part of my program.
+
+
+
+
+if [[ "$DE" == *gnome* ]]; then
+  ICON_DIR="/usr/share/icons/Windows-10-Icons"
+  if [ -d "$ICON_DIR" ]; then
+    echo "making sure the windows 10 icons can be read but not deleted"
+    sudo chmod 555 -R /usr/share/icons/Windows-10-Icons
+    echo "Permissions updated successfully."
+    echo "changing icons to Windows-10-Icons"
+    gsettings set org.gnome.desktop.interface icon-theme 'Windows-10-Icons'
+    echo "changing cursor to Windows-10-Icons"
+    gsettings set org.gnome.desktop.interface cursor-theme "Windows-10-Icons"
+  else
+    echo "Icon folder not found. Skipping chmod."
+  fi
+  
+  
+  if [ -f "$BG_PATH" ]; then
+    echo "applying Windows 10 background to your desktop"
+    gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Windows-10.jpg'
+    gsettings set org.gnome.desktop.background picture-options "zoom"
+  else
+    echo "Background image not found at $BG_PATH. Skipping background application."
+  fi
+  
+  
+  #Install dependencies:
+  sudo add-apt-repository ppa:agornostal/ulauncher -y
+  sudo apt update
+  sudo apt install -y nemo gnome-tweaks gnome-software gnome-extensions-app ttf-mscorefonts-installer ulauncher gtk2-engines-murrine gnome-themes-extra sassc
+  # Set Nemo as default file manager for folders
+  xdg-mime default nemo.desktop inode/directory
+  
+  
+  #Adding right click menu.
+  mkdir -p ~/Templates
+  if [ ! -f ~/Templates/"Empty File.txt" ]; then
+    touch ~/Templates/"Empty File.txt"
+  fi
+  
+  
+  #Installing GNOME extensions:
+  set -e
+  UUID="dash-to-panel@jderose9.github.com"
+  EXT_DIR="$HOME/.local/share/gnome-shell/extensions/$UUID"
+  ZIP_URL="https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v65.shell-extension.zip"
+  echo "🔍 Checking if Dash to Panel is installed..."
+  if [ ! -d "$EXT_DIR" ]; then
+    echo "⚠️ Dash to Panel not installed — installing fallback v65..."
+    sudo apt install -y curl unzip gnome-shell-extensions
+    echo "🌐 Downloading..."
+    curl -sL "$ZIP_URL" -o /tmp/dash-to-panel.zip
+    echo "📦 Extracting..."
+    mkdir -p "$EXT_DIR"
+    unzip -o /tmp/dash-to-panel.zip -d "$EXT_DIR"
+  else
+    echo "ℹ️ Dash to Panel already installed."
+  fi
+  echo "🎉 Done!"
+  set -e
+  UUID="arcmenu@arcmenu.com"
+  EXT_DIR="$HOME/.local/share/gnome-shell/extensions/$UUID"
+  ZIP_URL="https://extensions.gnome.org/extension-data/arcmenuarcmenu.com.v50.shell-extension.zip"
+  echo "🔍 Checking if Arc Menu is installed..."
+  if [ ! -d "$EXT_DIR" ]; then
+    echo "⚠️ Arc Menu not installed — installing fallback v50..."
+    echo "🌐 Downloading..."
+    curl -sL "$ZIP_URL" -o /tmp/arcmenu.zip
+    echo "📦 Extracting..."
+    mkdir -p "$EXT_DIR"
+    unzip -o /tmp/arcmenu.zip -d "$EXT_DIR"
+  else
+    echo "ℹ️ Arc Menu already installed."
+  fi
+  echo "🎉 Arc Menu setup complete!"
+  echo "Installing Date Menu Formatter"
+  EXT_ID=4655
+  GNOME_VERSION=$(gnome-shell --version | awk '{print $3}')
+  # Fetch metadata
+  VERSIONS_JSON=$(curl -s "https://extensions.gnome.org/extension-info/?pk=$EXT_ID&shell_version=$GNOME_VERSION")
+  # Fallback to latest available version if GNOME version unsupported
+  if echo "$VERSIONS_JSON" | jq -e .download_url | grep null >/dev/null; then
+    echo "⚠️ GNOME version $GNOME_VERSION not supported. Trying latest available version..."
+    GNOME_VERSION=$(curl -s "https://extensions.gnome.org/extension-query/?search=$EXT_ID" | jq -r '.extensions[0].shell_version_map | keys_unsorted[-1]')
+    VERSIONS_JSON=$(curl -s "https://extensions.gnome.org/extension-info/?pk=$EXT_ID&shell_version=$GNOME_VERSION")
+  fi
+  # Get download URL and UUID
+  ZIP_URL=$(echo "$VERSIONS_JSON" | jq -r .download_url)
+  UUID=$(echo "$VERSIONS_JSON" | jq -r .uuid)
+  # Abort if missing data, but NO 'exit'
+  if [ -z "$ZIP_URL" ] || [ "$ZIP_URL" = "null" ] || [ -z "$UUID" ]; then
+    echo "❌ Failed to get extension metadata."
+  else
+    EXT_DIR="$HOME/.local/share/gnome-shell/extensions/$UUID"
+    # Only install if not already installed
+    if [ ! -d "$EXT_DIR" ]; then
+      echo "📦 Installing extension: date-menu-formatter@marcinjakubowski.github.com"
+      curl -s -L -o ext.zip "https://extensions.gnome.org$ZIP_URL"
+      mkdir -p "$EXT_DIR"
+      unzip -q ext.zip -d "$EXT_DIR"
+      rm ext.zip
+    else
+      echo "✅ Extension already installed: date-menu-formatter@marcinjakubowski.github.com"
+    fi
+  fi
+  
+  
+  #Enabling GNOME extensions. This... might crash, you may need to log out and log back in, then run the script again:
+  echo "Enabling GNOME extensions. This... might crash. Log out, log back in, and run the script again."
+  echo "🚀 Enabling Dash to Panel..."
+  gnome-extensions enable "dash-to-panel@jderose9.github.com" || echo "⚠️ May need GNOME shell restart for effect."
+  echo "🚀 Enabling Arc Menu..."
+  gnome-extensions enable "arcmenu@arcmenu.com" || echo "⚠️ May need GNOME shell restart for effect."
+  echo "🚀 Enabling Date Menu Formatter..."
+  gnome-extensions enable "date-menu-formatter@marcinjakubowski.github.com"  || echo "⚠️ May need GNOME shell restart for effect."
+  echo "🚀 Enabling User Theme"
+  gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
+  echo "🚀 Disabling Ubuntu Dock..."
+  gnome-extensions disable ubuntu-dock@ubuntu.com
+  
+  
+  #Changing extension settings to be like Windows 10:
+  dconf load /org/gnome/shell/extensions/dash-to-panel/ < dash-to-panel-windows-10.txt
+  dconf load /org/gnome/shell/extensions/arcmenu/ < arc-menu-windows-10.txt
+  #dconf read /org/gnome/shell/favorite-apps > favorite-apps-windows-10.txt
+  dconf write /org/gnome/shell/favorite-apps "$(cat favorite-apps-windows-10.txt)"
+  #Restoring date and time configuration to look like windows 10:
+  SCHEMA=org.gnome.shell.extensions.date-menu-formatter
+  SCHEMA_DIR=~/.local/share/gnome-shell/extensions/date-menu-formatter@marcinjakubowski.github.com/schemas
+  while IFS=": " read -r key val; do
+    eval GSETTINGS_SCHEMA_DIR=$SCHEMA_DIR gsettings set $SCHEMA $key "$val"
+  done < date-menu-formatter-windows-10.txt
+  #Change positions of new icons like Windows 10:
+  gsettings set org.gnome.shell.extensions.ding start-corner 'top-left'
+  
+  
+  # System-wide Windows 10 GTK theme installation
+  THEME_NAME="Windows 10"
+  THEME_DIR="/usr/share/themes/$THEME_NAME"
+  TMP_ZIP="/tmp/windows-10-theme.zip"
+  # Only install if theme is not already present
+  if [ ! -d "$THEME_DIR" ]; then
+    echo "[INFO] Installing Windows 10 GTK theme system-wide..."
+    sudo mkdir -p /usr/share/themes
+    # Download and extract
+    curl -L -o "$TMP_ZIP" https://github.com/B00merang-Project/Windows-10/archive/refs/heads/master.zip
+    sudo unzip -q "$TMP_ZIP" -d /usr/share/themes
+    sudo mv /usr/share/themes/Windows-10-master "$THEME_DIR"
+    rm -f "$TMP_ZIP"
+  else
+    echo "[INFO] Theme already installed: $THEME_DIR"
+  fi
+  # Optionally set it (comment out if not needed in the larger script)
+  echo "Applying Windows 10 theme"
+  gsettings set org.gnome.desktop.interface gtk-theme "$THEME_NAME"
+  gsettings set org.gnome.shell.extensions.user-theme name 'Windows 10'
+  
+  
+  #Change the desktop files to be like Windows 10:
+  sudo rm /usr/share/applications/ulauncher.desktop
+  sudo cp ../setupStuff/desktopFiles/applications/show_desktop.desktop /usr/share/applications/show_desktop.desktop
+  sudo cp ../setupStuff/desktopFiles/applications/org.gnome.TextEditor.desktop /usr/share/applications/org.gnome.TextEditor.desktop
+  sudo cp ../setupStuff/desktopFiles/applications/ulauncher.desktop /usr/share/applications/ulauncher.desktop
+  
+  
+  # Set GNOME font settings
+  gsettings set org.gnome.desktop.interface font-name 'Segoe UI 11'
+  gsettings set org.gnome.desktop.interface document-font-name 'Segoe UI 11'
+  gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Segoe UI Bold 11'
+  gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 12'
+  # Updated antialiasing and hinting options
+  gsettings set org.gnome.desktop.interface font-antialiasing 'rgba'
+  gsettings set org.gnome.desktop.interface font-hinting 'slight'
+  
+  
+  #Installing the final Windows 10 theme:
+  echo "Installing the final windows 10 theme:"
+  git clone https://github.com/vinceliuice/Fluent-gtk-theme.git
+  sudo ./Fluent-gtk-theme/install.sh 
+  gsettings set org.gnome.shell.extensions.user-theme name "Fluent-Dark"
+  
+  
+  #Finally when all is done, log out and log back in:
+  gnome-session-quit --logout
+  
+fi
 
