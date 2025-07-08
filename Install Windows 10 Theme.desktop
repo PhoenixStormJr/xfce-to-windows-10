@@ -1,0 +1,14 @@
+[Desktop Entry]
+X-SnapInstanceName=Install Windows Theme
+Version=1.0
+Name=Install Windows Theme
+Comment=Click here to make Linux feel like home (Windows)
+GenericName=Linux Installer
+Keywords=Installer;Windows;xfce;
+Exec=x-terminal-emulator -e "bash ~/Downloads/Convert-Linux-to-Windows-10-main/setupStuff/scripts/ScriptLinuxToWindows10.sh"
+Terminal=false
+Type=Application
+Icon=edit-cut
+Categories=Installer
+StartupNotify=true
+Path=
