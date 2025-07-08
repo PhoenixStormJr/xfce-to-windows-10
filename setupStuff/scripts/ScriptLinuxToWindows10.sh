@@ -399,7 +399,7 @@ if [[ "$DE" == *gnome* ]]; then
   #Install dependencies:
   sudo add-apt-repository ppa:agornostal/ulauncher -y
   sudo apt update
-  sudo apt install -y nemo gnome-tweaks gnome-software gnome-extensions-app ttf-mscorefonts-installer ulauncher gtk2-engines-murrine gnome-themes-extra sassc
+  sudo apt install -y nemo gnome-tweaks gnome-software gnome-extensions-app ttf-mscorefonts-installer ulauncher gtk2-engines-murrine gnome-themes-extra sassc wmctrl xdotool
   # Set Nemo as default file manager for folders
   xdg-mime default nemo.desktop inode/directory
   
