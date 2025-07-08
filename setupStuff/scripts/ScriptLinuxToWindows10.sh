@@ -157,27 +157,31 @@ fi
 
 
 
+DE=$(echo "$XDG_CURRENT_DESKTOP" | tr '[:upper:]' '[:lower:]')
 
 
-DISTROUNKNOWN="true"
-echo $DISTROUNKNOWN
-echo "getting name of your linux distro"
-source /etc/os-release
-echo "the name of your system is:"
-echo $NAME
-echo "installing dependancies"
-if [ "$NAME" = "Ubuntu" ]; then
+#If the desktop environment is xfce then install the xfce version of my program:
+if [[ "$DE" == *xfce* ]]; then
+  echo "xfce"
+  DISTROUNKNOWN="true"
+  echo $DISTROUNKNOWN
+  echo "getting name of your linux distro"
+  source /etc/os-release
+  echo "the name of your system is:"
+  echo $NAME
+  echo "installing dependancies"
+  if [ "$NAME" = "Ubuntu" ]; then
     sudo apt update --allow-unauthenticated --allow-insecure-repositories
     sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles snapd wmctrl -y --allow-unauthenticated
     sudo snap install snap-store
     DISTROUNKNOWN="false"
-fi
-if [ "$NAME" = "Linux Mint" ]; then
+  fi
+  if [ "$NAME" = "Linux Mint" ]; then
     sudo apt update --allow-unauthenticated --allow-insecure-repositories
     sudo apt install xfce4-panel-profiles dconf-cli git python3 fonts-liberation gir1.2-glib-2.0 libnotify-bin mousepad procps psmisc xdotool xfce4-datetime-plugin xfce4-power-manager-plugins xfce4-pulseaudio-plugin xfce4-whiskermenu-plugin xfce4-panel-profiles wmctrl -y --allow-unauthenticated
     DISTROUNKNOWN="false"
-fi
-if [ "$DISTROUNKNOWN" = "true" ]; then
+  fi
+  if [ "$DISTROUNKNOWN" = "true" ]; then
     sudo cp setupStuff/apt/UbuntuSources.list /etc/apt/sources.list.d
     sudo apt update --allow-unauthenticated --allow-insecure-repositories
     echo "UNKNOWN DISTRO DETECTED. we'll go ahead anyway..."
@@ -199,24 +203,24 @@ if [ "$DISTROUNKNOWN" = "true" ]; then
     sudo apt install xfce4-panel-profiles -y --allow-unauthenticated
     sudo apt install snapd -y --allow-unauthenticated
     NAME="Ubuntu"
-fi
-
-
-#Sets a variable to see the Windows 10 theme directory.
-THEME_DIR="/usr/share/themes/Kali-Windows-10-theme"
-#This command checks if Windows 10 theme is already installed.
-echo "Checking if Windows 10 theme is already installed..."
-if [ ! -d "$THEME_DIR" ]; then
+  fi
+  
+  
+  #Sets a variable to see the Windows 10 theme directory.
+  THEME_DIR="/usr/share/themes/Kali-Windows-10-theme"
+  #This command checks if Windows 10 theme is already installed.
+  echo "Checking if Windows 10 theme is already installed..."
+  if [ ! -d "$THEME_DIR" ]; then
     #this command copies the windows 10 theme, from kali, to your theme folder.
     echo "Theme not found. Copying Windows 10 theme to /usr/share/themes/..."
     sudo cp -r setupStuff/Kali-Windows-10-theme "$THEME_DIR"
     echo "Theme installed."
-else
+  else
     echo "Theme already exists. Skipping copy."
-fi
-#this command makes sure everyone can use the theme, but no one can delete it.
-echo "making sure the windows 10 theme can be read but not deleted"
-if [ -d "$THEME_DIR" ]; then
+  fi
+  #this command makes sure everyone can use the theme, but no one can delete it.
+  echo "making sure the windows 10 theme can be read but not deleted"
+  if [ -d "$THEME_DIR" ]; then
     sudo chmod 555 -R "$THEME_DIR"
     echo "Permissions updated to read/execute only."
     #this command applies the new theme we copied to the system.
@@ -224,12 +228,12 @@ if [ -d "$THEME_DIR" ]; then
     xfconf-query -c xsettings -p /Net/ThemeName -s "Kali-Windows-10-theme"
     echo "changing the window buttons to look like Windows 10"
     xfconf-query -c xfwm4 -p /general/theme -n -t string -s "Kali-Windows-10-theme"
-else
+  else
     echo "Theme folder not found. Skipping chmod."
-fi
-
-
-if [ -d "$ICON_DIR" ]; then
+  fi
+  
+  
+  if [ -d "$ICON_DIR" ]; then
     echo "making sure the windows 10 icons can be read but not deleted"
     sudo chmod 555 -R /usr/share/icons/Windows-10-Icons
     echo "Permissions updated successfully."
@@ -237,20 +241,20 @@ if [ -d "$ICON_DIR" ]; then
     xfconf-query -c xsettings -p /Net/IconThemeName -s Windows-10-Icons
     echo "changing cursor to Windows-10-Icons"
     xfconf-query -c xsettings -p /Gtk/CursorThemeName -n -t string -s "Windows-10-Icons"
-else
+  else
     echo "Icon folder not found. Skipping chmod."
-fi
-
-
-echo "Changing the text theme to the windows style."
-xfconf-query -c xsettings -p /Gtk/FontName -n -t string -s "Liberation Sans 11"
-echo "changing the button pictures to be like windows 10."
-xfconf-query -c xfwm4 -p /general/button_layout -n -t string -s "|HMC"
-
-
-TAR_FILE="./windowsLike.tar.gz"
-echo "Checking for existing XFCE panel theme archive..."
-if [ ! -f "$TAR_FILE" ]; then
+  fi
+  
+  
+  echo "Changing the text theme to the windows style."
+  xfconf-query -c xsettings -p /Gtk/FontName -n -t string -s "Liberation Sans 11"
+  echo "changing the button pictures to be like windows 10."
+  xfconf-query -c xfwm4 -p /general/button_layout -n -t string -s "|HMC"
+  
+  
+  TAR_FILE="./windowsLike.tar.gz"
+  echo "Checking for existing XFCE panel theme archive..."
+  if [ ! -f "$TAR_FILE" ]; then
     echo "creating the xfce4 panel theme"
     mkdir windowsLike
     mkdir windowsLike/launcher-2
@@ -269,96 +273,99 @@ if [ ! -f "$TAR_FILE" ]; then
     echo -e "[Desktop Entry]\nName=Text Editor\nExec=mousepad %F\nIcon=accessories-text-editor\nTerminal=false\nStartupNotify=true\nType=Application\nCategories=Utility;TextEditor;GTK;\nMimeType=text/plain;\n" > ./windowsLike/launcher-8/15780460092.desktop
     echo -e "layout=1\ndate_font=Liberation Sans 9\ntime_font=Liberation Sans 9\ndate_format=%m/%d/%Y\ntime_format=%l:%M %p" > ./windowsLike/datetime-16.rc
     if [ "$NAME" = "Ubuntu" ]; then
-        echo -e "[Desktop Entry]\nName=App Store\nComment=Add, remove or update software on this computer\nIcon=softwarecenter\nExec=snap-store %U\nTerminal=false\nType=Application\nCategories=GNOME;GTK;System;PackageManager;\nKeywords=Updates;Upgrade;Sources;Repositories;Preferences;Install;Uninstall;Program;Software;App;Store;\nStartupNotify=true\nMimeType=x-scheme-handler/appstream;x-scheme-handler/apt;x-scheme-handler/snap;\nX-GNOME-UsesNotifications=true\nDBusActivatable=true\nX-Purism-FormFactor=Workstation;Mobile;\nX-Ubuntu-Gettext-Domain=gnome-software\nPath=\n" > ./windowsLike/launcher-18/16878133091.desktop
+      echo -e "[Desktop Entry]\nName=App Store\nComment=Add, remove or update software on this computer\nIcon=softwarecenter\nExec=snap-store %U\nTerminal=false\nType=Application\nCategories=GNOME;GTK;System;PackageManager;\nKeywords=Updates;Upgrade;Sources;Repositories;Preferences;Install;Uninstall;Program;Software;App;Store;\nStartupNotify=true\nMimeType=x-scheme-handler/appstream;x-scheme-handler/apt;x-scheme-handler/snap;\nX-GNOME-UsesNotifications=true\nDBusActivatable=true\nX-Purism-FormFactor=Workstation;Mobile;\nX-Ubuntu-Gettext-Domain=gnome-software\nPath=\n" > ./windowsLike/launcher-18/16878133091.desktop
     fi
     if [ "$NAME" = "Linux Mint" ]; then
-        echo -e "[Desktop Entry]\nName=App Store\nComment=Add, remove or update software on this computer\nIcon=softwarecenter\nExec=mintinstall %U\nTerminal=false\nType=Application\nCategories=GNOME;GTK;System;PackageManager;\nKeywords=Updates;Upgrade;Sources;Repositories;Preferences;Install;Uninstall;Program;Software;App;Store;\nStartupNotify=true\nMimeType=x-scheme-handler/appstream;x-scheme-handler/apt;x-scheme-handler/snap;\nX-GNOME-UsesNotifications=true\nDBusActivatable=true\nX-Purism-FormFactor=Workstation;Mobile;\nX-Ubuntu-Gettext-Domain=gnome-software\nPath=\n" > ./windowsLike/launcher-18/16878133091.desktop
+      echo -e "[Desktop Entry]\nName=App Store\nComment=Add, remove or update software on this computer\nIcon=softwarecenter\nExec=mintinstall %U\nTerminal=false\nType=Application\nCategories=GNOME;GTK;System;PackageManager;\nKeywords=Updates;Upgrade;Sources;Repositories;Preferences;Install;Uninstall;Program;Software;App;Store;\nStartupNotify=true\nMimeType=x-scheme-handler/appstream;x-scheme-handler/apt;x-scheme-handler/snap;\nX-GNOME-UsesNotifications=true\nDBusActivatable=true\nX-Purism-FormFactor=Workstation;Mobile;\nX-Ubuntu-Gettext-Domain=gnome-software\nPath=\n" > ./windowsLike/launcher-18/16878133091.desktop
     fi
     echo -e "[Desktop Entry]\nEncoding=UTF-8\nName=Thunderbird Mail\nComment=Send and receive mail with Thunderbird\nGenericName=Mail Client\nKeywords=Email;E-mail;Newsgroup;Feed;RSS\nExec=thunderbird %u\nTerminal=false\nX-MultipleArgs=false\nType=Application\nIcon=thunderbird\nCategories=Application;Network;Email;\nMimeType=x-scheme-handler/mailto;application/x-xpinstall;x-scheme-handler/webcal;x-scheme-handler/mid;message/rfc822;\nStartupNotify=true\nActions=Compose;Contacts\nX-XFCE-Source=file:///usr/share/applications/thunderbird.desktop\n\n[Desktop Action Compose]\nName=Compose New Message\nExec=thunderbird -compose\nOnlyShowIn=Messaging Menu;Unity;\n\n[Desktop Action Contacts]\nName=Contacts\nExec=thunderbird -addressbook\nOnlyShowIn=Messaging Menu;Unity;\n" > ./windowsLike/launcher-19/16895434911.desktop
     cd windowsLike/ && tar -zcvf ../windowsLike.tar.gz * && cd - 
-else
+  else
     echo "XFCE panel theme archive already exists. Skipping creation."
-fi
-#Okay, NOW we're installing the shortcuts!
-xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/Super_L" -r
-xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/Super_L" --create -t string -s "xfce4-popup-whiskermenu"
-xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/<Super>d" -r
-xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/<Super>d" --create -t string -s "wmctrl -k on"
-echo "waiting 10 (0/10) seconds before applying it"
-sleep 1
-echo "waiting 10 (1/10) seconds before applying it"
-sleep 1
-echo "waiting 10 (2/10) seconds before applying it"
-sleep 1
-echo "waiting 10 (3/10) seconds before applying it"
-sleep 1
-echo "waiting 10 (4/10) seconds before applying it"
-sleep 1
-echo "waiting 10 (5/10) seconds before applying it"
-sleep 1
-echo "waiting 10 (6/10) seconds before applying it"
-sleep 1
-echo "waiting 10 (7/10) seconds before applying it"
-sleep 1
-echo "waiting 10 (8/10) seconds before applying it"
-sleep 1
-echo "waiting 10 (9/10) seconds before applying it"
-sleep 1
-echo "waiting 10 (10/10) seconds before applying it"
-sleep 1
-xfce4-panel-profiles load windowsLike.tar.gz
-
-
-
-if [ -f "$BG_PATH" ]; then
+  fi
+  #Okay, NOW we're installing the shortcuts!
+  xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/Super_L" -r
+  xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/Super_L" --create -t string -s "xfce4-popup-whiskermenu"
+  xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/<Super>d" -r
+  xfconf-query -c xfce4-keyboard-shortcuts -p "/commands/custom/<Super>d" --create -t string -s "wmctrl -k on"
+  echo "waiting 10 (0/10) seconds before applying it"
+  sleep 1
+  echo "waiting 10 (1/10) seconds before applying it"
+  sleep 1
+  echo "waiting 10 (2/10) seconds before applying it"
+  sleep 1
+  echo "waiting 10 (3/10) seconds before applying it"
+  sleep 1
+  echo "waiting 10 (4/10) seconds before applying it"
+  sleep 1
+  echo "waiting 10 (5/10) seconds before applying it"
+  sleep 1
+  echo "waiting 10 (6/10) seconds before applying it"
+  sleep 1
+  echo "waiting 10 (7/10) seconds before applying it"
+  sleep 1
+  echo "waiting 10 (8/10) seconds before applying it"
+  sleep 1
+  echo "waiting 10 (9/10) seconds before applying it"
+  sleep 1
+  echo "waiting 10 (10/10) seconds before applying it"
+  sleep 1
+  xfce4-panel-profiles load windowsLike.tar.gz
+  
+  
+  
+  if [ -f "$BG_PATH" ]; then
     echo "applying Windows 10 background to your desktop"
     xfconf-query --channel xfce4-desktop --list | grep last-image | while read path; do
-        xfconf-query --channel xfce4-desktop --property $path --set /usr/share/backgrounds/Windows-10.jpg
+      xfconf-query --channel xfce4-desktop --property $path --set /usr/share/backgrounds/Windows-10.jpg
     done
-else
+  else
     echo "Background image not found at $BG_PATH. Skipping background application."
-fi
-
-
-echo "copying shortcuts, which, on linux are known as .desktop files, to their proper places."
-sudo cp setupStuff/desktopFiles/applications/ControlPanel.desktop /usr/share/applications
-sudo cp setupStuff/desktopFiles/applications/Notepad.desktop /usr/share/applications
-
-#Now to the desktop:
-cp setupStuff/desktopFiles/Desktop/firefox_firefox.desktop ~/Desktop/
-cp setupStuff/desktopFiles/Desktop/HowToInstallApps.txt ~/Desktop/
-
-
-LINK_PATH="/home/$USER/Desktop/ALL_Applications"
-TARGET="/usr/share/applications"
-if [ ! -L "$LINK_PATH" ] && [ ! -e "$LINK_PATH" ]; then
+  fi
+  
+  
+  echo "copying shortcuts, which, on linux are known as .desktop files, to their proper places."
+  sudo cp setupStuff/desktopFiles/applications/ControlPanel.desktop /usr/share/applications
+  sudo cp setupStuff/desktopFiles/applications/Notepad.desktop /usr/share/applications
+  
+  #Now to the desktop:
+  cp setupStuff/desktopFiles/Desktop/firefox_firefox.desktop ~/Desktop/
+  cp setupStuff/desktopFiles/Desktop/HowToInstallApps.txt ~/Desktop/
+  
+  
+  LINK_PATH="/home/$USER/Desktop/ALL_Applications"
+  TARGET="/usr/share/applications"
+  if [ ! -L "$LINK_PATH" ] && [ ! -e "$LINK_PATH" ]; then
     echo "Creating symbolic link $LINK_PATH -> $TARGET"
     ln -s "$TARGET" "$LINK_PATH"
-else
+  else
     echo "Symbolic link or file $LINK_PATH already exists. Skipping."
-fi
-
-
-SRC="setupStuff/desktopFiles/$NAME/AppStore.desktop"
-DST="/home/$USER/Desktop/AppStore.desktop"
-if [ ! -e "$DST" ]; then
+  fi
+  
+  
+  SRC="setupStuff/desktopFiles/$NAME/AppStore.desktop"
+  DST="/home/$USER/Desktop/AppStore.desktop"
+  if [ ! -e "$DST" ]; then
     echo "Copying AppStore.desktop to Desktop"
     cp "$SRC" "$DST"
-else
+  else
     echo "AppStore.desktop already exists on Desktop. Skipping."
-fi
-
-
-SRC="setupStuff/desktopFiles/$NAME/AppStore.desktop"
-DST="/usr/share/applications/AppStore.desktop"
-if [ ! -e "$DST" ]; then
+  fi
+  
+  
+  SRC="setupStuff/desktopFiles/$NAME/AppStore.desktop"
+  DST="/usr/share/applications/AppStore.desktop"
+  if [ ! -e "$DST" ]; then
     echo "Copying AppStore.desktop to /usr/share/applications/"
     sudo cp "$SRC" "$DST"
-else
+  else
     echo "AppStore.desktop already exists in /usr/share/applications/. Skipping."
+  fi
+  
+  
+  echo "Now changing mousepad, or notepad settings, to be easier to use"
+  dconf load /org/xfce/mousepad/ < setupStuff/mousepad.settings
+  echo "All commands finished successfully, your computer should now look like Windows 10."
 fi
+#End of the xfce part of my program.
 
-
-echo "Now changing mousepad, or notepad settings, to be easier to use"
-dconf load /org/xfce/mousepad/ < setupStuff/mousepad.settings
-echo "All commands finished successfully, your computer should now look like Windows 10."
