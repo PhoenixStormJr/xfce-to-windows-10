@@ -492,16 +492,16 @@ if [[ "$DE" == *gnome* ]]; then
   
   
   #Changing extension settings to be like Windows 10:
-  dconf load /org/gnome/shell/extensions/dash-to-panel/ < dash-to-panel-windows-10.txt
-  dconf load /org/gnome/shell/extensions/arcmenu/ < arc-menu-windows-10.txt
-  #dconf read /org/gnome/shell/favorite-apps > favorite-apps-windows-10.txt
-  dconf write /org/gnome/shell/favorite-apps "$(cat favorite-apps-windows-10.txt)"
+  dconf load /org/gnome/shell/extensions/dash-to-panel/ < setupStuff/dash-to-panel-windows-10.txt
+  dconf load /org/gnome/shell/extensions/arcmenu/ < setupStuff/arc-menu-windows-10.txt
+  #dconf read /org/gnome/shell/favorite-apps > setupStuff/favorite-apps-windows-10.txt
+  dconf write /org/gnome/shell/favorite-apps "$(cat setupStuff/favorite-apps-windows-10.txt)"
   #Restoring date and time configuration to look like windows 10:
   SCHEMA=org.gnome.shell.extensions.date-menu-formatter
   SCHEMA_DIR=~/.local/share/gnome-shell/extensions/date-menu-formatter@marcinjakubowski.github.com/schemas
   while IFS=": " read -r key val; do
     eval GSETTINGS_SCHEMA_DIR=$SCHEMA_DIR gsettings set $SCHEMA $key "$val"
-  done < date-menu-formatter-windows-10.txt
+  done < setupStuff/date-menu-formatter-windows-10.txt
   #Change positions of new icons like Windows 10:
   gsettings set org.gnome.shell.extensions.ding start-corner 'top-left'
   
@@ -530,9 +530,9 @@ if [[ "$DE" == *gnome* ]]; then
   
   #Change the desktop files to be like Windows 10:
   sudo rm /usr/share/applications/ulauncher.desktop
-  sudo cp ../setupStuff/desktopFiles/applications/show_desktop.desktop /usr/share/applications/show_desktop.desktop
-  sudo cp ../setupStuff/desktopFiles/applications/org.gnome.TextEditor.desktop /usr/share/applications/org.gnome.TextEditor.desktop
-  sudo cp ../setupStuff/desktopFiles/applications/ulauncher.desktop /usr/share/applications/ulauncher.desktop
+  sudo cp setupStuff/desktopFiles/applications/show_desktop.desktop /usr/share/applications/show_desktop.desktop
+  sudo cp setupStuff/desktopFiles/applications/org.gnome.TextEditor.desktop /usr/share/applications/org.gnome.TextEditor.desktop
+  sudo cp setupStuff/desktopFiles/applications/ulauncher.desktop /usr/share/applications/ulauncher.desktop
   
   
   # Set GNOME font settings
