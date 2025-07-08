@@ -504,7 +504,9 @@ if [[ "$DE" == *gnome* ]]; then
   done < setupStuff/date-menu-formatter-windows-10.txt
   #Change positions of new icons like Windows 10:
   gsettings set org.gnome.shell.extensions.ding start-corner 'top-left'
-  
+  #Enabling 4 workspaces only:
+  gsettings set org.gnome.mutter dynamic-workspaces false
+  gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
   
   # System-wide Windows 10 GTK theme installation
   THEME_NAME="Windows 10"
