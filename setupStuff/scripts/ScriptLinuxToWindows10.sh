@@ -504,6 +504,8 @@ if [[ "$DE" == *gnome* ]]; then
   done < setupStuff/date-menu-formatter-windows-10.txt
   #Change positions of new icons like Windows 10:
   gsettings set org.gnome.shell.extensions.ding start-corner 'top-left'
+
+  
   #Enabling 4 workspaces only, and workspace switcher:
   gsettings set org.gnome.mutter dynamic-workspaces false
   gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
@@ -520,6 +522,17 @@ next=$(( (current + 1) % total ))
 xdotool set_desktop $next
 EOF
   chmod +x ~/.local/bin/workspace-next-loop.sh
+  mkdir -p ~/.local/share/applications
+  cat > ~/.local/share/applications/workspace-next-loop.desktop << 'EOF'
+[Desktop Entry]
+Name=Next Workspace
+Comment=Switch to the next workspace, looping back to the first
+Exec=/home/$USER/.local/bin/workspace-next-loop.sh
+Icon=xfce4-workspaces
+Terminal=false
+Type=Application
+Categories=Utility;
+EOF
   
   
   # System-wide Windows 10 GTK theme installation
