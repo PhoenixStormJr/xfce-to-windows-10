@@ -1,6 +1,6 @@
 # convert Linux to Windows 10
 
-Note: On GNOME you might have to move the Install.desktop to your ACTUAL desktop to run it!!! But keep the rest of the files in your downloads!
+Note: On GNOME you might have to move the Install Windows 10 Theme.desktop to your ACTUAL desktop to run it!!! But keep the rest of the files in your downloads!
 
 
 This script will instantly convert your xfce desktop to a windows 10 like feel. (Now I'm trying to work on supporting other desktop environments!)
