@@ -327,6 +327,7 @@ if [[ "$DE" == *xfce* ]]; then
   echo "copying shortcuts, which, on linux are known as .desktop files, to their proper places."
   sudo cp setupStuff/desktopFiles/applications/ControlPanel.desktop /usr/share/applications
   sudo cp setupStuff/desktopFiles/applications/Notepad.desktop /usr/share/applications
+
   
   #Now to the desktop:
   cp setupStuff/desktopFiles/Desktop/firefox_firefox.desktop ~/Desktop/
@@ -527,7 +528,7 @@ EOF
 [Desktop Entry]
 Name=Next Workspace
 Comment=Switch to the next workspace, looping back to the first
-Exec=/home/$USER/.local/bin/workspace-next-loop.sh
+Exec=bash -c "/home/$USER/.local/bin/workspace-next-loop.sh"
 Icon=xfce4-workspaces
 Terminal=false
 Type=Application
