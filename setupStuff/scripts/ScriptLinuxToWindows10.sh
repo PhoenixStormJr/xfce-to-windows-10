@@ -313,7 +313,6 @@ if [[ "$DE" == *xfce* ]]; then
   xfce4-panel-profiles load windowsLike.tar.gz
   
   
-  
   if [ -f "$BG_PATH" ]; then
     echo "applying Windows 10 background to your desktop"
     xfconf-query --channel xfce4-desktop --list | grep last-image | while read path; do
@@ -586,4 +585,12 @@ EOF
   gnome-session-quit --logout
   
 fi
+#end of the GNOME section of my program.
 
+
+
+
+
+if [[ "$DE" == *kde* ]]; then
+  echo "hello"
+fi
