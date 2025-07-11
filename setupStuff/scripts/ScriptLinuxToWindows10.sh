@@ -655,6 +655,21 @@ if [[ "$DE" == *kde* ]]; then
   else
     echo "Windows-10-Dark theme already installed. Skipping."
   fi
+  # GTK 3 settings
+  mkdir -p ~/.config/gtk-3.0
+  tee ~/.config/gtk-3.0/settings.ini > /dev/null <<EOF
+[Settings]
+gtk-theme-name = Windows-10-Dark-3.2.1-dark
+gtk-icon-theme-name = breeze
+EOF
+  # GTK 2 settings
+  mkdir -p ~/.config/gtk-2.0
+  tee ~/.config/gtk-2.0/gtkrc > /dev/null <<EOF
+gtk-theme-name="Windows-10-Dark-3.2.1-dark"
+EOF
+
+
+
 fi
 #End of KDE-Plasma configuration
 
