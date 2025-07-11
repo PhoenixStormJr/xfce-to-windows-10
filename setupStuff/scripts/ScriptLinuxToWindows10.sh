@@ -613,5 +613,7 @@ if [[ "$DE" == *kde* ]]; then
   kpackagetool5 -t KWin/Script -i setupStuff/kde-windows-10-stuff/sticky-window-snapping-v2.0.1.kwinscript
   kwriteconfig5 --file kwinrc --group Plugins --key sticky-window-snappingEnabled true
   kwriteconfig5 --file kwinrc --group ElectricBorders --key TopLeft --delete
+  kwriteconfig5 --file kwinrc --group TouchEdges --key Left --delete
+  kwriteconfig5 --file kwinrc --group Effect-overview --key TouchBorderActivate --delete
   qdbus org.kde.KWin /KWin reconfigure
 fi
