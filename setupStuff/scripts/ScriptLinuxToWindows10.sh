@@ -616,4 +616,7 @@ if [[ "$DE" == *kde* ]]; then
   kwriteconfig5 --file kwinrc --group TouchEdges --key Left --delete
   kwriteconfig5 --file kwinrc --group Effect-overview --key TouchBorderActivate --delete
   qdbus org.kde.KWin /KWin reconfigure
+
+  git clone https://github.com/yeyushengfan258/Win10OS-kde.git ~/Win10OS-kde
+
 fi
