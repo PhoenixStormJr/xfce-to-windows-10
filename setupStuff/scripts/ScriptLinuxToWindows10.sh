@@ -614,7 +614,15 @@ if [[ "$DE" == *kde* ]]; then
   
   
   #Making the windows stick to the borders of your monitor like Windows 10:
-  kpackagetool5 -t KWin/Script -i setupStuff/kde-windows-10-stuff/sticky-window-snapping-v2.0.1.kwinscript
+  SCRIPT_ID="sticky-window-snapping"
+  SCRIPT_PATH="setupStuff/kde-windows-10-stuff/sticky-window-snapping-v2.0.1.kwinscript"
+  # Check if the script is already installed
+  if ! kpackagetool5 -t KWin/Script -l | grep -q "$SCRIPT_ID"; then
+    echo "Installing $SCRIPT_ID..."
+    kpackagetool5 -t KWin/Script -i "$SCRIPT_PATH"
+  else
+    echo "$SCRIPT_ID is already installed. Skipping..."
+  fi
   kwriteconfig5 --file kwinrc --group Plugins --key sticky-window-snappingEnabled true
   
   
