@@ -634,8 +634,14 @@ if [[ "$DE" == *kde* ]]; then
   
   
   #Installing the Global Windows 10 theme for KDE-Plasma:
-  git clone https://github.com/yeyushengfan258/Win10OS-kde.git /tmp/Win10OS-kde
-  sudo bash /tmp/Win10OS-kde/install.sh --global
+  #Check if any installed global theme contains "Win10OS" in its name
+  if ! find /usr/share/plasma/look-and-feel -maxdepth 1 -type d -name '*Win10OS*' | grep -q .; then
+    echo "Installing Win10OS Global Theme..."
+    git clone https://github.com/yeyushengfan258/Win10OS-kde.git /tmp/Win10OS-kde
+    sudo bash /tmp/Win10OS-kde/install.sh --global
+  else
+    echo "Win10OS Global Theme already installed. Skipping..."
+  fi
   kwriteconfig5 --file kdeglobals --group KDE --key LookAndFeelPackage "com.github.yeyushengfan258.Win10OS-dark"
   lookandfeeltool -a com.github.yeyushengfan258.Win10OS-dark
   kwriteconfig5 --file plasmarc --group Theme --key name "Win10OS-dark"
