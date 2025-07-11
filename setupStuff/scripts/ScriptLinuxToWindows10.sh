@@ -592,5 +592,8 @@ fi
 
 
 if [[ "$DE" == *kde* ]]; then
-  echo "hello"
+  kwriteconfig5 --file kwinrc --group Windows --key Placement Centered
+  kwriteconfig5 --file kwinrc --group TabBox --key LayoutName thumbnails
+  kwriteconfig5 --file kwinrc --group TabBox --key AlternativeLayoutName thumbnails
+  qdbus org.kde.KWin /KWin reconfigure
 fi
