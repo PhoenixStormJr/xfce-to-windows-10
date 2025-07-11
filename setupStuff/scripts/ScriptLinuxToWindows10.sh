@@ -618,4 +618,6 @@ if [[ "$DE" == *kde* ]]; then
   qdbus org.kde.KWin /KWin reconfigure
   git clone https://github.com/yeyushengfan258/Win10OS-kde.git /tmp/Win10OS-kde
   sudo bash /tmp/Win10OS-kde/install.sh --global
+  kwriteconfig5 --file kdeglobals --group KDE --key LookAndFeelPackage "com.github.yeyushengfan258.Win10OS-dark"
+  lookandfeeltool -a com.github.yeyushengfan258.Win10OS-dark
 fi
