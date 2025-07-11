@@ -596,4 +596,6 @@ if [[ "$DE" == *kde* ]]; then
   kwriteconfig5 --file kwinrc --group TabBox --key LayoutName thumbnails
   kwriteconfig5 --file kwinrc --group TabBox --key AlternativeLayoutName thumbnails
   qdbus org.kde.KWin /KWin reconfigure
+  mkdir -p ~/Downloads/kwin-scripts
+  cd ~/Downloads/kwin-scripts
 fi
