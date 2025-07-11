@@ -611,6 +611,5 @@ if [[ "$DE" == *kde* ]]; then
   kwriteconfig5 --file kwinrc --group TabBox --key LayoutName thumbnails
   kwriteconfig5 --file kwinrc --group TabBox --key AlternativeLayoutName thumbnails
   qdbus org.kde.KWin /KWin reconfigure
-  #mkdir -p ~/Downloads/kwin-scripts
-  #cd ~/Downloads/kwin-scripts
+  kpackagetool5 -t KWin/Script -i setupStuff/kde-windows-10-stuff/sticky-window-snapping-v2.0.1.kwinscript
 fi
