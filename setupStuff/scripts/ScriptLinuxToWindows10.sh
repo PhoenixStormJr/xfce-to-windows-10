@@ -618,5 +618,6 @@ if [[ "$DE" == *kde* ]]; then
   qdbus org.kde.KWin /KWin reconfigure
 
   git clone https://github.com/yeyushengfan258/Win10OS-kde.git ~/Win10OS-kde
-
+  cd ~/Win10OS-kde
+  sudo ./install.sh --global
 fi
