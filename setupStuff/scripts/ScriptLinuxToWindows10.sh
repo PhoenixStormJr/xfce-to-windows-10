@@ -607,17 +607,31 @@ fi
 
 
 if [[ "$DE" == *kde* ]]; then
+  #Changing basic settings to be like Windows 10:
   kwriteconfig5 --file kwinrc --group Windows --key Placement Centered
   kwriteconfig5 --file kwinrc --group TabBox --key LayoutName thumbnails
   kwriteconfig5 --file kwinrc --group TabBox --key AlternativeLayoutName thumbnails
+  
+  
+  #Making the windows stick to the borders of your monitor like Windows 10:
   kpackagetool5 -t KWin/Script -i setupStuff/kde-windows-10-stuff/sticky-window-snapping-v2.0.1.kwinscript
   kwriteconfig5 --file kwinrc --group Plugins --key sticky-window-snappingEnabled true
+  
+  
+  #More basic settings like Windows 10:
   kwriteconfig5 --file kwinrc --group ElectricBorders --key TopLeft --delete
   kwriteconfig5 --file kwinrc --group TouchEdges --key Left --delete
   kwriteconfig5 --file kwinrc --group Effect-overview --key TouchBorderActivate --delete
   qdbus org.kde.KWin /KWin reconfigure
+  
+  
+  #Installing the Global Windows 10 theme for KDE-Plasma:
   git clone https://github.com/yeyushengfan258/Win10OS-kde.git /tmp/Win10OS-kde
   sudo bash /tmp/Win10OS-kde/install.sh --global
   kwriteconfig5 --file kdeglobals --group KDE --key LookAndFeelPackage "com.github.yeyushengfan258.Win10OS-dark"
   lookandfeeltool -a com.github.yeyushengfan258.Win10OS-dark
+  kwriteconfig5 --file plasmarc --group Theme --key name "Win10OS-dark"
+  plasmashell --replace &
 fi
+#End of KDE-Plasma configuration
+
