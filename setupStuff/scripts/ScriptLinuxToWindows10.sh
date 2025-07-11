@@ -137,6 +137,21 @@ sudo cp setupStuff/desktopFiles/applications/thunderbird.desktop /usr/share/appl
 sudo cp setupStuff/desktopFiles/applications/thunderbird_thunderbird.desktop /usr/share/applications
 
 
+#Making backgrounds directory if it does not exist:
+if [ -d /usr/share/backgrounds ]; then
+    echo "/usr/share/backgrounds already exists and is a directory."
+elif [ -e /usr/share/backgrounds ]; then
+    echo "Error: /usr/share/backgrounds exists but is not a directory. Removing it..."
+    sudo rm -f /usr/share/backgrounds
+    sudo mkdir /usr/share/backgrounds
+    echo "Created /usr/share/backgrounds as a directory."
+else
+    echo "/usr/share/backgrounds does not exist. Creating it..."
+    sudo mkdir /usr/share/backgrounds
+    echo "Created /usr/share/backgrounds."
+fi
+
+
 BG_PATH="/usr/share/backgrounds/Windows-10.jpg"
 echo "Checking if background image is already installed..."
 if [ ! -f "$BG_PATH" ]; then
