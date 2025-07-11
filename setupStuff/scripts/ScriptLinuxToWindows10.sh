@@ -667,9 +667,9 @@ EOF
   tee ~/.config/gtk-2.0/gtkrc > /dev/null <<EOF
 gtk-theme-name="Windows-10-Dark-3.2.1-dark"
 EOF
-
-
-
+  rm ~/.config/gtkrc
+  kwriteconfig5 --file gtkrc --group Settings --key gtk-theme-name "Windows-10-Dark-3.2.1-dark"
+  kwriteconfig5 --file gtkrc-3.0 --group Settings --key gtk-theme-name "Windows-10-Dark-3.2.1-dark"
 fi
 #End of KDE-Plasma configuration
 
