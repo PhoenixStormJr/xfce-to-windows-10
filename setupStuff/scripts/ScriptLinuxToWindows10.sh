@@ -646,6 +646,15 @@ if [[ "$DE" == *kde* ]]; then
   lookandfeeltool -a com.github.yeyushengfan258.Win10OS-dark
   kwriteconfig5 --file plasmarc --group Theme --key name "Win10OS-dark"
   plasmashell --replace &
+
+
+  #Installing the GTK theme for KDE-Plasma:
+  if [ ! -d "/usr/share/themes/Windows-10-Dark-3.2.1-dark" ]; then
+    echo "Installing Windows-10-Dark theme..."
+    sudo tar -xvzf setupStuff/kde-windows-10-stuff/Windows-10-Dark.tar.gz -C /usr/share/themes/
+  else
+    echo "Windows-10-Dark theme already installed. Skipping."
+  fi
 fi
 #End of KDE-Plasma configuration
 
