@@ -643,9 +643,9 @@ if [[ "$DE" == *kde* ]]; then
   else
     echo "Win10OS Global Theme already installed. Skipping..."
   fi
-  kwriteconfig5 --file kdeglobals --group KDE --key LookAndFeelPackage "com.github.yeyushengfan258.Win10OS-dark"
-  lookandfeeltool -a com.github.yeyushengfan258.Win10OS-dark
-  kwriteconfig5 --file plasmarc --group Theme --key name "Win10OS-dark"
+  kwriteconfig5 --file kdeglobals --group KDE --key LookAndFeelPackage "com.github.yeyushengfan258.Win10OS-default"
+  lookandfeeltool -a com.github.yeyushengfan258.Win10OS-default
+  kwriteconfig5 --file plasmarc --group Theme --key name "Win10OS-default"
   plasmashell --replace &
 
 
