@@ -639,6 +639,7 @@ if [[ "$DE" == *kde* ]]; then
     echo "Installing Win10OS Global Theme..."
     git clone https://github.com/yeyushengfan258/Win10OS-kde.git /tmp/Win10OS-kde
     sudo bash /tmp/Win10OS-kde/install.sh --global
+    sudo unzip setupStuff/kde-windows-10-stuff/Win10OS-default.zip -d /usr/share/plasma/look-and-feel/
   else
     echo "Win10OS Global Theme already installed. Skipping..."
   fi
