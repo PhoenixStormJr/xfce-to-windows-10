@@ -656,20 +656,44 @@ if [[ "$DE" == *kde* ]]; then
     echo "Windows-10-Dark theme already installed. Skipping."
   fi
   # GTK 3 settings
-  mkdir -p ~/.config/gtk-3.0
-  tee ~/.config/gtk-3.0/settings.ini > /dev/null <<EOF
-[Settings]
+  target="$HOME/.config/gtk-3.0/settings.ini"
+  desired_content="[Settings]
 gtk-theme-name = Windows-10-Dark-3.2.1-dark
-gtk-icon-theme-name = breeze
+gtk-icon-theme-name = breeze"
+  # Create directory if missing
+  mkdir -p "$(dirname "$target")"
+  # Check if file exists and matches desired content
+  if ! [[ -f "$target" && "$(cat "$target")" == "$desired_content" ]]; then
+    tee "$target" > /dev/null <<EOF
+$desired_content
 EOF
+    echo "GTK settings.ini updated."
+  else
+    echo "GTK settings.ini already up to date."
+  fi
   # GTK 2 settings
-  mkdir -p ~/.config/gtk-2.0
-  tee ~/.config/gtk-2.0/gtkrc > /dev/null <<EOF
-gtk-theme-name="Windows-10-Dark-3.2.1-dark"
+  target="$HOME/.config/gtk-2.0/gtkrc"
+  desired_content='gtk-theme-name="Windows-10-Dark-3.2.1-dark"'
+  mkdir -p "$(dirname "$target")"
+  if ! [[ -f "$target" && "$(cat "$target")" == "$desired_content" ]]; then
+    tee "$target" > /dev/null <<EOF
+$desired_content
 EOF
-  rm ~/.config/gtkrc
-  kwriteconfig5 --file gtkrc --group Settings --key gtk-theme-name "Windows-10-Dark-3.2.1-dark"
-  kwriteconfig5 --file gtkrc-3.0 --group Settings --key gtk-theme-name "Windows-10-Dark-3.2.1-dark"
+    echo "GTK 2.0 gtkrc updated."
+  else
+    echo "GTK 2.0 gtkrc already up to date."
+  fi
+  theme="Windows-10-Dark-3.2.1-dark"
+  current1=$(kwriteconfig5 --file gtkrc --group Settings --key gtk-theme-name)
+  current2=$(kwriteconfig5 --file gtkrc-3.0 --group Settings --key gtk-theme-name)
+  if [[ "$current1" != "$theme" || "$current2" != "$theme" ]]; then
+    rm ~/.config/gtkrc
+    kwriteconfig5 --file gtkrc --group Settings --key gtk-theme-name "$theme"
+    kwriteconfig5 --file gtkrc-3.0 --group Settings --key gtk-theme-name "$theme"
+    echo "kwriteconfig5 gtk-theme-name keys updated."
+  else
+    echo "kwriteconfig5 gtk-theme-name keys already set."
+  fi
 fi
 #End of KDE-Plasma configuration
 
