@@ -684,8 +684,8 @@ EOF
     echo "GTK 2.0 gtkrc already up to date."
   fi
   theme="Windows-10-Dark-3.2.1-dark"
-  current1=$(kwriteconfig5 --file gtkrc --group Settings --key gtk-theme-name)
-  current2=$(kwriteconfig5 --file gtkrc-3.0 --group Settings --key gtk-theme-name)
+  current1=$(kreadconfig5 --file gtkrc --group Settings --key gtk-theme-name)
+  current2=$(kreadconfig5 --file gtkrc-3.0 --group Settings --key gtk-theme-name)
   if [[ "$current1" != "$theme" || "$current2" != "$theme" ]]; then
     rm ~/.config/gtkrc
     kwriteconfig5 --file gtkrc --group Settings --key gtk-theme-name "$theme"
