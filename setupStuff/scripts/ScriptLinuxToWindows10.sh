@@ -387,7 +387,7 @@ fi
 
 
 
-if [[ "$DE" == *gnome* ]]; then
+if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
   ICON_DIR="/usr/share/icons/Windows-10-Icons"
   if [ -d "$ICON_DIR" ]; then
     echo "making sure the windows 10 icons can be read but not deleted"
