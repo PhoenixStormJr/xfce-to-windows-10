@@ -587,7 +587,7 @@ check_and_set() {
   local desired=$3
   current=$(kreadconfig5 --file "$FILE" --group "$group" --key "$key")
   if [[ "$current" != "$desired" ]]; then
-    kwriteconfig5 --file "$FILE" --group "$group" --key "$key" --set "$desired"
+    kwriteconfig5 --file "$FILE" --group "$group" --key "$key" "$desired"
     CHANGED=1
   fi
 }
@@ -617,8 +617,11 @@ if [[ "$DE" == *kde* ]]; then
   FILE="kwinrc"
   CHANGED=0
   # Now check each setting:
+  echo "DEBUG1"
   check_and_set "Windows" "Placement" "Centered"
+  echo "DEBUG2"
   check_and_set "TabBox" "LayoutName" "thumbnails"
+  echo "DEBUG3"
   check_and_set "TabBox" "AlternativeLayoutName" "thumbnails"
   check_and_set "Plugins" "sticky-window-snappingEnabled" "true"
   delete_key_if_exists "ElectricBorders" "TopLeft"
@@ -636,7 +639,8 @@ if [[ "$DE" == *kde* ]]; then
     echo "Installing Win10OS Global Theme..."
     git clone https://github.com/yeyushengfan258/Win10OS-kde.git /tmp/Win10OS-kde
     sudo bash /tmp/Win10OS-kde/install.sh --global
-    sudo unzip setupStuff/kde-windows-10-stuff/Win10OS-default.zip -d /usr/share/plasma/look-and-feel/
+    sudo tar -xzf setupStuff/kde-windows-10-stuff/Win10OS-default.tar.gz -C /usr/share/plasma/look-and-feel/
+    sudo chown -R root:root /usr/share/plasma/look-and-feel/com.github.yeyushengfan258.Win10OS-default/
   else
     echo "Win10OS Global Theme already installed. Skipping..."
   fi
@@ -653,7 +657,7 @@ if [[ "$DE" == *kde* ]]; then
   echo "Current LookAndFeelPackage: '$current_laf'"
   if [[ "$current_laf" != "$LOOKANDFEEL" ]]; then
     echo "Setting LookAndFeelPackage to '$LOOKANDFEEL'..."
-    kwriteconfig5 --file "$FILE_KDEGLOBALS" --group KDE --key LookAndFeelPackage --set "$LOOKANDFEEL"
+    kwriteconfig5 --file "$FILE_KDEGLOBALS" --group KDE --key LookAndFeelPackage "$LOOKANDFEEL"
     CHANGED=1
   else
     echo "LookAndFeelPackage already set to '$LOOKANDFEEL'. Skipping."
@@ -662,7 +666,7 @@ if [[ "$DE" == *kde* ]]; then
   current_applied=$(kreadconfig5 --file kdeglobals --group KDE --key LookAndFeelPackage)
   if [[ "$current_applied" != "$LOOKANDFEEL" ]]; then
     echo "Applying lookandfeel '$LOOKANDFEEL' with lookandfeeltool..."
-    lookandfeeltool -a "$LOOKANDFEEL"
+    lookandfeeltool -a "com.github.yeyushengfan258.Win10OS-default"
     CHANGED=1
   else
     echo "Lookandfeel '$LOOKANDFEEL' already applied. Skipping."
@@ -672,7 +676,7 @@ if [[ "$DE" == *kde* ]]; then
   echo "Current theme name: '$current_theme'"
   if [[ "$current_theme" != "$THEME_NAME" ]]; then
     echo "Setting theme name to '$THEME_NAME'..."
-    kwriteconfig5 --file "$FILE_PLASMARCT" --group Theme --key name --set "$THEME_NAME"
+    kwriteconfig5 --file "$FILE_PLASMARCT" --group Theme --key name "$THEME_NAME"
     CHANGED=1
   else
     echo "Theme name already set to '$THEME_NAME'. Skipping."
@@ -735,4 +739,3 @@ EOF
   fi
 fi
 #End of KDE-Plasma configuration
-
