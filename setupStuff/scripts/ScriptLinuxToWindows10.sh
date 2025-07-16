@@ -617,11 +617,8 @@ if [[ "$DE" == *kde* ]]; then
   FILE="kwinrc"
   CHANGED=0
   # Now check each setting:
-  echo "DEBUG1"
   check_and_set "Windows" "Placement" "Centered"
-  echo "DEBUG2"
   check_and_set "TabBox" "LayoutName" "thumbnails"
-  echo "DEBUG3"
   check_and_set "TabBox" "AlternativeLayoutName" "thumbnails"
   check_and_set "Plugins" "sticky-window-snappingEnabled" "true"
   delete_key_if_exists "ElectricBorders" "TopLeft"
