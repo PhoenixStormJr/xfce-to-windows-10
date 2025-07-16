@@ -602,7 +602,6 @@ delete_key_if_exists() {
 }
 
 
-
 if [[ "$DE" == *kde* ]]; then
   #Making the windows stick to the borders of your monitor like Windows 10:
   SCRIPT_ID="sticky-window-snapping"
@@ -614,34 +613,21 @@ if [[ "$DE" == *kde* ]]; then
   else
     echo "$SCRIPT_ID is already installed. Skipping..."
   fi
-  echo "DEBUG 1"
   #Changing basic settings to be like Windows 10:
   FILE="kwinrc"
-  echo "DEBUG 2"
   CHANGED=0
-  echo "DEBUG 3"
   # Now check each setting:
-  echo "DEBUG 4"
   check_and_set "Windows" "Placement" "Centered"
-  echo "DEBUG 5"
   check_and_set "TabBox" "LayoutName" "thumbnails"
-  echo "DEBUG 6"
   check_and_set "TabBox" "AlternativeLayoutName" "thumbnails"
-  echo "DEBUG 7"
   check_and_set "Plugins" "sticky-window-snappingEnabled" "true"
-  echo "DEBUG 8"
   delete_key_if_exists "ElectricBorders" "TopLeft"
-  echo "DEBUG 9"
   delete_key_if_exists "TouchEdges" "Left"
-  echo "DEBUG 10"
   delete_key_if_exists "Effect-overview" "TouchBorderActivate"
-  echo "DEBUG 11"
   # Only reconfigure if changes made
   if [[ $CHANGED -eq 1 ]]; then
     qdbus org.kde.KWin /KWin reconfigure
   fi
-  echo "DEBUG 12"
-  
   
   
   #Installing the Global Windows 10 theme for KDE-Plasma:
@@ -654,7 +640,6 @@ if [[ "$DE" == *kde* ]]; then
   else
     echo "Win10OS Global Theme already installed. Skipping..."
   fi
-  
   
   
   #Applying Windows 10 theme:
