@@ -31,6 +31,9 @@ AND I made it reduce the wait-until-online service wait time during boot!
 
 
 # credits to:
+
+Merged multiple icons from these sources:
+
 https://github.com/B00merang-Artwork/Windows-10
 
 B00merang-Artwork, 
@@ -46,6 +49,12 @@ https://www.kali.org/docs/introduction/kali-undercover/
 
 Croluy , theGorkha.
 
+https://store.kde.org/p/1387736/
+
+Humberto (who also got them from others, LOL) "What other icons do I base on? - Windows 10 Icon Themes by DINDING41TR3 - Winux10 Icons by DINDING41TR3 - We10X icon theme by YEYUSHENGFAN258"
+
+
+
 Found some useful commands here:
 
 https://github.com/SofianeHamlaoui/Go-undercover/blob/master/go-undercover.sh
@@ -59,11 +68,3 @@ https://askubuntu.com/questions/380550/xubuntu-how-to-set-the-wallpaper-using-th
 
 scai
 
-Also well... Windows-10 obviously...
-mail icon is located in C:\Program Files\WindowsApps\microsoft.windowscommunicationsapps_16005.11629.20316.0_x64__8wekyb3d8bbwe\images\HxMail (followed by odd letters or whatnot. Its MANY logos.) however, you will need to right click, and add yourself to the security tab and stuff. Very complicated, not going into it.
-
-windows media player icon is located in "C:\Program Files (x86)\Windows Media Player\wmplayer.exe" however you will need something like icon viewer in order to actually use this, and the convert the .exe to .ico and convert the .ico to .png
-
-Photos icon is located in C:\Program Files\WindowsApps\Microsoft.Windows.Photos_2019.19071.12548.0_x64__8wekyb3d8bbwe\Assets\PhotosAppList.targetsize- (followed by the size of the image.) Again, you need to take ownership.
-
-Groove Music Icon is in "C:\Program Files\WindowsApps\Microsoft.ZuneMusic_10.19071.19011.0_x64__8wekyb3d8bbwe\Assets\contrast-black\AppList.targetsize-" (again weird numbers)
