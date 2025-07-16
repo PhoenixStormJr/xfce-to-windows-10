@@ -580,13 +580,30 @@ fi
 
 
 
+
+check_and_set() {
+  local group=$1
+  local key=$2
+  local desired=$3
+  current=$(kreadconfig5 --file "$FILE" --group "$group" --key "$key")
+  if [[ "$current" != "$desired" ]]; then
+    kwriteconfig5 --file "$FILE" --group "$group" --key "$key" --set "$desired"
+    CHANGED=1
+  fi
+}
+delete_key_if_exists() {
+  local group=$1
+  local key=$2
+  current=$(kreadconfig5 --file "$FILE" --group "$group" --key "$key" 2>/dev/null)
+  if [[ -n "$current" ]]; then
+    kwriteconfig5 --file "$FILE" --group "$group" --key "$key" --delete
+    CHANGED=1
+  fi
+}
+
+
+
 if [[ "$DE" == *kde* ]]; then
-  #Changing basic settings to be like Windows 10:
-  kwriteconfig5 --file kwinrc --group Windows --key Placement Centered
-  kwriteconfig5 --file kwinrc --group TabBox --key LayoutName thumbnails
-  kwriteconfig5 --file kwinrc --group TabBox --key AlternativeLayoutName thumbnails
-  
-  
   #Making the windows stick to the borders of your monitor like Windows 10:
   SCRIPT_ID="sticky-window-snapping"
   SCRIPT_PATH="setupStuff/kde-windows-10-stuff/sticky-window-snapping-v2.0.1.kwinscript"
@@ -597,14 +614,34 @@ if [[ "$DE" == *kde* ]]; then
   else
     echo "$SCRIPT_ID is already installed. Skipping..."
   fi
-  kwriteconfig5 --file kwinrc --group Plugins --key sticky-window-snappingEnabled true
+  echo "DEBUG 1"
+  #Changing basic settings to be like Windows 10:
+  FILE="kwinrc"
+  echo "DEBUG 2"
+  CHANGED=0
+  echo "DEBUG 3"
+  # Now check each setting:
+  echo "DEBUG 4"
+  check_and_set "Windows" "Placement" "Centered"
+  echo "DEBUG 5"
+  check_and_set "TabBox" "LayoutName" "thumbnails"
+  echo "DEBUG 6"
+  check_and_set "TabBox" "AlternativeLayoutName" "thumbnails"
+  echo "DEBUG 7"
+  check_and_set "Plugins" "sticky-window-snappingEnabled" "true"
+  echo "DEBUG 8"
+  delete_key_if_exists "ElectricBorders" "TopLeft"
+  echo "DEBUG 9"
+  delete_key_if_exists "TouchEdges" "Left"
+  echo "DEBUG 10"
+  delete_key_if_exists "Effect-overview" "TouchBorderActivate"
+  echo "DEBUG 11"
+  # Only reconfigure if changes made
+  if [[ $CHANGED -eq 1 ]]; then
+    qdbus org.kde.KWin /KWin reconfigure
+  fi
+  echo "DEBUG 12"
   
-  
-  #More basic settings like Windows 10:
-  kwriteconfig5 --file kwinrc --group ElectricBorders --key TopLeft --delete
-  kwriteconfig5 --file kwinrc --group TouchEdges --key Left --delete
-  kwriteconfig5 --file kwinrc --group Effect-overview --key TouchBorderActivate --delete
-  qdbus org.kde.KWin /KWin reconfigure
   
   
   #Installing the Global Windows 10 theme for KDE-Plasma:
@@ -617,12 +654,54 @@ if [[ "$DE" == *kde* ]]; then
   else
     echo "Win10OS Global Theme already installed. Skipping..."
   fi
-  kwriteconfig5 --file kdeglobals --group KDE --key LookAndFeelPackage "com.github.yeyushengfan258.Win10OS-default"
-  lookandfeeltool -a com.github.yeyushengfan258.Win10OS-default
-  kwriteconfig5 --file plasmarc --group Theme --key name "Win10OS-default"
-  plasmashell --replace &
-
-
+  
+  
+  
+  #Applying Windows 10 theme:
+  FILE_KDEGLOBALS="kdeglobals"
+  FILE_PLASMARCT="plasmarc"
+  LOOKANDFEEL="com.github.yeyushengfan258.Win10OS-default"
+  THEME_NAME="Win10OS-dark"
+  CHANGED=0
+  echo "Checking LookAndFeelPackage in $FILE_KDEGLOBALS..."
+  current_laf=$(kreadconfig5 --file "$FILE_KDEGLOBALS" --group KDE --key LookAndFeelPackage)
+  echo "Current LookAndFeelPackage: '$current_laf'"
+  if [[ "$current_laf" != "$LOOKANDFEEL" ]]; then
+    echo "Setting LookAndFeelPackage to '$LOOKANDFEEL'..."
+    kwriteconfig5 --file "$FILE_KDEGLOBALS" --group KDE --key LookAndFeelPackage --set "$LOOKANDFEEL"
+    CHANGED=1
+  else
+    echo "LookAndFeelPackage already set to '$LOOKANDFEEL'. Skipping."
+  fi
+  echo "Checking current applied lookandfeel via lookandfeeltool..."
+  current_applied=$(kreadconfig5 --file kdeglobals --group KDE --key LookAndFeelPackage)
+  if [[ "$current_applied" != "$LOOKANDFEEL" ]]; then
+    echo "Applying lookandfeel '$LOOKANDFEEL' with lookandfeeltool..."
+    lookandfeeltool -a "$LOOKANDFEEL"
+    CHANGED=1
+  else
+    echo "Lookandfeel '$LOOKANDFEEL' already applied. Skipping."
+  fi
+  echo "Checking theme name in $FILE_PLASMARCT..."
+  current_theme=$(kreadconfig5 --file "$FILE_PLASMARCT" --group Theme --key name)
+  echo "Current theme name: '$current_theme'"
+  if [[ "$current_theme" != "$THEME_NAME" ]]; then
+    echo "Setting theme name to '$THEME_NAME'..."
+    kwriteconfig5 --file "$FILE_PLASMARCT" --group Theme --key name --set "$THEME_NAME"
+    CHANGED=1
+  else
+    echo "Theme name already set to '$THEME_NAME'. Skipping."
+  fi
+  if [[ $CHANGED -eq 1 ]]; then
+    echo "Changes detected. Restarting plasmashell to apply settings..."
+    kquitapp5 plasmashell
+    kstart5 plasmashell
+  else
+    echo "No changes needed. Skipping plasmashell restart."
+  fi
+  
+  
+  
   #Installing the GTK theme for KDE-Plasma:
   if [ ! -d "/usr/share/themes/Windows-10-Dark-3.2.1-dark" ]; then
     echo "Installing Windows-10-Dark theme..."
