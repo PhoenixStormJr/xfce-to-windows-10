@@ -4,7 +4,9 @@ Note: On GNOME you might have to move the Install Windows 10 Theme.desktop to yo
 
 bash ~/Downloads/Convert-Linux-to-Windows-10-main/setupStuff/scripts/ScriptLinuxToWindows10.sh
 
-This script will instantly convert your xfce desktop to a windows 10 like feel. (Now I'm trying to work on supporting other desktop environments!)
+You will also need to log out and log back in after running it. Then run it AGAIN.
+
+This script will instantly convert your xfce or gnome desktop to a windows 10 like feel. (Now I'm trying to work on supporting other desktop environments!)
 
 also IDK why it's saying its like 98% CSS, I wrote this in 100% bash, the language that Linux uses. Then again, this is my first project, it could be kali's windows 10 theme triggering it. IDK...
 
