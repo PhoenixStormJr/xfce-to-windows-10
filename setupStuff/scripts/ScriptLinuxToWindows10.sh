@@ -221,15 +221,15 @@ if [[ "$DE" == *xfce* ]]; then
     echo "Theme folder not found. Skipping chmod."
   fi
   
-  
+  ICON_DIR="/usr/share/icons/UniversalWin10Icons"
   if [ -d "$ICON_DIR" ]; then
     echo "making sure the windows 10 icons can be read but not deleted"
-    sudo chmod 555 -R /usr/share/icons/Windows-10-Icons
+    sudo chmod 755 -R /usr/share/icons/UniversalWin10Icons
     echo "Permissions updated successfully."
-    echo "changing icons to Windows-10-Icons"
-    xfconf-query -c xsettings -p /Net/IconThemeName -s Windows-10-Icons
-    echo "changing cursor to Windows-10-Icons"
-    xfconf-query -c xsettings -p /Gtk/CursorThemeName -n -t string -s "Windows-10-Icons"
+    echo "changing icons to UniversalWin10Icons"
+    xfconf-query -c xsettings -p /Net/IconThemeName -s UniversalWin10Icons
+    echo "changing cursor to UniversalWin10Icons"
+    xfconf-query -c xsettings -p /Gtk/CursorThemeName -n -t string -s "UniversalWin10Icons"
   else
     echo "Icon folder not found. Skipping chmod."
   fi
@@ -362,15 +362,15 @@ fi
 
 
 if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
-  ICON_DIR="/usr/share/icons/Windows-10-Icons"
+  ICON_DIR="/usr/share/icons/UniversalWin10Icons"
   if [ -d "$ICON_DIR" ]; then
     echo "making sure the windows 10 icons can be read but not deleted"
-    sudo chmod 555 -R /usr/share/icons/Windows-10-Icons
+    sudo chmod 555 -R /usr/share/icons/UniversalWin10Icons
     echo "Permissions updated successfully."
-    echo "changing icons to Windows-10-Icons"
-    gsettings set org.gnome.desktop.interface icon-theme 'Windows-10-Icons'
-    echo "changing cursor to Windows-10-Icons"
-    gsettings set org.gnome.desktop.interface cursor-theme "Windows-10-Icons"
+    echo "changing icons to UniversalWin10Icons"
+    gsettings set org.gnome.desktop.interface icon-theme 'UniversalWin10Icons'
+    echo "changing cursor to UniversalWin10Icons"
+    gsettings set org.gnome.desktop.interface cursor-theme "UniversalWin10Icons"
   else
     echo "Icon folder not found. Skipping chmod."
   fi
