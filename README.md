@@ -56,6 +56,7 @@ https://store.kde.org/p/1387736/
 
 Humberto (who also got them from others, LOL) "What other icons do I base on? - Windows 10 Icon Themes by DINDING41TR3 - Winux10 Icons by DINDING41TR3 - We10X icon theme by YEYUSHENGFAN258"
 
+OH! And I fixed MANY MANY MANY icons myself!!!
 
 
 Found some useful commands here:
