@@ -678,6 +678,46 @@ if [[ "$DE" == *kde* ]]; then
   else
     echo "Theme name already set to '$THEME_NAME'. Skipping."
   fi
+  # Update icon arrangement if needed
+  original_file=~/.config/plasma-org.kde.plasma.desktop-appletsrc
+  temp_file=~/.config/tmp
+  changed_flag=0
+  awk '
+  BEGIN { inside=0; inserted=0; changed=0 }
+  /^\[Containments\]\[1\]\[General\]/ { inside=1; print; next }
+  /^\[.*\]/ {
+    if (inside && !inserted) {
+      print "arrangement=1"
+      inserted=1
+      changed=1
+    }
+    inside=0
+  }
+  {
+    if (inside && $0 ~ /^arrangement=/) {
+      if ($0 != "arrangement=1") changed=1
+      print "arrangement=1"
+      inserted=1
+    } else print
+  }
+  END {
+    if (inside && !inserted) {
+      print "arrangement=1"
+      changed=1
+    }
+    # write changed status to a file
+    if (changed == 1) print "CHANGED" > "/tmp/arrangement_changed_flag"
+  }
+' "$original_file" > "$temp_file"
+  if [[ -f /tmp/arrangement_changed_flag ]]; then
+    echo "Icon arrangement updated to Top to Bottom."
+    mv "$temp_file" "$original_file"
+    rm /tmp/arrangement_changed_flag
+    CHANGED=1
+  else
+    echo "Icon arrangement already correct. Skipping."
+    rm "$temp_file"
+  fi
   if [[ $CHANGED -eq 1 ]]; then
     echo "Changes detected. Restarting plasmashell to apply settings..."
     kquitapp5 plasmashell
