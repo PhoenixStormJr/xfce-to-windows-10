@@ -750,6 +750,8 @@ if [[ "$DE" == *kde* ]]; then
   new_file="./setupStuff/kde-windows-10-stuff/windows10-panel.conf"
   if ! cmp -s "$original_file" "$new_file"; then
     echo "[*] Panel layout differs. Updating..."
+    #to backup mine:
+    #cp ~/.config/plasma-org.kde.plasma.desktop-appletsrc ./setupStuff/kde-windows-10-stuff/windows10-panel.conf
     cp "$new_file" "$original_file"
     CHANGED=1
   else
