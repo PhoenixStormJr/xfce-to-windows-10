@@ -634,12 +634,27 @@ if [[ "$DE" == *kde* ]]; then
   #Check if any installed global theme contains "Win10OS" in its name
   if ! find /usr/share/plasma/look-and-feel -maxdepth 1 -type d -name '*Win10OS*' | grep -q .; then
     echo "Installing Win10OS Global Theme..."
+    rm -rf /tmp/Win10OS-kde
     git clone https://github.com/yeyushengfan258/Win10OS-kde.git /tmp/Win10OS-kde
     sudo bash /tmp/Win10OS-kde/install.sh --global
     sudo tar -xzf setupStuff/kde-windows-10-stuff/Win10OS-default.tar.gz -C /usr/share/plasma/look-and-feel/
     sudo chown -R root:root /usr/share/plasma/look-and-feel/com.github.yeyushengfan258.Win10OS-default/
   else
-    echo "Win10OS Global Theme already installed. Skipping..."
+    echo "Win10OS Global Theme already installed. Checking metadata.desktop..."
+    metadata_file="/usr/share/plasma/look-and-feel/com.github.yeyushengfan258.Win10OS-default/metadata.desktop"
+    if [[ ! -s "$metadata_file" ]]; then
+      echo "⚠️  metadata.desktop is missing or empty. Reinstalling theme..."
+      sudo rm -rf /usr/share/plasma/look-and-feel/com.github.yeyushengfan258.Win10OS-default/
+      sudo rm -rf /usr/share/plasma/look-and-feel/com.github.yeyushengfan258.Win10OS-dark/
+      sudo rm -rf /usr/share/plasma/look-and-feel/com.github.yeyushengfan258.Win10OS-light/
+      rm -rf /tmp/Win10OS-kde
+      git clone https://github.com/yeyushengfan258/Win10OS-kde.git /tmp/Win10OS-kde
+      sudo bash /tmp/Win10OS-kde/install.sh --global
+      sudo tar -xzf setupStuff/kde-windows-10-stuff/Win10OS-default.tar.gz -C /usr/share/plasma/look-and-feel/
+      sudo chown -R root:root /usr/share/plasma/look-and-feel/com.github.yeyushengfan258.Win10OS-default/
+    else
+      echo "✅ metadata.desktop exists and is not empty. Skipping install."
+    fi
   fi
   
   
