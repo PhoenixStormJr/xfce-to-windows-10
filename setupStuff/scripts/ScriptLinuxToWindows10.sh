@@ -658,16 +658,25 @@ if [[ "$DE" == *kde* ]]; then
   fi
   
 
-  # Installing Windows 10 Menu:
+  # Installing Windows 10 Search Menu:
   MENUZ_DIR="$HOME/.local/share/plasma/plasmoids/menuZ"
   if [ -d "$MENUZ_DIR" ]; then
-    echo "[✓] Windows 10 Start Menu (Menu Z) is already installed."
+    echo "[✓] Windows 10 Search Menu (Menu Z) is already installed."
   else
-    echo "[*] Installing Windows 10 Start Menu (Menu Z)..."
+    echo "[*] Installing Windows 10 Search Menu (Menu Z)..."
     mkdir -p ~/.local/share/plasma/plasmoids
     plasmapkg2 -i ./setupStuff/kde-windows-10-stuff/menuZ.plasmoid
   fi
 
+  # Installing Windows 10 Start Menu (Menu X):
+  MENUX_DIR="$HOME/.local/share/plasma/plasmoids/menuX"
+  if [ -d "$MENUX_DIR" ]; then
+    echo "[✓] Windows 10 Start Menu (Menu X) is already installed."
+  else
+    echo "[*] Installing Windows 10 Start Menu (Menu X)..."
+    mkdir -p ~/.local/share/plasma/plasmoids
+    plasmapkg2 -i ./setupStuff/kde-windows-10-stuff/menuX.plasmoid
+  fi
   
   #Applying Windows 10 theme:
   FILE_KDEGLOBALS="kdeglobals"
