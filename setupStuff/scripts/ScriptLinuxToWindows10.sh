@@ -789,5 +789,9 @@ EOF
   else
     echo "kwriteconfig5 gtk-theme-name keys already set."
   fi
+  #Logout because the script needs to restart everything:
+  echo ""
+  echo "DONE! Logging out to apply the changes!"
+  qdbus org.kde.ksmserver /KSMServer logout 0 0 1
 fi
 #End of KDE-Plasma configuration
