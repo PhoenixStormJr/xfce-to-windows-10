@@ -657,6 +657,17 @@ if [[ "$DE" == *kde* ]]; then
     fi
   fi
   
+
+  # Installing Windows 10 Menu:
+  MENUZ_DIR="$HOME/.local/share/plasma/plasmoids/menuZ"
+  if [ -d "$MENUZ_DIR" ]; then
+    echo "[✓] Windows 10 Start Menu (Menu Z) is already installed."
+  else
+    echo "[*] Installing Windows 10 Start Menu (Menu Z)..."
+    mkdir -p ~/.local/share/plasma/plasmoids
+    plasmapkg2 -i ./setupStuff/kde-windows-10-stuff/menuZ.plasmoid
+  fi
+
   
   #Applying Windows 10 theme:
   FILE_KDEGLOBALS="kdeglobals"
@@ -733,6 +744,18 @@ if [[ "$DE" == *kde* ]]; then
     echo "Icon arrangement already correct. Skipping."
     rm "$temp_file"
   fi
+
+  #Now updating panel layout to be like Windows 10:
+  original_file="$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc"
+  new_file="./setupStuff/kde-windows-10-stuff/windows10-panel.conf"
+  if ! cmp -s "$original_file" "$new_file"; then
+    echo "[*] Panel layout differs. Updating..."
+    cp "$new_file" "$original_file"
+    CHANGED=1
+  else
+    echo "[✓] Panel layout already matches. Skipping update."
+  fi
+
   if [[ $CHANGED -eq 1 ]]; then
     echo "Changes detected. Restarting plasmashell to apply settings..."
     kquitapp5 plasmashell
@@ -789,6 +812,8 @@ EOF
   else
     echo "kwriteconfig5 gtk-theme-name keys already set."
   fi
+
+
   #Logout because the script needs to restart everything:
   echo ""
   echo "DONE! Logging out to apply the changes!"
