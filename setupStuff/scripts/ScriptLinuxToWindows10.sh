@@ -770,12 +770,57 @@ if [[ "$DE" == *kde* ]]; then
 
   #Updating transparency of the menu to be more like Windows 10:
   CONFIG="$HOME/.config/plasmashellrc"
-  if ! grep -q '^panelOpacity=1$' "$CONFIG"; then
-    echo "[*] Changing panelOpacity to 1..."
-    sed -i 's/^panelOpacity=.*/panelOpacity=1/' "$CONFIG"
+  PANEL_SECTION="[PlasmaViews][Panel 2]"
+  TARGET_KEY="panelOpacity"
+  TARGET_VALUE="1"
+  #Temp file to store modified config
+  TMP_FILE="$(mktemp)"
+  #Parse and edit the config
+  awk -v section="$PANEL_SECTION" -v key="$TARGET_KEY" -v value="$TARGET_VALUE" -v changed=0 '
+BEGIN { in_section = 0; key_found = 0; section_found = 0; }
+/^\[.*\]$/ {
+    if ($0 == section) {
+        in_section = 1
+        section_found = 1
+    } else {
+        if (in_section && !key_found) {
+            print key "=" value
+            changed = 1
+        }
+        in_section = 0
+    }
+}
+{
+    if (in_section && $0 ~ "^" key "=") {
+        key_found = 1
+        if ($0 != key "=" value) {
+            print key "=" value
+            changed = 1
+            next
+        }
+    }
+    print
+}
+END {
+    if (!section_found) {
+        print ""
+        print section
+        print key "=" value
+        changed = 1
+    } else if (in_section && !key_found) {
+        print key "=" value
+        changed = 1
+    }
+}
+' "$CONFIG" > "$TMP_FILE"
+  # Only overwrite if something actually changed
+  if ! cmp -s "$CONFIG" "$TMP_FILE"; then
+    echo "[*] Changing transparency to match Windows 10"
+    mv "$TMP_FILE" "$CONFIG"
     CHANGED=1
   else
-    echo "[✓] panelOpacity is already set to 1."
+    echo "[.] Transparency already like Windows 10"
+    rm "$TMP_FILE"
   fi
 
 
