@@ -767,6 +767,18 @@ if [[ "$DE" == *kde* ]]; then
     echo "[✓] Panel layout already matches. Skipping update."
   fi
 
+
+  #Updating transparency of the menu to be more like Windows 10:
+  CONFIG="$HOME/.config/plasmashellrc"
+  if ! grep -q '^panelOpacity=1$' "$CONFIG"; then
+    echo "[*] Changing panelOpacity to 1..."
+    sed -i 's/^panelOpacity=.*/panelOpacity=1/' "$CONFIG"
+    CHANGED=1
+  else
+    echo "[✓] panelOpacity is already set to 1."
+  fi
+
+
   if [[ $CHANGED -eq 1 ]]; then
     echo "Changes detected. Restarting plasmashell to apply settings..."
     kquitapp5 plasmashell
