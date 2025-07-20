@@ -766,63 +766,19 @@ if [[ "$DE" == *kde* ]]; then
   else
     echo "[✓] Panel layout already matches. Skipping update."
   fi
-
-
-  #Updating transparency of the menu to be more like Windows 10:
+  
+  # Updating transparency of the menu to be more like Windows 10:
   CONFIG="$HOME/.config/plasmashellrc"
-  PANEL_SECTION="[PlasmaViews][Panel 2]"
-  TARGET_KEY="panelOpacity"
-  TARGET_VALUE="1"
-  #Temp file to store modified config
-  TMP_FILE="$(mktemp)"
-  #Parse and edit the config
-  awk -v section="$PANEL_SECTION" -v key="$TARGET_KEY" -v value="$TARGET_VALUE" -v changed=0 '
-BEGIN { in_section = 0; key_found = 0; section_found = 0; }
-/^\[.*\]$/ {
-    if ($0 == section) {
-        in_section = 1
-        section_found = 1
-    } else {
-        if (in_section && !key_found) {
-            print key "=" value
-            changed = 1
-        }
-        in_section = 0
-    }
-}
-{
-    if (in_section && $0 ~ "^" key "=") {
-        key_found = 1
-        if ($0 != key "=" value) {
-            print key "=" value
-            changed = 1
-            next
-        }
-    }
-    print
-}
-END {
-    if (!section_found) {
-        print ""
-        print section
-        print key "=" value
-        changed = 1
-    } else if (in_section && !key_found) {
-        print key "=" value
-        changed = 1
-    }
-}
-' "$CONFIG" > "$TMP_FILE"
-  # Only overwrite if something actually changed
-  if ! cmp -s "$CONFIG" "$TMP_FILE"; then
+  VALUE="1"
+  # Read current value
+  CURRENT_VALUE=$(kreadconfig5 --file plasmashellrc --group "PlasmaViews" --group "Panel 2" --key "panelOpacity")
+  if [[ "$CURRENT_VALUE" != "$VALUE" ]]; then
     echo "[*] Changing transparency to match Windows 10"
-    mv "$TMP_FILE" "$CONFIG"
+    kwriteconfig5 --file plasmashellrc --group "PlasmaViews" --group "Panel 2" --key "panelOpacity" "$VALUE"
     CHANGED=1
   else
     echo "[.] Transparency already like Windows 10"
-    rm "$TMP_FILE"
   fi
-
 
   if [[ $CHANGED -eq 1 ]]; then
     echo "Changes detected. Restarting plasmashell to apply settings..."
