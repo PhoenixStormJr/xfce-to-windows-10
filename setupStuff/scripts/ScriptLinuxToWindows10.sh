@@ -683,8 +683,16 @@ if [[ "$DE" == *kde* ]]; then
     echo "[✓] Windows 10 Start Menu (Menu X) is already installed."
   else
     echo "[*] Installing Windows 10 Start Menu (Menu X)..."
-    mkdir -p ~/.local/share/plasma/plasmoids
     plasmapkg2 -i ./setupStuff/kde-windows-10-stuff/menuX.plasmoid
+  fi
+  
+  # Installing Digital Clock Lite:
+  MENUX_DIR="$HOME/.local/share/plasma/plasmoids/org.kde.plasma.digitalclocklite"
+  if [ -d "$MENUX_DIR" ]; then
+    echo "[✓] Digital Clock Lite is already installed."
+  else
+    echo "[*] Installing Digital Clock Lite"
+    plasmapkg2 -i ./setupStuff/kde-windows-10-stuff/digital-clock-lite.plasmoid
   fi
   
   #Applying Windows 10 theme:
