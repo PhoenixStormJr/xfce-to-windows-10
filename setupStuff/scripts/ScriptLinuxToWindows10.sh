@@ -854,7 +854,7 @@ for (i = 0; i < allDesktops.length; i++) {
   #Logout because the script needs to restart everything:
   echo ""
   echo "DONE! Logging out to apply the changes!"
-  sleep 60
+  sleep 30
   qdbus org.kde.ksmserver /KSMServer logout 0 0 1
 fi
 #End of KDE-Plasma configuration
