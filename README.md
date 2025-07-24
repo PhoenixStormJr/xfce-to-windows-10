@@ -72,3 +72,6 @@ https://askubuntu.com/questions/380550/xubuntu-how-to-set-the-wallpaper-using-th
 
 scai
 
+Windows 10 Tux wallpaper:
+https://www.reddit.com/r/wallpaper/comments/pllp0l/1920_x_1080_tux_looking_through_windows_window/
+Nxmm1s
