@@ -127,7 +127,7 @@ fi
 
 
 BG_PATH="/usr/share/backgrounds/Windows-10.jpg"
-echo "Checking if background image is already installed..."
+echo "Checking if background images are already installed..."
 if [ ! -f "$BG_PATH" ]; then
     echo "Windows 10 Background not found. Copying now..."
     sudo cp setupStuff/Windows-10.jpg /usr/share/backgrounds/
@@ -136,6 +136,14 @@ else
     echo "Windows 10 Background already exists. Skipping copy."
 fi
 
+BG_PATH="/usr/share/backgrounds/Windows-10-Tux.jpg"
+if [ ! -f "$BG_PATH" ]; then
+    echo "Windows 10 Background not found. Copying now..."
+    sudo cp setupStuff/Windows-10-Tux.jpg /usr/share/backgrounds/
+    echo "Windows 10 Background copied successfully."
+else
+    echo "Windows 10 Background already exists. Skipping copy."
+fi
 
 
 
@@ -305,7 +313,7 @@ if [[ "$DE" == *xfce* ]]; then
   if [ -f "$BG_PATH" ]; then
     echo "applying Windows 10 background to your desktop"
     xfconf-query --channel xfce4-desktop --list | grep last-image | while read path; do
-      xfconf-query --channel xfce4-desktop --property $path --set /usr/share/backgrounds/Windows-10.jpg
+      xfconf-query --channel xfce4-desktop --property $path --set /usr/share/backgrounds/Windows-10-Tux.jpg
     done
   else
     echo "Background image not found at $BG_PATH. Skipping background application."
@@ -378,7 +386,7 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
   
   if [ -f "$BG_PATH" ]; then
     echo "applying Windows 10 background to your desktop"
-    gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Windows-10.jpg'
+    gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Windows-10-Tux.jpg'
     gsettings set org.gnome.desktop.background picture-options "zoom"
   else
     echo "Background image not found at $BG_PATH. Skipping background application."
@@ -847,7 +855,7 @@ for (i = 0; i < allDesktops.length; i++) {
   d = allDesktops[i];
   d.wallpaperPlugin = "org.kde.image";
   d.currentConfigGroup = ["Wallpaper", "org.kde.image", "General"];
-  d.writeConfig("Image", "file:///usr/share/backgrounds/Windows-10.jpg");
+  d.writeConfig("Image", "file:///usr/share/backgrounds/Windows-10-Tux.jpg");
 }'
   
   
