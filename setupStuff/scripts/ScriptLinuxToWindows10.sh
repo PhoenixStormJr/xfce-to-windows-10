@@ -851,6 +851,9 @@ for (i = 0; i < allDesktops.length; i++) {
 }'
   
   
+  #Next I will install Digital Clock Lite widget.
+  
+  
   #Logout because the script needs to restart everything:
   echo ""
   echo "DONE! Logging out to apply the changes!"
