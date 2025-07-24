@@ -784,6 +784,9 @@ if [[ "$DE" == *kde* ]]; then
     echo "Changes detected. Restarting plasmashell to apply settings..."
     kquitapp5 plasmashell
     kstart5 plasmashell
+    qdbus org.kde.KWin /Compositor suspend
+    sleep 1
+    qdbus org.kde.KWin /Compositor resume    
   else
     echo "No changes needed. Skipping plasmashell restart."
   fi
@@ -841,6 +844,7 @@ EOF
   #Logout because the script needs to restart everything:
   echo ""
   echo "DONE! Logging out to apply the changes!"
+  sleep 60
   qdbus org.kde.ksmserver /KSMServer logout 0 0 1
 fi
 #End of KDE-Plasma configuration
