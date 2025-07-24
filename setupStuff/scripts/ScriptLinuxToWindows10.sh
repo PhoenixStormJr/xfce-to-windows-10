@@ -136,6 +136,7 @@ else
     echo "Windows 10 Background already exists. Skipping copy."
 fi
 
+echo "[Linux-to-Windows] Copying Tuxified Windows wallpaper by Nxmm1s"
 BG_PATH="/usr/share/backgrounds/Windows-10-Tux.jpg"
 if [ ! -f "$BG_PATH" ]; then
     echo "Windows 10 Background not found. Copying now..."
