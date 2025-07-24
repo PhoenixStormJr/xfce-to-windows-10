@@ -839,8 +839,18 @@ EOF
   else
     echo "kwriteconfig5 gtk-theme-name keys already set."
   fi
-
-
+  
+  echo "[🖼️]  Applying glorious Windows 10 wallpaper... Replacing Linux soul with corporate beauty."
+  qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript '
+var allDesktops = desktops();
+for (i = 0; i < allDesktops.length; i++) {
+  d = allDesktops[i];
+  d.wallpaperPlugin = "org.kde.image";
+  d.currentConfigGroup = ["Wallpaper", "org.kde.image", "General"];
+  d.writeConfig("Image", "file:///usr/share/backgrounds/Windows-10.jpg");
+}'
+  
+  
   #Logout because the script needs to restart everything:
   echo ""
   echo "DONE! Logging out to apply the changes!"
