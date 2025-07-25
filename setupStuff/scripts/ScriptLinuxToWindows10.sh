@@ -253,31 +253,190 @@ if [[ "$DE" == *xfce* ]]; then
   TAR_FILE="./windowsLike.tar.gz"
   echo "Checking for existing XFCE panel theme archive..."
   if [ ! -f "$TAR_FILE" ]; then
-    echo "creating the xfce4 panel theme"
-    mkdir windowsLike
-    mkdir windowsLike/launcher-2
-    mkdir windowsLike/launcher-3
-    mkdir windowsLike/launcher-6
-    mkdir windowsLike/launcher-7
-    mkdir windowsLike/launcher-8
-    mkdir windowsLike/launcher-18
-    mkdir windowsLike/launcher-19
-    echo -e "/configver 2\n/panels [<1>]\n/panels/dark-mode false\n/panels/panel-1/icon-size uint32 24\n/panels/panel-1/length 100.0\n/panels/panel-1/length-adjust true\n/panels/panel-1/plugin-ids [<1>, <2>, <3>, <4>, <5>, <6>, <18>, <7>, <19>, <8>, <9>, <10>, <11>, <12>, <13>, <14>, <16>, <15>, <17>]\n/panels/panel-1/position 'p=8;x=0;y=0'\n/panels/panel-1/position-locked true\n/panels/panel-1/size uint32 44\n/plugins/plugin-1 'whiskermenu'\n/plugins/plugin-10 'separator'\n/plugins/plugin-10/expand true\n/plugins/plugin-10/style uint32 0\n/plugins/plugin-11 'power-manager-plugin'\n/plugins/plugin-12 'systray'\n/plugins/plugin-12/known-items [<'nm-applet'>]\n/plugins/plugin-12/show-frame false\n/plugins/plugin-12/size-max uint32 24\n/plugins/plugin-12/square-icons true\n/plugins/plugin-13 'pulseaudio'\n/plugins/plugin-13/enable-keyboard-shortcuts true\n/plugins/plugin-14 'notification-plugin'\n/plugins/plugin-15 'separator'\n/plugins/plugin-15/style uint32 0\n/plugins/plugin-16 'datetime'\n/plugins/plugin-17 'separator'\n/plugins/plugin-17/style uint32 0\n/plugins/plugin-18 'launcher'\n/plugins/plugin-18/items [<'16878133091.desktop'>]\n/plugins/plugin-19 'launcher'\n/plugins/plugin-19/items [<'16895434911.desktop'>]\n/plugins/plugin-2 'launcher'\n/plugins/plugin-2/items [<'15780470832.desktop'>]\n/plugins/plugin-3 'launcher'\n/plugins/plugin-3/items [<'15780471503.desktop'>]\n/plugins/plugin-4 'showdesktop'\n/plugins/plugin-5 'directorymenu'\n/plugins/plugin-5/base-directory '/home/$USER'\n/plugins/plugin-5/icon-name 'system-file-manager'\n/plugins/plugin-6 'launcher'\n/plugins/plugin-6/items [<'15735608061.desktop'>]\n/plugins/plugin-7 'launcher'\n/plugins/plugin-7/items [<'15780459961.desktop'>]\n/plugins/plugin-8 'launcher'\n/plugins/plugin-8/items [<'15780460092.desktop'>]\n/plugins/plugin-9 'tasklist'\n/plugins/plugin-9/show-handle false\n/plugins/plugin-9/show-labels false" > ./windowsLike/config.txt
-    echo -e "favorites=xfce4-terminal-emulator.desktop,xfce4-file-manager.desktop,xfce-text-editor.desktop,xfce4-web-browser.desktop,xfce-ui-settings.desktop,xfce-display-settings.desktop,xfce-settings-manager.desktop,org.xfce.Parole.desktop,org.xfce.ristretto.desktop,xfce-backdrop-settings.desktop\nrecent=\nbutton-icon=xfce4-panel-menu\nbutton-single-row=false\nshow-button-title=false\nshow-button-icon=true\nlauncher-show-name=true\nlauncher-show-description=false\nlauncher-show-tooltip=true\nlauncher-icon-size=4\nhover-switch-category=true\ncategory-show-name=true\ncategory-icon-size=2\nsort-categories=false\nview-mode=0\ndefault-category=0\nrecent-items-max=10\nfavorites-in-recent=true\nposition-search-alternate=true\nposition-commands-alternate=true\nposition-categories-alternate=true\nposition-categories-horizontal=false\nstay-on-focus-out=false\nprofile-shape=0\nconfirm-session-command=true\nmenu-width=678\nmenu-height=710\nmenu-opacity=95\ncommand-settings=xfce4-settings-manager\nshow-command-settings=false\ncommand-lockscreen=xflock4\nshow-command-lockscreen=false\ncommand-switchuser=dm-tool switch-to-greeter\nshow-command-switchuser=false\ncommand-logoutuser=xfce4-session-logout --logout --fast\nshow-command-logoutuser=false\ncommand-restart=xfce4-session-logout --reboot --fast\nshow-command-restart=false\ncommand-shutdown=xfce4-session-logout --halt --fast\nshow-command-shutdown=false\ncommand-suspend=xfce4-session-logout --suspend\nshow-command-suspend=false\ncommand-hibernate=xfce4-session-logout --hibernate\nshow-command-hibernate=false\ncommand-logout=xfce4-session-logout\nshow-command-logout=true\ncommand-menueditor=menulibre\nshow-command-menueditor=false\ncommand-profile=mugshot\nshow-command-profile=false\nsearch-actions=0\n\n" > ./windowsLike/whiskermenu-1.rc
-    echo -e "[Desktop Entry]\nVersion=1.0\nExec=xfce4-appfinder\nIcon=edit-find-symbolic\nStartupNotify=true\nTerminal=false\nType=Application\nCategories=Utility;X-XFCE;\nName=Application Finder\n" > ./windowsLike/launcher-2/15780470832.desktop
-    echo -e "[Desktop Entry]\nVersion=1.0\nType=Application\nName=Next Workspace\nExec=xdotool set_desktop --relative 1\nIcon=xfce4-workspaces\nTerminal=false\nStartupNotify=false\n" > ./windowsLike/launcher-3/15780471503.desktop
-    echo -e "[Desktop Entry]\nVersion=1.0\nType=Application\nExec=exo-open --launch TerminalEmulator\nIcon=utilities-terminal\nStartupNotify=true\nTerminal=false\nCategories=Utility;X-XFCE;X-Xfce-Toplevel;\nOnlyShowIn=XFCE;\nX-AppStream-Ignore=True\nName=Terminal\n" > ./windowsLike/launcher-6/15735608061.desktop
-    echo -e "[Desktop Entry]\nVersion=1.0\nType=Application\nExec=exo-open --launch WebBrowser %u\nIcon=web-browser\nStartupNotify=true\nTerminal=false\nCategories=Network;X-XFCE;X-Xfce-Toplevel;\nOnlyShowIn=XFCE;\nX-XFCE-MimeType=x-scheme-handler/http;x-scheme-handler/https;\nX-AppStream-Ignore=True\nName=Web Browser\n" > ./windowsLike/launcher-7/15780459961.desktop
-    echo -e "[Desktop Entry]\nName=Text Editor\nExec=mousepad %F\nIcon=accessories-text-editor\nTerminal=false\nStartupNotify=true\nType=Application\nCategories=Utility;TextEditor;GTK;\nMimeType=text/plain;\n" > ./windowsLike/launcher-8/15780460092.desktop
-    echo -e "layout=1\ndate_font=Liberation Sans 9\ntime_font=Liberation Sans 9\ndate_format=%m/%d/%Y\ntime_format=%l:%M %p" > ./windowsLike/datetime-16.rc
-    if [ "$NAME" = "Ubuntu" ]; then
-      echo -e "[Desktop Entry]\nName=App Store\nComment=Add, remove or update software on this computer\nIcon=softwarecenter\nExec=snap-store %U\nTerminal=false\nType=Application\nCategories=GNOME;GTK;System;PackageManager;\nKeywords=Updates;Upgrade;Sources;Repositories;Preferences;Install;Uninstall;Program;Software;App;Store;\nStartupNotify=true\nMimeType=x-scheme-handler/appstream;x-scheme-handler/apt;x-scheme-handler/snap;\nX-GNOME-UsesNotifications=true\nDBusActivatable=true\nX-Purism-FormFactor=Workstation;Mobile;\nX-Ubuntu-Gettext-Domain=gnome-software\nPath=\n" > ./windowsLike/launcher-18/16878133091.desktop
-    fi
-    if [ "$NAME" = "Linux Mint" ]; then
-      echo -e "[Desktop Entry]\nName=App Store\nComment=Add, remove or update software on this computer\nIcon=softwarecenter\nExec=mintinstall %U\nTerminal=false\nType=Application\nCategories=GNOME;GTK;System;PackageManager;\nKeywords=Updates;Upgrade;Sources;Repositories;Preferences;Install;Uninstall;Program;Software;App;Store;\nStartupNotify=true\nMimeType=x-scheme-handler/appstream;x-scheme-handler/apt;x-scheme-handler/snap;\nX-GNOME-UsesNotifications=true\nDBusActivatable=true\nX-Purism-FormFactor=Workstation;Mobile;\nX-Ubuntu-Gettext-Domain=gnome-software\nPath=\n" > ./windowsLike/launcher-18/16878133091.desktop
-    fi
-    echo -e "[Desktop Entry]\nEncoding=UTF-8\nName=Thunderbird Mail\nComment=Send and receive mail with Thunderbird\nGenericName=Mail Client\nKeywords=Email;E-mail;Newsgroup;Feed;RSS\nExec=thunderbird %u\nTerminal=false\nX-MultipleArgs=false\nType=Application\nIcon=thunderbird\nCategories=Application;Network;Email;\nMimeType=x-scheme-handler/mailto;application/x-xpinstall;x-scheme-handler/webcal;x-scheme-handler/mid;message/rfc822;\nStartupNotify=true\nActions=Compose;Contacts\nX-XFCE-Source=file:///usr/share/applications/thunderbird.desktop\n\n[Desktop Action Compose]\nName=Compose New Message\nExec=thunderbird -compose\nOnlyShowIn=Messaging Menu;Unity;\n\n[Desktop Action Contacts]\nName=Contacts\nExec=thunderbird -addressbook\nOnlyShowIn=Messaging Menu;Unity;\n" > ./windowsLike/launcher-19/16895434911.desktop
-    cd windowsLike/ && tar -zcvf ../windowsLike.tar.gz * && cd - 
+    mkdir -p windowsLike_FILES/launcher-{2,3,6,7,8,18,19}
+    cat > windowsLike_FILES/launcher-2/15780470832.desktop << 'EOF'
+[Desktop Entry]
+Version=1.0
+Exec=xfce4-appfinder
+Icon=edit-find-symbolic
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=Utility;X-XFCE;
+Name=Application Finder
+EOF
+    cat > windowsLike_FILES/launcher-3/15780471503.desktop << 'EOF'
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Next Workspace
+Exec=xdotool set_desktop --relative 1
+Icon=xfce4-workspaces
+Terminal=false
+StartupNotify=false
+EOF
+    cat > windowsLike_FILES/launcher-6/15735608061.desktop << 'EOF'
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=exo-open --launch TerminalEmulator
+Icon=utilities-terminal
+StartupNotify=true
+Terminal=false
+Categories=Utility;X-XFCE;X-Xfce-Toplevel;
+OnlyShowIn=XFCE;
+X-AppStream-Ignore=True
+Name=Terminal
+EOF
+    cat > windowsLike_FILES/launcher-7/15780459961.desktop << 'EOF'
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=exo-open --launch WebBrowser %u
+Icon=web-browser
+StartupNotify=true
+Terminal=false
+Categories=Network;X-XFCE;X-Xfce-Toplevel;
+OnlyShowIn=XFCE;
+X-XFCE-MimeType=x-scheme-handler/http;x-scheme-handler/https;
+X-AppStream-Ignore=True
+Name=Web Browser
+EOF
+    cat > windowsLike_FILES/launcher-8/15780460092.desktop << 'EOF'
+[Desktop Entry]
+Name=Text Editor
+Exec=mousepad %F
+Icon=accessories-text-editor
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=Utility;TextEditor;GTK;
+MimeType=text/plain;
+EOF
+    cat > windowsLike_FILES/launcher-18/16878133091.desktop << 'EOF'
+[Desktop Entry]
+Name=App Store
+Comment=Add, remove or update software on this computer
+Icon=softwarecenter
+Exec=snap-store %U
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;System;PackageManager;
+Keywords=Updates;Upgrade;Sources;Repositories;Preferences;Install;Uninstall;Program;Software;App;Store;
+StartupNotify=true
+MimeType=x-scheme-handler/appstream;x-scheme-handler/apt;x-scheme-handler/snap;
+X-GNOME-UsesNotifications=true
+DBusActivatable=true
+X-Purism-FormFactor=Workstation;Mobile;
+X-Ubuntu-Gettext-Domain=gnome-software
+Path=
+EOF
+    cat > windowsLike_FILES/launcher-19/16895434911.desktop << 'EOF'
+[Desktop Entry]
+Encoding=UTF-8
+Name=Thunderbird Mail
+Comment=Send and receive mail with Thunderbird
+GenericName=Mail Client
+Keywords=Email;E-mail;Newsgroup;Feed;RSS
+Exec=thunderbird %u
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=thunderbird
+Categories=Application;Network;Email;
+MimeType=x-scheme-handler/mailto;application/x-xpinstall;x-scheme-handler/webcal;x-scheme-handler/mid;message/rfc822;
+StartupNotify=true
+Actions=Compose;Contacts
+X-XFCE-Source=file:///usr/share/applications/thunderbird.desktop
+
+[Desktop Action Compose]
+Name=Compose New Message
+Exec=thunderbird -compose
+OnlyShowIn=Messaging Menu;Unity;
+
+[Desktop Action Contacts]
+Name=Contacts
+Exec=thunderbird -addressbook
+OnlyShowIn=Messaging Menu;Unity;
+EOF
+    cat > windowsLike_FILES/config.txt << 'EOF'
+/configver 2
+/panels [<1>]
+/panels/dark-mode false
+/panels/panel-1/icon-size uint32 24
+/panels/panel-1/length 100.0
+/panels/panel-1/length-adjust true
+/panels/panel-1/plugin-ids [<1>, <2>, <3>, <5>, <6>, <18>, <7>, <19>, <8>, <9>, <10>, <11>, <12>, <13>, <14>, <16>, <4>]
+/panels/panel-1/position 'p=8;x=0;y=0'
+/panels/panel-1/position-locked true
+/panels/panel-1/size uint32 44
+/plugins/plugin-1 'whiskermenu'
+/plugins/plugin-1/button-icon 'xfce4-panel-menu'
+/plugins/plugin-1/category-icon-size 2
+/plugins/plugin-1/favorites [<'xfce4-terminal-emulator.desktop'>, <'xfce4-file-manager.desktop'>, <'xfce-text-editor.desktop'>, <'xfce4-web-browser.desktop'>, <'xfce-ui-settings.desktop'>, <'xfce-display-settings.desktop'>, <'xfce-settings-manager.desktop'>, <'org.xfce.Parole.desktop'>, <'org.xfce.ristretto.desktop'>, <'xfce-backdrop-settings.desktop'>]
+/plugins/plugin-1/favorites-in-recent true
+/plugins/plugin-1/hover-switch-category true
+/plugins/plugin-1/launcher-icon-size 4
+/plugins/plugin-1/launcher-show-description false
+/plugins/plugin-1/menu-height 710
+/plugins/plugin-1/menu-opacity 95
+/plugins/plugin-1/menu-width 678
+/plugins/plugin-1/position-categories-alternate true
+/plugins/plugin-1/position-commands-alternate true
+/plugins/plugin-1/position-search-alternate true
+/plugins/plugin-1/recent @av []
+/plugins/plugin-1/show-command-lockscreen false
+/plugins/plugin-1/show-command-menueditor false
+/plugins/plugin-1/show-command-profile false
+/plugins/plugin-1/show-command-settings false
+/plugins/plugin-1/sort-categories false
+/plugins/plugin-1/view-mode 0
+/plugins/plugin-10 'separator'
+/plugins/plugin-10/expand true
+/plugins/plugin-10/style uint32 0
+/plugins/plugin-11 'power-manager-plugin'
+/plugins/plugin-12 'systray'
+/plugins/plugin-12/known-items [<'nm-applet'>]
+/plugins/plugin-12/known-legacy-items [<'ibus panel'>]
+/plugins/plugin-12/show-frame false
+/plugins/plugin-12/size-max uint32 24
+/plugins/plugin-12/square-icons true
+/plugins/plugin-13 'pulseaudio'
+/plugins/plugin-13/enable-keyboard-shortcuts true
+/plugins/plugin-14 'notification-plugin'
+/plugins/plugin-16 'datetime'
+/plugins/plugin-18 'launcher'
+/plugins/plugin-18/items [<'16878133091.desktop'>]
+/plugins/plugin-19 'launcher'
+/plugins/plugin-19/items [<'16895434911.desktop'>]
+/plugins/plugin-2 'launcher'
+/plugins/plugin-2/items [<'15780470832.desktop'>]
+/plugins/plugin-3 'launcher'
+/plugins/plugin-3/items [<'15780471503.desktop'>]
+/plugins/plugin-4 'showdesktop'
+/plugins/plugin-5 'directorymenu'
+/plugins/plugin-5/base-directory '/home/phoenix'
+/plugins/plugin-5/icon-name 'system-file-manager'
+/plugins/plugin-6 'launcher'
+/plugins/plugin-6/items [<'15735608061.desktop'>]
+/plugins/plugin-7 'launcher'
+/plugins/plugin-7/items [<'15780459961.desktop'>]
+/plugins/plugin-8 'launcher'
+/plugins/plugin-8/items [<'15780460092.desktop'>]
+/plugins/plugin-9 'tasklist'
+/plugins/plugin-9/show-handle false
+/plugins/plugin-9/show-labels false
+EOF
+    cat > windowsLike_FILES/datetime-16.rc << 'EOF'
+layout=1
+date_font=Liberation Sans 9
+time_font=Liberation Sans 9
+date_format=%m/%d/%Y
+time_format=%l:%M %p
+EOF
+  cd windowsLike_FILES
+  tar -czf ../windowsLike.tar.gz *
+  cd ..
   else
     echo "XFCE panel theme archive already exists. Skipping creation."
   fi
