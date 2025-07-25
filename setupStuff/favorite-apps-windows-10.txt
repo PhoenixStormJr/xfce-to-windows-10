@@ -1,1 +1,0 @@
-['ulauncher.desktop', 'workspace-next-loop.desktop', 'show_desktop.desktop', 'nemo.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Software.desktop', 'firefox_firefox.desktop', 'thunderbird_thunderbird.desktop', 'org.gnome.TextEditor.desktop', 'yelp.desktop']
